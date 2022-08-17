@@ -3,6 +3,13 @@
 # To be run in the docker container
 # Needs /data (containing tfrecords of data), /wiki and /output mounted
 
+NUM_GPUS=8
+
+if [ $# -eq 1 ] 
+then
+	NUM_GPUS=$1
+fi
+
 DATA_DIR="/data"
 WIKI_DIR="/wiki"
 OUTPUT_DIR="/output"
@@ -17,7 +24,7 @@ echo "STARTING TIMING RUN AT $start_fmt"
 python run_pretraining.py \
   --bert_config_file=${WIKI_DIR}/bert_config.json \
   --output_dir=${OUTPUT_DIR} \
-  --input_file="${DATA_DIR}/part*" \
+  --input_file="${DATA_DIR}/*" \
   --nodo_eval \
   --do_train \
   --eval_batch_size=8 \
@@ -31,7 +38,7 @@ python run_pretraining.py \
   --optimizer=lamb \
   --save_checkpoints_steps=6250 \
   --start_warmup_step=0 \
-  --num_gpus=8 \
+  --num_gpus=$NUM_GPUS \
   --train_batch_size=24
   
   # end timing
