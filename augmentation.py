@@ -169,7 +169,7 @@ def text_augmentation(input, output, method, number):
     :return:
     """
     f_original = open(input, "r")
-    f_new = open(output + f"_{method}", "w")
+    f_new = open(output, "w")
 
     if method == "random_deletion":
         number = float(number)
