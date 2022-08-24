@@ -1,6 +1,13 @@
 #!/bin/bash
 
-python3 augmentation.py --input cleanup_scripts/sample_data/wiki_01 --output augmentation/wiki_01 --method random_insertion --number 5
-python3 augmentation.py --input cleanup_scripts/sample_data/wiki_01 --output augmentation/wiki_01  --method random_swap --number 5
-python3 augmentation.py --input cleanup_scripts/sample_data/wiki_01 --output augmentation/wiki_01  --method random_deletion --number 0.5
-python3 augmentation.py --input cleanup_scripts/sample_data/wiki_01 --output augmentation/wiki_01  --method synonym_replacemnet --number 5
+method=$1
+for num in {001..002}
+do
+    echo "method: ${method} case: ${num}"
+   python3 augmentation.py \
+   --input /raid/data/bert/raw-data/part-00${num}-of-00500 \
+   --output /raid/data/bert/${method}/part-00${num}-of-00500 \
+   --method ${method} \
+   --number 0.5
+done
+
