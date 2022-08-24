@@ -136,8 +136,6 @@ def synonym_replacement(text: str, n: int) -> str:
     :param n: randomly replace n words with synonym
     :return: a sentence
     """
-
-    print(type(n))
     words = text.split(' ')
     wc = len(words)
     if wc < n:
