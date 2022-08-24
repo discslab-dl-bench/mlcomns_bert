@@ -136,6 +136,8 @@ def synonym_replacement(text: str, n: int) -> str:
     :param n: randomly replace n words with synonym
     :return: a sentence
     """
+
+    print(type(n))
     words = text.split(' ')
     wc = len(words)
     if wc < n:
@@ -169,7 +171,12 @@ def text_augmentation(input, output, method, number):
     :return:
     """
     f_original = open(input, "r")
-    f_new = open(output, "w")
+    f_new = open(output + f"_{method}", "w")
+
+    if method == "random_deletion":
+        number = float(number)
+    else:
+        number = int(number)
 
     while True:
         text = f_original.readline()
@@ -196,7 +203,7 @@ if __name__ == "__main__":
     PARSER.add_argument('--number', dest='number')
     args = PARSER.parse_args()
 
-    text_augmentation(args.input, args.output, args.method, float(args.number))
+    text_augmentation(args.input, args.output, args.method, args.number)
 
 
     # flags.mark_flag_as_required("input")
