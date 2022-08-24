@@ -2,28 +2,29 @@ import random
 import nltk
 from nltk.corpus import wordnet
 import absl
+import argparse
 
-flags = absl.flags
-FLAGS = flags.FLAGS
+# flags = absl.flags
+# FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    "input", None,
-    "The file to be augmented."
-)
+# flags.DEFINE_string(
+#     "input", None,
+#     "The file to be augmented."
+# )
 
-flags.DEFINE_string(
-    "output", None,
-    "The file to save the augmented text."
-)
+# flags.DEFINE_string(
+#     "output", None,
+#     "The file to save the augmented text."
+# )
 
-flags.DEFINE_string(
-    "method", None,
-    "The augmentation method."
-)
+# flags.DEFINE_string(
+#     "method", None,
+#     "The augmentation method."
+# )
 
-flags.DEFINE_float(
-    'number', None, 'Number of times (RI, RS, SR) or probability (RD).'
-)
+# flags.DEFINE_float(
+#     'number', None, 'Number of times (RI, RS, SR) or probability (RD).'
+# )
 
 
 def get_synonym(word):
@@ -183,19 +184,26 @@ def text_augmentation(input, output, method, number):
     f_original.close()
     f_new.close()
 
-def main(_):
-    text_augmentation(flags.input, flags.output, flags.method, flags.number)
-
 
 if __name__ == "__main__":
     # nltk.download('wordnet')
     # nltk.download('omw-1.4')
 
-    flags.mark_flag_as_required("input")
-    flags.mark_flag_as_required("output")
-    flags.mark_flag_as_required("method")
-    flags.mark_flag_as_required("number")
-    absl.app.run(main)
+    PARSER = argparse.ArgumentParser()
+    PARSER.add_argument('--input', dest='input', required=True)
+    PARSER.add_argument('--output', dest='output', required=True)
+    PARSER.add_argument('--method', dest='method', choices=["random_swap", "random_insertion", "random_deletion", "synonym_replacemnet"])
+    PARSER.add_argument('--number', dest='number')
+    args = PARSER.parse_args()
+
+    text_augmentation(args.input, args.output, args.method, float(args.number))
+
+
+    # flags.mark_flag_as_required("input")
+    # flags.mark_flag_as_required("output")
+    # flags.mark_flag_as_required("method")
+    # flags.mark_flag_as_required("number")
+    # absl.app.run(main)
 
 
 
