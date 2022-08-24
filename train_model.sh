@@ -4,10 +4,17 @@
 # Needs /data (containing tfrecords of data), /wiki and /output mounted
 
 NUM_GPUS=8
+WARMUP_AMOUNT=1562
 
 if [ $# -eq 1 ] 
 then
 	NUM_GPUS=$1
+fi
+
+if [ $# -eq 2 ]
+then
+	NUM_GPUS=$1
+	WARMUP_AMOUNT=$2
 fi
 
 DATA_DIR="/data"
@@ -21,10 +28,14 @@ start=$(date +%s)
 start_fmt=$(date +%Y-%m-%d\ %r)
 echo "STARTING TIMING RUN AT $start_fmt"
 
+echo "Checking wiki dir: "
+ls ${WIKI_DIR}/ckpt/
+
 python run_pretraining.py \
   --bert_config_file=${WIKI_DIR}/bert_config.json \
   --output_dir=${OUTPUT_DIR} \
-  --input_file="${DATA_DIR}/*" \
+  --log_dir=${OUTPUT_DIR} \
+  --input_file="${DATA_DIR}/part*" \
   --nodo_eval \
   --do_train \
   --eval_batch_size=8 \
@@ -34,12 +45,12 @@ python run_pretraining.py \
   --max_predictions_per_seq=76 \
   --max_seq_length=512 \
   --num_train_steps=107538 \
-  --num_warmup_steps=1562 \
+  --num_warmup_steps=${WARMUP_AMOUNT} \
   --optimizer=lamb \
   --save_checkpoints_steps=6250 \
   --start_warmup_step=0 \
   --num_gpus=$NUM_GPUS \
-  --train_batch_size=24
+  --train_batch_size=6 
   
   # end timing
 end=$(date +%s)

@@ -1,6 +1,6 @@
 FROM tensorflow/tensorflow:1.15.2-gpu
 
-ADD . /workspace/bert
+COPY . /workspace/bert
 WORKDIR /workspace/bert
 
 # Hack to avoid this error https://github.com/NVIDIA/nvidia-docker/issues/1632
