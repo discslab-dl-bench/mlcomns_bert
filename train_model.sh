@@ -4,17 +4,13 @@
 # Needs /data (containing tfrecords of data), /wiki and /output mounted
 
 NUM_GPUS=8
-WARMUP_AMOUNT=1562
+BATCH_SIZE=24
 
 if [ $# -eq 1 ] 
 then
 	NUM_GPUS=$1
-fi
+	BATCH_SIZE=$(expr 6 \* $NUM_GPUS)
 
-if [ $# -eq 2 ]
-then
-	NUM_GPUS=$1
-	WARMUP_AMOUNT=$2
 fi
 
 DATA_DIR="/data"
@@ -45,12 +41,12 @@ python run_pretraining.py \
   --max_predictions_per_seq=76 \
   --max_seq_length=512 \
   --num_train_steps=107538 \
-  --num_warmup_steps=${WARMUP_AMOUNT} \
+  --num_warmup_steps=0 \
   --optimizer=lamb \
   --save_checkpoints_steps=6250 \
   --start_warmup_step=0 \
   --num_gpus=$NUM_GPUS \
-  --train_batch_size=6 
+  --train_batch_size=$BATCH_SIZE 
   
   # end timing
 end=$(date +%s)

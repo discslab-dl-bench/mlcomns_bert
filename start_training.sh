@@ -50,11 +50,11 @@ fi
 
 if [[ $DELETE_PREVIOUS_RUNS -eq 1 ]]
 then
-		rm -f $OUTPUT_DIR/*
+		rm -rf $OUTPUT_DIR/*
 fi
 
 # Building up the command
-COMMAND="docker run -it --rm --gpus all --name training -v /raid/data/bert/wiki:/wiki -v /raid/data/bert/raw-data:/raw-data -v ${DATA_DIR}:/data -v ${OUTPUT_DIR}:/output" 
+COMMAND="docker run -it --rm --gpus all -v /raid/data/bert/wiki:/wiki -v /raid/data/bert/raw-data:/raw-data -v ${DATA_DIR}:/data -v ${OUTPUT_DIR}:/output" 
 
 
 if [ $AMT_MEMORY -gt 0 ]
