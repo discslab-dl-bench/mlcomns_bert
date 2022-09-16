@@ -1,0 +1,1601 @@
+/dl-bench/zdouce/mlcomns_bert
+STARTING TIMING RUN AT 2022-09-10 09:29:00 PM
+Checking wiki dir: 
+model.ckpt-28252.data-00000-of-00001  model.ckpt-28252.meta
+model.ckpt-28252.index
+WARNING:tensorflow:From run_pretraining.py:460: The name tf.train.CheckpointSaverHook is deprecated. Please use tf.estimator.CheckpointSaverHook instead.
+
+WARNING:tensorflow:From run_pretraining.py:484: The name tf.logging.set_verbosity is deprecated. Please use tf.compat.v1.logging.set_verbosity instead.
+
+W0910 21:29:02.559206 139685619324736 module_wrapper.py:139] From run_pretraining.py:484: The name tf.logging.set_verbosity is deprecated. Please use tf.compat.v1.logging.set_verbosity instead.
+
+WARNING:tensorflow:From run_pretraining.py:484: The name tf.logging.INFO is deprecated. Please use tf.compat.v1.logging.INFO instead.
+
+W0910 21:29:02.559505 139685619324736 module_wrapper.py:139] From run_pretraining.py:484: The name tf.logging.INFO is deprecated. Please use tf.compat.v1.logging.INFO instead.
+
+:::MLLOG {"namespace": "", "time_ms": 1662845342559, "event_type": "INTERVAL_START", "key": "init_start", "value": null, "metadata": {"file": "run_pretraining.py", "lineno": 491}}
+WARNING:tensorflow:From run_pretraining.py:495: The name tf.gfile.MakeDirs is deprecated. Please use tf.io.gfile.makedirs instead.
+
+W0910 21:29:03.120186 139685619324736 module_wrapper.py:139] From run_pretraining.py:495: The name tf.gfile.MakeDirs is deprecated. Please use tf.io.gfile.makedirs instead.
+
+WARNING:tensorflow:From run_pretraining.py:499: The name tf.gfile.Glob is deprecated. Please use tf.io.gfile.glob instead.
+
+W0910 21:29:03.120503 139685619324736 module_wrapper.py:139] From run_pretraining.py:499: The name tf.gfile.Glob is deprecated. Please use tf.io.gfile.glob instead.
+
+WARNING:tensorflow:From run_pretraining.py:501: The name tf.logging.info is deprecated. Please use tf.compat.v1.logging.info instead.
+
+W0910 21:29:03.123825 139685619324736 module_wrapper.py:139] From run_pretraining.py:501: The name tf.logging.info is deprecated. Please use tf.compat.v1.logging.info instead.
+
+INFO:tensorflow:*** Input Files ***
+I0910 21:29:03.123990 139685619324736 run_pretraining.py:501] *** Input Files ***
+INFO:tensorflow:  /data/part-00498-of-00500
+I0910 21:29:03.124136 139685619324736 run_pretraining.py:503]   /data/part-00498-of-00500
+INFO:tensorflow:  /data/part-00617-of-01000
+I0910 21:29:03.124259 139685619324736 run_pretraining.py:503]   /data/part-00617-of-01000
+INFO:tensorflow:  /data/part-00122-of-00500
+I0910 21:29:03.124370 139685619324736 run_pretraining.py:503]   /data/part-00122-of-00500
+INFO:tensorflow:  /data/part-00656-of-01000
+I0910 21:29:03.124469 139685619324736 run_pretraining.py:503]   /data/part-00656-of-01000
+INFO:tensorflow:  /data/part-00687-of-01000
+I0910 21:29:03.124565 139685619324736 run_pretraining.py:503]   /data/part-00687-of-01000
+INFO:tensorflow:  /data/part-00005-of-00500
+I0910 21:29:03.124640 139685619324736 run_pretraining.py:503]   /data/part-00005-of-00500
+INFO:tensorflow:  /data/part-00477-of-00500
+I0910 21:29:03.124716 139685619324736 run_pretraining.py:503]   /data/part-00477-of-00500
+INFO:tensorflow:  /data/part-00500-of-01000
+I0910 21:29:03.124806 139685619324736 run_pretraining.py:503]   /data/part-00500-of-01000
+INFO:tensorflow:  /data/part-00118-of-00500
+I0910 21:29:03.124895 139685619324736 run_pretraining.py:503]   /data/part-00118-of-00500
+INFO:tensorflow:  /data/part-00376-of-00500
+I0910 21:29:03.124985 139685619324736 run_pretraining.py:503]   /data/part-00376-of-00500
+INFO:tensorflow:  /data/part-00644-of-01000
+I0910 21:29:03.125059 139685619324736 run_pretraining.py:503]   /data/part-00644-of-01000
+INFO:tensorflow:  /data/part-00491-of-00500
+I0910 21:29:03.125133 139685619324736 run_pretraining.py:503]   /data/part-00491-of-00500
+INFO:tensorflow:  /data/part-00035-of-00500
+I0910 21:29:03.125206 139685619324736 run_pretraining.py:503]   /data/part-00035-of-00500
+INFO:tensorflow:  /data/part-00181-of-00500
+I0910 21:29:03.125295 139685619324736 run_pretraining.py:503]   /data/part-00181-of-00500
+INFO:tensorflow:  /data/part-00041-of-00500
+I0910 21:29:03.125366 139685619324736 run_pretraining.py:503]   /data/part-00041-of-00500
+INFO:tensorflow:  /data/part-00002-of-00500
+I0910 21:29:03.125438 139685619324736 run_pretraining.py:503]   /data/part-00002-of-00500
+INFO:tensorflow:  /data/part-00173-of-00500
+I0910 21:29:03.125510 139685619324736 run_pretraining.py:503]   /data/part-00173-of-00500
+INFO:tensorflow:  /data/part-00570-of-01000
+I0910 21:29:03.125582 139685619324736 run_pretraining.py:503]   /data/part-00570-of-01000
+INFO:tensorflow:  /data/part-00037-of-00500
+I0910 21:29:03.125653 139685619324736 run_pretraining.py:503]   /data/part-00037-of-00500
+INFO:tensorflow:  /data/part-00621-of-01000
+I0910 21:29:03.125742 139685619324736 run_pretraining.py:503]   /data/part-00621-of-01000
+INFO:tensorflow:  /data/part-00119-of-00500
+I0910 21:29:03.125816 139685619324736 run_pretraining.py:503]   /data/part-00119-of-00500
+INFO:tensorflow:  /data/part-00304-of-00500
+I0910 21:29:03.125889 139685619324736 run_pretraining.py:503]   /data/part-00304-of-00500
+INFO:tensorflow:  /data/part-00133-of-00500
+I0910 21:29:03.125962 139685619324736 run_pretraining.py:503]   /data/part-00133-of-00500
+INFO:tensorflow:  /data/part-00225-of-00500
+I0910 21:29:03.126051 139685619324736 run_pretraining.py:503]   /data/part-00225-of-00500
+INFO:tensorflow:  /data/part-00389-of-00500
+I0910 21:29:03.126122 139685619324736 run_pretraining.py:503]   /data/part-00389-of-00500
+INFO:tensorflow:  /data/part-00006-of-00500
+I0910 21:29:03.126194 139685619324736 run_pretraining.py:503]   /data/part-00006-of-00500
+INFO:tensorflow:  /data/part-00463-of-00500
+I0910 21:29:03.126265 139685619324736 run_pretraining.py:503]   /data/part-00463-of-00500
+INFO:tensorflow:  /data/part-00315-of-00500
+I0910 21:29:03.126337 139685619324736 run_pretraining.py:503]   /data/part-00315-of-00500
+INFO:tensorflow:  /data/part-00003-of-00500
+I0910 21:29:03.126409 139685619324736 run_pretraining.py:503]   /data/part-00003-of-00500
+INFO:tensorflow:  /data/part-00212-of-00500
+I0910 21:29:03.126480 139685619324736 run_pretraining.py:503]   /data/part-00212-of-00500
+INFO:tensorflow:  /data/part-00601-of-01000
+I0910 21:29:03.126551 139685619324736 run_pretraining.py:503]   /data/part-00601-of-01000
+INFO:tensorflow:  /data/part-00487-of-00500
+I0910 21:29:03.126622 139685619324736 run_pretraining.py:503]   /data/part-00487-of-00500
+INFO:tensorflow:  /data/part-00310-of-00500
+I0910 21:29:03.126694 139685619324736 run_pretraining.py:503]   /data/part-00310-of-00500
+INFO:tensorflow:  /data/part-00294-of-00500
+I0910 21:29:03.126765 139685619324736 run_pretraining.py:503]   /data/part-00294-of-00500
+INFO:tensorflow:  /data/part-00135-of-00500
+I0910 21:29:03.126837 139685619324736 run_pretraining.py:503]   /data/part-00135-of-00500
+INFO:tensorflow:  /data/part-00385-of-00500
+I0910 21:29:03.126908 139685619324736 run_pretraining.py:503]   /data/part-00385-of-00500
+INFO:tensorflow:  /data/part-00454-of-00500
+I0910 21:29:03.126979 139685619324736 run_pretraining.py:503]   /data/part-00454-of-00500
+INFO:tensorflow:  /data/part-00572-of-01000
+I0910 21:29:03.127051 139685619324736 run_pretraining.py:503]   /data/part-00572-of-01000
+INFO:tensorflow:  /data/part-00200-of-00500
+I0910 21:29:03.127141 139685619324736 run_pretraining.py:503]   /data/part-00200-of-00500
+INFO:tensorflow:  /data/part-00458-of-00500
+I0910 21:29:03.127214 139685619324736 run_pretraining.py:503]   /data/part-00458-of-00500
+INFO:tensorflow:  /data/part-00473-of-00500
+I0910 21:29:03.127287 139685619324736 run_pretraining.py:503]   /data/part-00473-of-00500
+INFO:tensorflow:  /data/part-00504-of-01000
+I0910 21:29:03.127360 139685619324736 run_pretraining.py:503]   /data/part-00504-of-01000
+INFO:tensorflow:  /data/part-00526-of-01000
+I0910 21:29:03.127447 139685619324736 run_pretraining.py:503]   /data/part-00526-of-01000
+INFO:tensorflow:  /data/part-00613-of-01000
+I0910 21:29:03.127518 139685619324736 run_pretraining.py:503]   /data/part-00613-of-01000
+INFO:tensorflow:  /data/part-00421-of-00500
+I0910 21:29:03.127589 139685619324736 run_pretraining.py:503]   /data/part-00421-of-00500
+INFO:tensorflow:  /data/part-00159-of-00500
+I0910 21:29:03.127661 139685619324736 run_pretraining.py:503]   /data/part-00159-of-00500
+INFO:tensorflow:  /data/part-00564-of-01000
+I0910 21:29:03.127732 139685619324736 run_pretraining.py:503]   /data/part-00564-of-01000
+INFO:tensorflow:  /data/part-00232-of-00500
+I0910 21:29:03.127803 139685619324736 run_pretraining.py:503]   /data/part-00232-of-00500
+INFO:tensorflow:  /data/part-00450-of-00500
+I0910 21:29:03.127875 139685619324736 run_pretraining.py:503]   /data/part-00450-of-00500
+INFO:tensorflow:  /data/part-00263-of-00500
+I0910 21:29:03.127947 139685619324736 run_pretraining.py:503]   /data/part-00263-of-00500
+INFO:tensorflow:  /data/part-00565-of-01000
+I0910 21:29:03.128018 139685619324736 run_pretraining.py:503]   /data/part-00565-of-01000
+INFO:tensorflow:  /data/part-00627-of-01000
+I0910 21:29:03.128090 139685619324736 run_pretraining.py:503]   /data/part-00627-of-01000
+INFO:tensorflow:  /data/part-00596-of-01000
+I0910 21:29:03.128161 139685619324736 run_pretraining.py:503]   /data/part-00596-of-01000
+INFO:tensorflow:  /data/part-00249-of-00500
+I0910 21:29:03.128279 139685619324736 run_pretraining.py:503]   /data/part-00249-of-00500
+INFO:tensorflow:  /data/part-00531-of-01000
+I0910 21:29:03.128366 139685619324736 run_pretraining.py:503]   /data/part-00531-of-01000
+INFO:tensorflow:  /data/part-00278-of-00500
+I0910 21:29:03.128444 139685619324736 run_pretraining.py:503]   /data/part-00278-of-00500
+INFO:tensorflow:  /data/part-00610-of-01000
+I0910 21:29:03.128563 139685619324736 run_pretraining.py:503]   /data/part-00610-of-01000
+INFO:tensorflow:  /data/part-00425-of-00500
+I0910 21:29:03.128635 139685619324736 run_pretraining.py:503]   /data/part-00425-of-00500
+INFO:tensorflow:  /data/part-00268-of-00500
+I0910 21:29:03.128708 139685619324736 run_pretraining.py:503]   /data/part-00268-of-00500
+INFO:tensorflow:  /data/part-00308-of-00500
+I0910 21:29:03.128780 139685619324736 run_pretraining.py:503]   /data/part-00308-of-00500
+INFO:tensorflow:  /data/part-00452-of-00500
+I0910 21:29:03.128851 139685619324736 run_pretraining.py:503]   /data/part-00452-of-00500
+INFO:tensorflow:  /data/part-00337-of-00500
+I0910 21:29:03.128922 139685619324736 run_pretraining.py:503]   /data/part-00337-of-00500
+INFO:tensorflow:  /data/part-00177-of-00500
+I0910 21:29:03.128994 139685619324736 run_pretraining.py:503]   /data/part-00177-of-00500
+INFO:tensorflow:  /data/part-00494-of-00500
+I0910 21:29:03.129065 139685619324736 run_pretraining.py:503]   /data/part-00494-of-00500
+INFO:tensorflow:  /data/part-00420-of-00500
+I0910 21:29:03.129137 139685619324736 run_pretraining.py:503]   /data/part-00420-of-00500
+INFO:tensorflow:  /data/part-00025-of-00500
+I0910 21:29:03.129209 139685619324736 run_pretraining.py:503]   /data/part-00025-of-00500
+INFO:tensorflow:  /data/part-00235-of-00500
+I0910 21:29:03.129281 139685619324736 run_pretraining.py:503]   /data/part-00235-of-00500
+INFO:tensorflow:  /data/part-00085-of-00500
+I0910 21:29:03.129352 139685619324736 run_pretraining.py:503]   /data/part-00085-of-00500
+INFO:tensorflow:  /data/part-00455-of-00500
+I0910 21:29:03.129424 139685619324736 run_pretraining.py:503]   /data/part-00455-of-00500
+INFO:tensorflow:  /data/part-00469-of-00500
+I0910 21:29:03.129496 139685619324736 run_pretraining.py:503]   /data/part-00469-of-00500
+INFO:tensorflow:  /data/part-00426-of-00500
+I0910 21:29:03.129568 139685619324736 run_pretraining.py:503]   /data/part-00426-of-00500
+INFO:tensorflow:  /data/part-00681-of-01000
+I0910 21:29:03.129640 139685619324736 run_pretraining.py:503]   /data/part-00681-of-01000
+INFO:tensorflow:  /data/part-00306-of-00500
+I0910 21:29:03.129712 139685619324736 run_pretraining.py:503]   /data/part-00306-of-00500
+INFO:tensorflow:  /data/part-00655-of-01000
+I0910 21:29:03.129802 139685619324736 run_pretraining.py:503]   /data/part-00655-of-01000
+INFO:tensorflow:  /data/part-00630-of-01000
+I0910 21:29:03.129876 139685619324736 run_pretraining.py:503]   /data/part-00630-of-01000
+INFO:tensorflow:  /data/part-00384-of-00500
+I0910 21:29:03.129949 139685619324736 run_pretraining.py:503]   /data/part-00384-of-00500
+INFO:tensorflow:  /data/part-00093-of-00500
+I0910 21:29:03.130039 139685619324736 run_pretraining.py:503]   /data/part-00093-of-00500
+INFO:tensorflow:  /data/part-00253-of-00500
+I0910 21:29:03.130111 139685619324736 run_pretraining.py:503]   /data/part-00253-of-00500
+INFO:tensorflow:  /data/part-00547-of-01000
+I0910 21:29:03.130182 139685619324736 run_pretraining.py:503]   /data/part-00547-of-01000
+INFO:tensorflow:  /data/part-00042-of-00500
+I0910 21:29:03.130254 139685619324736 run_pretraining.py:503]   /data/part-00042-of-00500
+INFO:tensorflow:  /data/part-00214-of-00500
+I0910 21:29:03.130326 139685619324736 run_pretraining.py:503]   /data/part-00214-of-00500
+INFO:tensorflow:  /data/part-00632-of-01000
+I0910 21:29:03.130397 139685619324736 run_pretraining.py:503]   /data/part-00632-of-01000
+INFO:tensorflow:  /data/part-00688-of-01000
+I0910 21:29:03.130469 139685619324736 run_pretraining.py:503]   /data/part-00688-of-01000
+INFO:tensorflow:  /data/part-00151-of-00500
+I0910 21:29:03.130541 139685619324736 run_pretraining.py:503]   /data/part-00151-of-00500
+INFO:tensorflow:  /data/part-00229-of-00500
+I0910 21:29:03.130613 139685619324736 run_pretraining.py:503]   /data/part-00229-of-00500
+INFO:tensorflow:  /data/part-00259-of-00500
+I0910 21:29:03.130684 139685619324736 run_pretraining.py:503]   /data/part-00259-of-00500
+INFO:tensorflow:  /data/part-00107-of-00500
+I0910 21:29:03.130756 139685619324736 run_pretraining.py:503]   /data/part-00107-of-00500
+INFO:tensorflow:  /data/part-00014-of-00500
+I0910 21:29:03.130828 139685619324736 run_pretraining.py:503]   /data/part-00014-of-00500
+INFO:tensorflow:  /data/part-00324-of-00500
+I0910 21:29:03.130899 139685619324736 run_pretraining.py:503]   /data/part-00324-of-00500
+INFO:tensorflow:  /data/part-00552-of-01000
+I0910 21:29:03.130971 139685619324736 run_pretraining.py:503]   /data/part-00552-of-01000
+INFO:tensorflow:  /data/part-00130-of-00500
+I0910 21:29:03.131044 139685619324736 run_pretraining.py:503]   /data/part-00130-of-00500
+INFO:tensorflow:  /data/part-00132-of-00500
+I0910 21:29:03.131115 139685619324736 run_pretraining.py:503]   /data/part-00132-of-00500
+INFO:tensorflow:  /data/part-00015-of-00500
+I0910 21:29:03.131187 139685619324736 run_pretraining.py:503]   /data/part-00015-of-00500
+INFO:tensorflow:  /data/part-00260-of-00500
+I0910 21:29:03.131259 139685619324736 run_pretraining.py:503]   /data/part-00260-of-00500
+INFO:tensorflow:  /data/part-00349-of-00500
+I0910 21:29:03.131330 139685619324736 run_pretraining.py:503]   /data/part-00349-of-00500
+INFO:tensorflow:  /data/part-00346-of-00500
+I0910 21:29:03.131402 139685619324736 run_pretraining.py:503]   /data/part-00346-of-00500
+INFO:tensorflow:  /data/part-00391-of-00500
+I0910 21:29:03.131474 139685619324736 run_pretraining.py:503]   /data/part-00391-of-00500
+INFO:tensorflow:  /data/part-00143-of-00500
+I0910 21:29:03.131545 139685619324736 run_pretraining.py:503]   /data/part-00143-of-00500
+INFO:tensorflow:  /data/part-00265-of-00500
+I0910 21:29:03.131617 139685619324736 run_pretraining.py:503]   /data/part-00265-of-00500
+INFO:tensorflow:  /data/part-00594-of-01000
+I0910 21:29:03.131688 139685619324736 run_pretraining.py:503]   /data/part-00594-of-01000
+INFO:tensorflow:  /data/part-00609-of-01000
+I0910 21:29:03.131760 139685619324736 run_pretraining.py:503]   /data/part-00609-of-01000
+INFO:tensorflow:  /data/part-00387-of-00500
+I0910 21:29:03.131832 139685619324736 run_pretraining.py:503]   /data/part-00387-of-00500
+INFO:tensorflow:  /data/part-00186-of-00500
+I0910 21:29:03.131903 139685619324736 run_pretraining.py:503]   /data/part-00186-of-00500
+INFO:tensorflow:  /data/part-00012-of-00500
+I0910 21:29:03.131974 139685619324736 run_pretraining.py:503]   /data/part-00012-of-00500
+INFO:tensorflow:  /data/part-00248-of-00500
+I0910 21:29:03.132046 139685619324736 run_pretraining.py:503]   /data/part-00248-of-00500
+INFO:tensorflow:  /data/part-00242-of-00500
+I0910 21:29:03.132117 139685619324736 run_pretraining.py:503]   /data/part-00242-of-00500
+INFO:tensorflow:  /data/part-00635-of-01000
+I0910 21:29:03.132196 139685619324736 run_pretraining.py:503]   /data/part-00635-of-01000
+INFO:tensorflow:  /data/part-00383-of-00500
+I0910 21:29:03.132323 139685619324736 run_pretraining.py:503]   /data/part-00383-of-00500
+INFO:tensorflow:  /data/part-00523-of-01000
+I0910 21:29:03.132402 139685619324736 run_pretraining.py:503]   /data/part-00523-of-01000
+INFO:tensorflow:  /data/part-00542-of-01000
+I0910 21:29:03.132480 139685619324736 run_pretraining.py:503]   /data/part-00542-of-01000
+INFO:tensorflow:  /data/part-00441-of-00500
+I0910 21:29:03.132587 139685619324736 run_pretraining.py:503]   /data/part-00441-of-00500
+INFO:tensorflow:  /data/part-00499-of-00500
+I0910 21:29:03.132659 139685619324736 run_pretraining.py:503]   /data/part-00499-of-00500
+INFO:tensorflow:  /data/part-00072-of-00500
+I0910 21:29:03.132730 139685619324736 run_pretraining.py:503]   /data/part-00072-of-00500
+INFO:tensorflow:  /data/part-00162-of-00500
+I0910 21:29:03.132802 139685619324736 run_pretraining.py:503]   /data/part-00162-of-00500
+INFO:tensorflow:  /data/part-00483-of-00500
+I0910 21:29:03.132873 139685619324736 run_pretraining.py:503]   /data/part-00483-of-00500
+INFO:tensorflow:  /data/part-00311-of-00500
+I0910 21:29:03.132944 139685619324736 run_pretraining.py:503]   /data/part-00311-of-00500
+INFO:tensorflow:  /data/part-00176-of-00500
+I0910 21:29:03.133015 139685619324736 run_pretraining.py:503]   /data/part-00176-of-00500
+INFO:tensorflow:  /data/part-00226-of-00500
+I0910 21:29:03.133087 139685619324736 run_pretraining.py:503]   /data/part-00226-of-00500
+INFO:tensorflow:  /data/part-00539-of-01000
+I0910 21:29:03.133158 139685619324736 run_pretraining.py:503]   /data/part-00539-of-01000
+INFO:tensorflow:  /data/part-00348-of-00500
+I0910 21:29:03.133229 139685619324736 run_pretraining.py:503]   /data/part-00348-of-00500
+INFO:tensorflow:  /data/part-00604-of-01000
+I0910 21:29:03.133300 139685619324736 run_pretraining.py:503]   /data/part-00604-of-01000
+INFO:tensorflow:  /data/part-00580-of-01000
+I0910 21:29:03.133372 139685619324736 run_pretraining.py:503]   /data/part-00580-of-01000
+INFO:tensorflow:  /data/part-00302-of-00500
+I0910 21:29:03.133443 139685619324736 run_pretraining.py:503]   /data/part-00302-of-00500
+INFO:tensorflow:  /data/part-00004-of-00500
+I0910 21:29:03.133514 139685619324736 run_pretraining.py:503]   /data/part-00004-of-00500
+INFO:tensorflow:  /data/part-00279-of-00500
+I0910 21:29:03.133585 139685619324736 run_pretraining.py:503]   /data/part-00279-of-00500
+INFO:tensorflow:  /data/part-00021-of-00500
+I0910 21:29:03.133656 139685619324736 run_pretraining.py:503]   /data/part-00021-of-00500
+INFO:tensorflow:  /data/part-00415-of-00500
+I0910 21:29:03.133728 139685619324736 run_pretraining.py:503]   /data/part-00415-of-00500
+INFO:tensorflow:  /data/part-00115-of-00500
+I0910 21:29:03.133799 139685619324736 run_pretraining.py:503]   /data/part-00115-of-00500
+INFO:tensorflow:  /data/part-00297-of-00500
+I0910 21:29:03.133871 139685619324736 run_pretraining.py:503]   /data/part-00297-of-00500
+INFO:tensorflow:  /data/part-00459-of-00500
+I0910 21:29:03.133942 139685619324736 run_pretraining.py:503]   /data/part-00459-of-00500
+INFO:tensorflow:  /data/part-00185-of-00500
+I0910 21:29:03.134013 139685619324736 run_pretraining.py:503]   /data/part-00185-of-00500
+INFO:tensorflow:  /data/part-00136-of-00500
+I0910 21:29:03.134084 139685619324736 run_pretraining.py:503]   /data/part-00136-of-00500
+INFO:tensorflow:  /data/part-00351-of-00500
+I0910 21:29:03.134156 139685619324736 run_pretraining.py:503]   /data/part-00351-of-00500
+INFO:tensorflow:  /data/part-00577-of-01000
+I0910 21:29:03.134227 139685619324736 run_pretraining.py:503]   /data/part-00577-of-01000
+INFO:tensorflow:  /data/part-00343-of-00500
+I0910 21:29:03.134318 139685619324736 run_pretraining.py:503]   /data/part-00343-of-00500
+INFO:tensorflow:  /data/part-00070-of-00500
+I0910 21:29:03.134391 139685619324736 run_pretraining.py:503]   /data/part-00070-of-00500
+INFO:tensorflow:  /data/part-00187-of-00500
+I0910 21:29:03.134464 139685619324736 run_pretraining.py:503]   /data/part-00187-of-00500
+INFO:tensorflow:  /data/part-00410-of-00500
+I0910 21:29:03.134537 139685619324736 run_pretraining.py:503]   /data/part-00410-of-00500
+INFO:tensorflow:  /data/part-00583-of-01000
+I0910 21:29:03.134610 139685619324736 run_pretraining.py:503]   /data/part-00583-of-01000
+INFO:tensorflow:  /data/part-00172-of-00500
+I0910 21:29:03.134683 139685619324736 run_pretraining.py:503]   /data/part-00172-of-00500
+INFO:tensorflow:  /data/part-00670-of-01000
+I0910 21:29:03.134756 139685619324736 run_pretraining.py:503]   /data/part-00670-of-01000
+INFO:tensorflow:  /data/part-00224-of-00500
+I0910 21:29:03.134829 139685619324736 run_pretraining.py:503]   /data/part-00224-of-00500
+INFO:tensorflow:  /data/part-00510-of-01000
+I0910 21:29:03.134903 139685619324736 run_pretraining.py:503]   /data/part-00510-of-01000
+INFO:tensorflow:  /data/part-00652-of-01000
+I0910 21:29:03.134994 139685619324736 run_pretraining.py:503]   /data/part-00652-of-01000
+INFO:tensorflow:  /data/part-00398-of-00500
+I0910 21:29:03.135069 139685619324736 run_pretraining.py:503]   /data/part-00398-of-00500
+INFO:tensorflow:  /data/part-00234-of-00500
+I0910 21:29:03.135144 139685619324736 run_pretraining.py:503]   /data/part-00234-of-00500
+INFO:tensorflow:  /data/part-00289-of-00500
+I0910 21:29:03.135220 139685619324736 run_pretraining.py:503]   /data/part-00289-of-00500
+INFO:tensorflow:  /data/part-00543-of-01000
+I0910 21:29:03.135310 139685619324736 run_pretraining.py:503]   /data/part-00543-of-01000
+INFO:tensorflow:  /data/part-00197-of-00500
+I0910 21:29:03.135398 139685619324736 run_pretraining.py:503]   /data/part-00197-of-00500
+INFO:tensorflow:  /data/part-00222-of-00500
+I0910 21:29:03.135470 139685619324736 run_pretraining.py:503]   /data/part-00222-of-00500
+INFO:tensorflow:  /data/part-00551-of-01000
+I0910 21:29:03.135541 139685619324736 run_pretraining.py:503]   /data/part-00551-of-01000
+INFO:tensorflow:  /data/part-00682-of-01000
+I0910 21:29:03.135612 139685619324736 run_pretraining.py:503]   /data/part-00682-of-01000
+INFO:tensorflow:  /data/part-00148-of-00500
+I0910 21:29:03.135683 139685619324736 run_pretraining.py:503]   /data/part-00148-of-00500
+INFO:tensorflow:  /data/part-00099-of-00500
+I0910 21:29:03.135755 139685619324736 run_pretraining.py:503]   /data/part-00099-of-00500
+INFO:tensorflow:  /data/part-00044-of-00500
+I0910 21:29:03.135827 139685619324736 run_pretraining.py:503]   /data/part-00044-of-00500
+INFO:tensorflow:  /data/part-00168-of-00500
+I0910 21:29:03.135898 139685619324736 run_pretraining.py:503]   /data/part-00168-of-00500
+INFO:tensorflow:  /data/part-00465-of-00500
+I0910 21:29:03.135969 139685619324736 run_pretraining.py:503]   /data/part-00465-of-00500
+INFO:tensorflow:  /data/part-00183-of-00500
+I0910 21:29:03.136040 139685619324736 run_pretraining.py:503]   /data/part-00183-of-00500
+INFO:tensorflow:  /data/part-00307-of-00500
+I0910 21:29:03.136112 139685619324736 run_pretraining.py:503]   /data/part-00307-of-00500
+INFO:tensorflow:  /data/part-00615-of-01000
+I0910 21:29:03.136183 139685619324736 run_pretraining.py:503]   /data/part-00615-of-01000
+INFO:tensorflow:  /data/part-00639-of-01000
+I0910 21:29:03.136311 139685619324736 run_pretraining.py:503]   /data/part-00639-of-01000
+INFO:tensorflow:  /data/part-00291-of-00500
+I0910 21:29:03.136394 139685619324736 run_pretraining.py:503]   /data/part-00291-of-00500
+INFO:tensorflow:  /data/part-00126-of-00500
+I0910 21:29:03.136473 139685619324736 run_pretraining.py:503]   /data/part-00126-of-00500
+INFO:tensorflow:  /data/part-00475-of-00500
+I0910 21:29:03.136596 139685619324736 run_pretraining.py:503]   /data/part-00475-of-00500
+INFO:tensorflow:  /data/part-00405-of-00500
+I0910 21:29:03.136667 139685619324736 run_pretraining.py:503]   /data/part-00405-of-00500
+INFO:tensorflow:  /data/part-00512-of-01000
+I0910 21:29:03.136739 139685619324736 run_pretraining.py:503]   /data/part-00512-of-01000
+INFO:tensorflow:  /data/part-00517-of-01000
+I0910 21:29:03.136811 139685619324736 run_pretraining.py:503]   /data/part-00517-of-01000
+INFO:tensorflow:  /data/part-00422-of-00500
+I0910 21:29:03.136883 139685619324736 run_pretraining.py:503]   /data/part-00422-of-00500
+INFO:tensorflow:  /data/part-00393-of-00500
+I0910 21:29:03.136955 139685619324736 run_pretraining.py:503]   /data/part-00393-of-00500
+INFO:tensorflow:  /data/part-00445-of-00500
+I0910 21:29:03.137026 139685619324736 run_pretraining.py:503]   /data/part-00445-of-00500
+INFO:tensorflow:  /data/part-00492-of-00500
+I0910 21:29:03.137098 139685619324736 run_pretraining.py:503]   /data/part-00492-of-00500
+INFO:tensorflow:  /data/part-00546-of-01000
+I0910 21:29:03.137169 139685619324736 run_pretraining.py:503]   /data/part-00546-of-01000
+INFO:tensorflow:  /data/part-00231-of-00500
+I0910 21:29:03.137241 139685619324736 run_pretraining.py:503]   /data/part-00231-of-00500
+INFO:tensorflow:  /data/part-00634-of-01000
+I0910 21:29:03.137313 139685619324736 run_pretraining.py:503]   /data/part-00634-of-01000
+INFO:tensorflow:  /data/part-00430-of-00500
+I0910 21:29:03.137385 139685619324736 run_pretraining.py:503]   /data/part-00430-of-00500
+INFO:tensorflow:  /data/part-00642-of-01000
+I0910 21:29:03.137456 139685619324736 run_pretraining.py:503]   /data/part-00642-of-01000
+INFO:tensorflow:  /data/part-00328-of-00500
+I0910 21:29:03.137528 139685619324736 run_pretraining.py:503]   /data/part-00328-of-00500
+INFO:tensorflow:  /data/part-00560-of-01000
+I0910 21:29:03.137600 139685619324736 run_pretraining.py:503]   /data/part-00560-of-01000
+INFO:tensorflow:  /data/part-00247-of-00500
+I0910 21:29:03.137672 139685619324736 run_pretraining.py:503]   /data/part-00247-of-00500
+INFO:tensorflow:  /data/part-00370-of-00500
+I0910 21:29:03.137744 139685619324736 run_pretraining.py:503]   /data/part-00370-of-00500
+INFO:tensorflow:  /data/part-00431-of-00500
+I0910 21:29:03.137815 139685619324736 run_pretraining.py:503]   /data/part-00431-of-00500
+INFO:tensorflow:  /data/part-00013-of-00500
+I0910 21:29:03.137887 139685619324736 run_pretraining.py:503]   /data/part-00013-of-00500
+INFO:tensorflow:  /data/part-00574-of-01000
+I0910 21:29:03.137959 139685619324736 run_pretraining.py:503]   /data/part-00574-of-01000
+INFO:tensorflow:  /data/part-00559-of-01000
+I0910 21:29:03.138030 139685619324736 run_pretraining.py:503]   /data/part-00559-of-01000
+INFO:tensorflow:  /data/part-00146-of-00500
+I0910 21:29:03.138102 139685619324736 run_pretraining.py:503]   /data/part-00146-of-00500
+INFO:tensorflow:  /data/part-00502-of-01000
+I0910 21:29:03.138174 139685619324736 run_pretraining.py:503]   /data/part-00502-of-01000
+INFO:tensorflow:  /data/part-00507-of-01000
+I0910 21:29:03.138245 139685619324736 run_pretraining.py:503]   /data/part-00507-of-01000
+INFO:tensorflow:  /data/part-00082-of-00500
+I0910 21:29:03.138317 139685619324736 run_pretraining.py:503]   /data/part-00082-of-00500
+INFO:tensorflow:  /data/part-00659-of-01000
+I0910 21:29:03.138389 139685619324736 run_pretraining.py:503]   /data/part-00659-of-01000
+INFO:tensorflow:  /data/part-00481-of-00500
+I0910 21:29:03.138461 139685619324736 run_pretraining.py:503]   /data/part-00481-of-00500
+INFO:tensorflow:  /data/part-00493-of-00500
+I0910 21:29:03.138532 139685619324736 run_pretraining.py:503]   /data/part-00493-of-00500
+INFO:tensorflow:  /data/part-00654-of-01000
+I0910 21:29:03.138604 139685619324736 run_pretraining.py:503]   /data/part-00654-of-01000
+INFO:tensorflow:  /data/part-00470-of-00500
+I0910 21:29:03.138675 139685619324736 run_pretraining.py:503]   /data/part-00470-of-00500
+INFO:tensorflow:  /data/part-00266-of-00500
+I0910 21:29:03.138747 139685619324736 run_pretraining.py:503]   /data/part-00266-of-00500
+INFO:tensorflow:  /data/part-00067-of-00500
+I0910 21:29:03.138819 139685619324736 run_pretraining.py:503]   /data/part-00067-of-00500
+INFO:tensorflow:  /data/part-00040-of-00500
+I0910 21:29:03.138891 139685619324736 run_pretraining.py:503]   /data/part-00040-of-00500
+INFO:tensorflow:  /data/part-00111-of-00500
+I0910 21:29:03.138963 139685619324736 run_pretraining.py:503]   /data/part-00111-of-00500
+INFO:tensorflow:  /data/part-00202-of-00500
+I0910 21:29:03.139035 139685619324736 run_pretraining.py:503]   /data/part-00202-of-00500
+INFO:tensorflow:  /data/part-00301-of-00500
+I0910 21:29:03.139106 139685619324736 run_pretraining.py:503]   /data/part-00301-of-00500
+INFO:tensorflow:  /data/part-00443-of-00500
+I0910 21:29:03.139178 139685619324736 run_pretraining.py:503]   /data/part-00443-of-00500
+INFO:tensorflow:  /data/part-00069-of-00500
+I0910 21:29:03.139250 139685619324736 run_pretraining.py:503]   /data/part-00069-of-00500
+INFO:tensorflow:  /data/part-00050-of-00500
+I0910 21:29:03.139321 139685619324736 run_pretraining.py:503]   /data/part-00050-of-00500
+INFO:tensorflow:  /data/part-00598-of-01000
+I0910 21:29:03.139393 139685619324736 run_pretraining.py:503]   /data/part-00598-of-01000
+INFO:tensorflow:  /data/part-00660-of-01000
+I0910 21:29:03.139464 139685619324736 run_pretraining.py:503]   /data/part-00660-of-01000
+INFO:tensorflow:  /data/part-00062-of-00500
+I0910 21:29:03.139536 139685619324736 run_pretraining.py:503]   /data/part-00062-of-00500
+INFO:tensorflow:  /data/part-00141-of-00500
+I0910 21:29:03.139608 139685619324736 run_pretraining.py:503]   /data/part-00141-of-00500
+INFO:tensorflow:  /data/part-00663-of-01000
+I0910 21:29:03.139679 139685619324736 run_pretraining.py:503]   /data/part-00663-of-01000
+INFO:tensorflow:  /data/part-00155-of-00500
+I0910 21:29:03.139751 139685619324736 run_pretraining.py:503]   /data/part-00155-of-00500
+INFO:tensorflow:  /data/part-00406-of-00500
+I0910 21:29:03.139823 139685619324736 run_pretraining.py:503]   /data/part-00406-of-00500
+INFO:tensorflow:  /data/part-00276-of-00500
+I0910 21:29:03.139894 139685619324736 run_pretraining.py:503]   /data/part-00276-of-00500
+INFO:tensorflow:  /data/part-00189-of-00500
+I0910 21:29:03.139966 139685619324736 run_pretraining.py:503]   /data/part-00189-of-00500
+INFO:tensorflow:  /data/part-00046-of-00500
+I0910 21:29:03.140037 139685619324736 run_pretraining.py:503]   /data/part-00046-of-00500
+INFO:tensorflow:  /data/part-00191-of-00500
+I0910 21:29:03.140109 139685619324736 run_pretraining.py:503]   /data/part-00191-of-00500
+INFO:tensorflow:  /data/part-00032-of-00500
+I0910 21:29:03.140181 139685619324736 run_pretraining.py:503]   /data/part-00032-of-00500
+INFO:tensorflow:  /data/part-00388-of-00500
+I0910 21:29:03.140310 139685619324736 run_pretraining.py:503]   /data/part-00388-of-00500
+INFO:tensorflow:  /data/part-00456-of-00500
+I0910 21:29:03.140390 139685619324736 run_pretraining.py:503]   /data/part-00456-of-00500
+INFO:tensorflow:  /data/part-00479-of-00500
+I0910 21:29:03.140467 139685619324736 run_pretraining.py:503]   /data/part-00479-of-00500
+INFO:tensorflow:  /data/part-00333-of-00500
+I0910 21:29:03.140560 139685619324736 run_pretraining.py:503]   /data/part-00333-of-00500
+INFO:tensorflow:  /data/part-00368-of-00500
+I0910 21:29:03.140632 139685619324736 run_pretraining.py:503]   /data/part-00368-of-00500
+INFO:tensorflow:  /data/part-00087-of-00500
+I0910 21:29:03.140703 139685619324736 run_pretraining.py:503]   /data/part-00087-of-00500
+INFO:tensorflow:  /data/part-00321-of-00500
+I0910 21:29:03.140776 139685619324736 run_pretraining.py:503]   /data/part-00321-of-00500
+INFO:tensorflow:  /data/part-00631-of-01000
+I0910 21:29:03.140847 139685619324736 run_pretraining.py:503]   /data/part-00631-of-01000
+INFO:tensorflow:  /data/part-00103-of-00500
+I0910 21:29:03.140919 139685619324736 run_pretraining.py:503]   /data/part-00103-of-00500
+INFO:tensorflow:  /data/part-00108-of-00500
+I0910 21:29:03.140991 139685619324736 run_pretraining.py:503]   /data/part-00108-of-00500
+INFO:tensorflow:  /data/part-00007-of-00500
+I0910 21:29:03.141063 139685619324736 run_pretraining.py:503]   /data/part-00007-of-00500
+INFO:tensorflow:  /data/part-00607-of-01000
+I0910 21:29:03.141134 139685619324736 run_pretraining.py:503]   /data/part-00607-of-01000
+INFO:tensorflow:  /data/part-00496-of-00500
+I0910 21:29:03.141206 139685619324736 run_pretraining.py:503]   /data/part-00496-of-00500
+INFO:tensorflow:  /data/part-00198-of-00500
+I0910 21:29:03.141278 139685619324736 run_pretraining.py:503]   /data/part-00198-of-00500
+INFO:tensorflow:  /data/part-00090-of-00500
+I0910 21:29:03.141350 139685619324736 run_pretraining.py:503]   /data/part-00090-of-00500
+INFO:tensorflow:  /data/part-00288-of-00500
+I0910 21:29:03.141421 139685619324736 run_pretraining.py:503]   /data/part-00288-of-00500
+INFO:tensorflow:  /data/part-00352-of-00500
+I0910 21:29:03.141493 139685619324736 run_pretraining.py:503]   /data/part-00352-of-00500
+INFO:tensorflow:  /data/part-00120-of-00500
+I0910 21:29:03.141564 139685619324736 run_pretraining.py:503]   /data/part-00120-of-00500
+INFO:tensorflow:  /data/part-00356-of-00500
+I0910 21:29:03.141636 139685619324736 run_pretraining.py:503]   /data/part-00356-of-00500
+INFO:tensorflow:  /data/part-00605-of-01000
+I0910 21:29:03.141708 139685619324736 run_pretraining.py:503]   /data/part-00605-of-01000
+INFO:tensorflow:  /data/part-00217-of-00500
+I0910 21:29:03.141780 139685619324736 run_pretraining.py:503]   /data/part-00217-of-00500
+INFO:tensorflow:  /data/part-00322-of-00500
+I0910 21:29:03.141851 139685619324736 run_pretraining.py:503]   /data/part-00322-of-00500
+INFO:tensorflow:  /data/part-00178-of-00500
+I0910 21:29:03.141923 139685619324736 run_pretraining.py:503]   /data/part-00178-of-00500
+INFO:tensorflow:  /data/part-00501-of-01000
+I0910 21:29:03.141995 139685619324736 run_pretraining.py:503]   /data/part-00501-of-01000
+INFO:tensorflow:  /data/part-00161-of-00500
+I0910 21:29:03.142067 139685619324736 run_pretraining.py:503]   /data/part-00161-of-00500
+INFO:tensorflow:  /data/part-00149-of-00500
+I0910 21:29:03.142138 139685619324736 run_pretraining.py:503]   /data/part-00149-of-00500
+INFO:tensorflow:  /data/part-00154-of-00500
+I0910 21:29:03.142210 139685619324736 run_pretraining.py:503]   /data/part-00154-of-00500
+INFO:tensorflow:  /data/part-00163-of-00500
+I0910 21:29:03.142282 139685619324736 run_pretraining.py:503]   /data/part-00163-of-00500
+INFO:tensorflow:  /data/part-00236-of-00500
+I0910 21:29:03.142354 139685619324736 run_pretraining.py:503]   /data/part-00236-of-00500
+INFO:tensorflow:  /data/part-00395-of-00500
+I0910 21:29:03.142426 139685619324736 run_pretraining.py:503]   /data/part-00395-of-00500
+INFO:tensorflow:  /data/part-00669-of-01000
+I0910 21:29:03.142498 139685619324736 run_pretraining.py:503]   /data/part-00669-of-01000
+INFO:tensorflow:  /data/part-00369-of-00500
+I0910 21:29:03.142569 139685619324736 run_pretraining.py:503]   /data/part-00369-of-00500
+INFO:tensorflow:  /data/part-00179-of-00500
+I0910 21:29:03.142641 139685619324736 run_pretraining.py:503]   /data/part-00179-of-00500
+INFO:tensorflow:  /data/part-00497-of-00500
+I0910 21:29:03.142713 139685619324736 run_pretraining.py:503]   /data/part-00497-of-00500
+INFO:tensorflow:  /data/part-00442-of-00500
+I0910 21:29:03.142784 139685619324736 run_pretraining.py:503]   /data/part-00442-of-00500
+INFO:tensorflow:  /data/part-00397-of-00500
+I0910 21:29:03.142856 139685619324736 run_pretraining.py:503]   /data/part-00397-of-00500
+INFO:tensorflow:  /data/part-00686-of-01000
+I0910 21:29:03.142927 139685619324736 run_pretraining.py:503]   /data/part-00686-of-01000
+INFO:tensorflow:  /data/part-00474-of-00500
+I0910 21:29:03.142999 139685619324736 run_pretraining.py:503]   /data/part-00474-of-00500
+INFO:tensorflow:  /data/part-00371-of-00500
+I0910 21:29:03.143070 139685619324736 run_pretraining.py:503]   /data/part-00371-of-00500
+INFO:tensorflow:  /data/part-00417-of-00500
+I0910 21:29:03.143142 139685619324736 run_pretraining.py:503]   /data/part-00417-of-00500
+INFO:tensorflow:  /data/part-00379-of-00500
+I0910 21:29:03.143213 139685619324736 run_pretraining.py:503]   /data/part-00379-of-00500
+INFO:tensorflow:  /data/part-00529-of-01000
+I0910 21:29:03.143285 139685619324736 run_pretraining.py:503]   /data/part-00529-of-01000
+INFO:tensorflow:  /data/part-00386-of-00500
+I0910 21:29:03.143357 139685619324736 run_pretraining.py:503]   /data/part-00386-of-00500
+INFO:tensorflow:  /data/part-00334-of-00500
+I0910 21:29:03.143429 139685619324736 run_pretraining.py:503]   /data/part-00334-of-00500
+INFO:tensorflow:  /data/part-00092-of-00500
+I0910 21:29:03.143500 139685619324736 run_pretraining.py:503]   /data/part-00092-of-00500
+INFO:tensorflow:  /data/part-00556-of-01000
+I0910 21:29:03.143572 139685619324736 run_pretraining.py:503]   /data/part-00556-of-01000
+INFO:tensorflow:  /data/part-00156-of-00500
+I0910 21:29:03.143643 139685619324736 run_pretraining.py:503]   /data/part-00156-of-00500
+INFO:tensorflow:  /data/part-00503-of-01000
+I0910 21:29:03.143715 139685619324736 run_pretraining.py:503]   /data/part-00503-of-01000
+INFO:tensorflow:  /data/part-00451-of-00500
+I0910 21:29:03.143786 139685619324736 run_pretraining.py:503]   /data/part-00451-of-00500
+INFO:tensorflow:  /data/part-00589-of-01000
+I0910 21:29:03.143858 139685619324736 run_pretraining.py:503]   /data/part-00589-of-01000
+INFO:tensorflow:  /data/part-00105-of-00500
+I0910 21:29:03.143929 139685619324736 run_pretraining.py:503]   /data/part-00105-of-00500
+INFO:tensorflow:  /data/part-00684-of-01000
+I0910 21:29:03.144001 139685619324736 run_pretraining.py:503]   /data/part-00684-of-01000
+INFO:tensorflow:  /data/part-00285-of-00500
+I0910 21:29:03.144072 139685619324736 run_pretraining.py:503]   /data/part-00285-of-00500
+INFO:tensorflow:  /data/part-00429-of-00500
+I0910 21:29:03.144144 139685619324736 run_pretraining.py:503]   /data/part-00429-of-00500
+INFO:tensorflow:  /data/part-00064-of-00500
+I0910 21:29:03.144255 139685619324736 run_pretraining.py:503]   /data/part-00064-of-00500
+INFO:tensorflow:  /data/part-00233-of-00500
+I0910 21:29:03.144341 139685619324736 run_pretraining.py:503]   /data/part-00233-of-00500
+INFO:tensorflow:  /data/part-00299-of-00500
+I0910 21:29:03.144419 139685619324736 run_pretraining.py:503]   /data/part-00299-of-00500
+INFO:tensorflow:  /data/part-00101-of-00500
+I0910 21:29:03.144497 139685619324736 run_pretraining.py:503]   /data/part-00101-of-00500
+INFO:tensorflow:  /data/part-00112-of-00500
+I0910 21:29:03.144586 139685619324736 run_pretraining.py:503]   /data/part-00112-of-00500
+INFO:tensorflow:  /data/part-00587-of-01000
+I0910 21:29:03.144657 139685619324736 run_pretraining.py:503]   /data/part-00587-of-01000
+INFO:tensorflow:  /data/part-00571-of-01000
+I0910 21:29:03.144729 139685619324736 run_pretraining.py:503]   /data/part-00571-of-01000
+INFO:tensorflow:  /data/part-00255-of-00500
+I0910 21:29:03.144800 139685619324736 run_pretraining.py:503]   /data/part-00255-of-00500
+INFO:tensorflow:  /data/part-00264-of-00500
+I0910 21:29:03.144872 139685619324736 run_pretraining.py:503]   /data/part-00264-of-00500
+INFO:tensorflow:  /data/part-00416-of-00500
+I0910 21:29:03.144943 139685619324736 run_pretraining.py:503]   /data/part-00416-of-00500
+INFO:tensorflow:  /data/part-00045-of-00500
+I0910 21:29:03.145015 139685619324736 run_pretraining.py:503]   /data/part-00045-of-00500
+INFO:tensorflow:  /data/part-00083-of-00500
+I0910 21:29:03.145104 139685619324736 run_pretraining.py:503]   /data/part-00083-of-00500
+INFO:tensorflow:  /data/part-00521-of-01000
+I0910 21:29:03.145178 139685619324736 run_pretraining.py:503]   /data/part-00521-of-01000
+INFO:tensorflow:  /data/part-00678-of-01000
+I0910 21:29:03.145251 139685619324736 run_pretraining.py:503]   /data/part-00678-of-01000
+INFO:tensorflow:  /data/part-00600-of-01000
+I0910 21:29:03.145324 139685619324736 run_pretraining.py:503]   /data/part-00600-of-01000
+INFO:tensorflow:  /data/part-00033-of-00500
+I0910 21:29:03.145413 139685619324736 run_pretraining.py:503]   /data/part-00033-of-00500
+INFO:tensorflow:  /data/part-00661-of-01000
+I0910 21:29:03.145484 139685619324736 run_pretraining.py:503]   /data/part-00661-of-01000
+INFO:tensorflow:  /data/part-00381-of-00500
+I0910 21:29:03.145556 139685619324736 run_pretraining.py:503]   /data/part-00381-of-00500
+INFO:tensorflow:  /data/part-00665-of-01000
+I0910 21:29:03.145628 139685619324736 run_pretraining.py:503]   /data/part-00665-of-01000
+INFO:tensorflow:  /data/part-00193-of-00500
+I0910 21:29:03.145699 139685619324736 run_pretraining.py:503]   /data/part-00193-of-00500
+INFO:tensorflow:  /data/part-00251-of-00500
+I0910 21:29:03.145770 139685619324736 run_pretraining.py:503]   /data/part-00251-of-00500
+INFO:tensorflow:  /data/part-00314-of-00500
+I0910 21:29:03.145842 139685619324736 run_pretraining.py:503]   /data/part-00314-of-00500
+INFO:tensorflow:  /data/part-00522-of-01000
+I0910 21:29:03.145914 139685619324736 run_pretraining.py:503]   /data/part-00522-of-01000
+INFO:tensorflow:  /data/part-00029-of-00500
+I0910 21:29:03.145985 139685619324736 run_pretraining.py:503]   /data/part-00029-of-00500
+INFO:tensorflow:  /data/part-00495-of-00500
+I0910 21:29:03.146056 139685619324736 run_pretraining.py:503]   /data/part-00495-of-00500
+INFO:tensorflow:  /data/part-00318-of-00500
+I0910 21:29:03.146128 139685619324736 run_pretraining.py:503]   /data/part-00318-of-00500
+INFO:tensorflow:  /data/part-00608-of-01000
+I0910 21:29:03.146199 139685619324736 run_pretraining.py:503]   /data/part-00608-of-01000
+INFO:tensorflow:  /data/part-00689-of-01000
+I0910 21:29:03.146271 139685619324736 run_pretraining.py:503]   /data/part-00689-of-01000
+INFO:tensorflow:  /data/part-00519-of-01000
+I0910 21:29:03.146342 139685619324736 run_pretraining.py:503]   /data/part-00519-of-01000
+INFO:tensorflow:  /data/part-00532-of-01000
+I0910 21:29:03.146414 139685619324736 run_pretraining.py:503]   /data/part-00532-of-01000
+INFO:tensorflow:  /data/part-00317-of-00500
+I0910 21:29:03.146485 139685619324736 run_pretraining.py:503]   /data/part-00317-of-00500
+INFO:tensorflow:  /data/part-00243-of-00500
+I0910 21:29:03.146556 139685619324736 run_pretraining.py:503]   /data/part-00243-of-00500
+INFO:tensorflow:  /data/part-00616-of-01000
+I0910 21:29:03.146628 139685619324736 run_pretraining.py:503]   /data/part-00616-of-01000
+INFO:tensorflow:  /data/part-00228-of-00500
+I0910 21:29:03.146700 139685619324736 run_pretraining.py:503]   /data/part-00228-of-00500
+INFO:tensorflow:  /data/part-00336-of-00500
+I0910 21:29:03.146771 139685619324736 run_pretraining.py:503]   /data/part-00336-of-00500
+INFO:tensorflow:  /data/part-00129-of-00500
+I0910 21:29:03.146843 139685619324736 run_pretraining.py:503]   /data/part-00129-of-00500
+INFO:tensorflow:  /data/part-00275-of-00500
+I0910 21:29:03.146914 139685619324736 run_pretraining.py:503]   /data/part-00275-of-00500
+INFO:tensorflow:  /data/part-00164-of-00500
+I0910 21:29:03.146986 139685619324736 run_pretraining.py:503]   /data/part-00164-of-00500
+INFO:tensorflow:  /data/part-00541-of-01000
+I0910 21:29:03.147058 139685619324736 run_pretraining.py:503]   /data/part-00541-of-01000
+INFO:tensorflow:  /data/part-00022-of-00500
+I0910 21:29:03.147129 139685619324736 run_pretraining.py:503]   /data/part-00022-of-00500
+INFO:tensorflow:  /data/part-00150-of-00500
+I0910 21:29:03.147201 139685619324736 run_pretraining.py:503]   /data/part-00150-of-00500
+INFO:tensorflow:  /data/part-00196-of-00500
+I0910 21:29:03.147271 139685619324736 run_pretraining.py:503]   /data/part-00196-of-00500
+INFO:tensorflow:  /data/part-00140-of-00500
+I0910 21:29:03.147343 139685619324736 run_pretraining.py:503]   /data/part-00140-of-00500
+INFO:tensorflow:  /data/part-00145-of-00500
+I0910 21:29:03.147414 139685619324736 run_pretraining.py:503]   /data/part-00145-of-00500
+INFO:tensorflow:  /data/part-00190-of-00500
+I0910 21:29:03.147486 139685619324736 run_pretraining.py:503]   /data/part-00190-of-00500
+INFO:tensorflow:  /data/part-00261-of-00500
+I0910 21:29:03.147557 139685619324736 run_pretraining.py:503]   /data/part-00261-of-00500
+INFO:tensorflow:  /data/part-00582-of-01000
+I0910 21:29:03.147629 139685619324736 run_pretraining.py:503]   /data/part-00582-of-01000
+INFO:tensorflow:  /data/part-00355-of-00500
+I0910 21:29:03.147700 139685619324736 run_pretraining.py:503]   /data/part-00355-of-00500
+INFO:tensorflow:  /data/part-00412-of-00500
+I0910 21:29:03.147771 139685619324736 run_pretraining.py:503]   /data/part-00412-of-00500
+INFO:tensorflow:  /data/part-00606-of-01000
+I0910 21:29:03.147843 139685619324736 run_pretraining.py:503]   /data/part-00606-of-01000
+INFO:tensorflow:  /data/part-00286-of-00500
+I0910 21:29:03.147915 139685619324736 run_pretraining.py:503]   /data/part-00286-of-00500
+INFO:tensorflow:  /data/part-00647-of-01000
+I0910 21:29:03.147986 139685619324736 run_pretraining.py:503]   /data/part-00647-of-01000
+INFO:tensorflow:  /data/part-00641-of-01000
+I0910 21:29:03.148057 139685619324736 run_pretraining.py:503]   /data/part-00641-of-01000
+INFO:tensorflow:  /data/part-00360-of-00500
+I0910 21:29:03.148128 139685619324736 run_pretraining.py:503]   /data/part-00360-of-00500
+INFO:tensorflow:  /data/part-00679-of-01000
+I0910 21:29:03.148226 139685619324736 run_pretraining.py:503]   /data/part-00679-of-01000
+INFO:tensorflow:  /data/part-00109-of-00500
+I0910 21:29:03.148322 139685619324736 run_pretraining.py:503]   /data/part-00109-of-00500
+INFO:tensorflow:  /data/part-00586-of-01000
+I0910 21:29:03.148401 139685619324736 run_pretraining.py:503]   /data/part-00586-of-01000
+INFO:tensorflow:  /data/part-00361-of-00500
+I0910 21:29:03.148479 139685619324736 run_pretraining.py:503]   /data/part-00361-of-00500
+INFO:tensorflow:  /data/part-00175-of-00500
+I0910 21:29:03.148569 139685619324736 run_pretraining.py:503]   /data/part-00175-of-00500
+INFO:tensorflow:  /data/part-00016-of-00500
+I0910 21:29:03.148641 139685619324736 run_pretraining.py:503]   /data/part-00016-of-00500
+INFO:tensorflow:  /data/part-00138-of-00500
+I0910 21:29:03.148712 139685619324736 run_pretraining.py:503]   /data/part-00138-of-00500
+INFO:tensorflow:  /data/part-00018-of-00500
+I0910 21:29:03.148783 139685619324736 run_pretraining.py:503]   /data/part-00018-of-00500
+INFO:tensorflow:  /data/part-00131-of-00500
+I0910 21:29:03.148854 139685619324736 run_pretraining.py:503]   /data/part-00131-of-00500
+INFO:tensorflow:  /data/part-00056-of-00500
+I0910 21:29:03.148926 139685619324736 run_pretraining.py:503]   /data/part-00056-of-00500
+INFO:tensorflow:  /data/part-00592-of-01000
+I0910 21:29:03.148997 139685619324736 run_pretraining.py:503]   /data/part-00592-of-01000
+INFO:tensorflow:  /data/part-00623-of-01000
+I0910 21:29:03.149069 139685619324736 run_pretraining.py:503]   /data/part-00623-of-01000
+INFO:tensorflow:  /data/part-00215-of-00500
+I0910 21:29:03.149140 139685619324736 run_pretraining.py:503]   /data/part-00215-of-00500
+INFO:tensorflow:  /data/part-00424-of-00500
+I0910 21:29:03.149211 139685619324736 run_pretraining.py:503]   /data/part-00424-of-00500
+INFO:tensorflow:  /data/part-00618-of-01000
+I0910 21:29:03.149282 139685619324736 run_pretraining.py:503]   /data/part-00618-of-01000
+INFO:tensorflow:  /data/part-00566-of-01000
+I0910 21:29:03.149353 139685619324736 run_pretraining.py:503]   /data/part-00566-of-01000
+INFO:tensorflow:  /data/part-00106-of-00500
+I0910 21:29:03.149425 139685619324736 run_pretraining.py:503]   /data/part-00106-of-00500
+INFO:tensorflow:  /data/part-00637-of-01000
+I0910 21:29:03.149496 139685619324736 run_pretraining.py:503]   /data/part-00637-of-01000
+INFO:tensorflow:  /data/part-00482-of-00500
+I0910 21:29:03.149568 139685619324736 run_pretraining.py:503]   /data/part-00482-of-00500
+INFO:tensorflow:  /data/part-00052-of-00500
+I0910 21:29:03.149639 139685619324736 run_pretraining.py:503]   /data/part-00052-of-00500
+INFO:tensorflow:  /data/part-00073-of-00500
+I0910 21:29:03.149711 139685619324736 run_pretraining.py:503]   /data/part-00073-of-00500
+INFO:tensorflow:  /data/part-00484-of-00500
+I0910 21:29:03.149782 139685619324736 run_pretraining.py:503]   /data/part-00484-of-00500
+INFO:tensorflow:  /data/part-00280-of-00500
+I0910 21:29:03.149853 139685619324736 run_pretraining.py:503]   /data/part-00280-of-00500
+INFO:tensorflow:  /data/part-00573-of-01000
+I0910 21:29:03.149925 139685619324736 run_pretraining.py:503]   /data/part-00573-of-01000
+INFO:tensorflow:  /data/part-00440-of-00500
+I0910 21:29:03.149996 139685619324736 run_pretraining.py:503]   /data/part-00440-of-00500
+INFO:tensorflow:  /data/part-00513-of-01000
+I0910 21:29:03.150067 139685619324736 run_pretraining.py:503]   /data/part-00513-of-01000
+INFO:tensorflow:  /data/part-00329-of-00500
+I0910 21:29:03.150138 139685619324736 run_pretraining.py:503]   /data/part-00329-of-00500
+INFO:tensorflow:  /data/part-00599-of-01000
+I0910 21:29:03.150210 139685619324736 run_pretraining.py:503]   /data/part-00599-of-01000
+INFO:tensorflow:  /data/part-00027-of-00500
+I0910 21:29:03.150282 139685619324736 run_pretraining.py:503]   /data/part-00027-of-00500
+INFO:tensorflow:  /data/part-00210-of-00500
+I0910 21:29:03.150353 139685619324736 run_pretraining.py:503]   /data/part-00210-of-00500
+INFO:tensorflow:  /data/part-00672-of-01000
+I0910 21:29:03.150425 139685619324736 run_pretraining.py:503]   /data/part-00672-of-01000
+INFO:tensorflow:  /data/part-00400-of-00500
+I0910 21:29:03.150497 139685619324736 run_pretraining.py:503]   /data/part-00400-of-00500
+INFO:tensorflow:  /data/part-00113-of-00500
+I0910 21:29:03.150568 139685619324736 run_pretraining.py:503]   /data/part-00113-of-00500
+INFO:tensorflow:  /data/part-00123-of-00500
+I0910 21:29:03.150639 139685619324736 run_pretraining.py:503]   /data/part-00123-of-00500
+INFO:tensorflow:  /data/part-00125-of-00500
+I0910 21:29:03.150711 139685619324736 run_pretraining.py:503]   /data/part-00125-of-00500
+INFO:tensorflow:  /data/part-00427-of-00500
+I0910 21:29:03.150782 139685619324736 run_pretraining.py:503]   /data/part-00427-of-00500
+INFO:tensorflow:  /data/part-00137-of-00500
+I0910 21:29:03.150853 139685619324736 run_pretraining.py:503]   /data/part-00137-of-00500
+INFO:tensorflow:  /data/part-00075-of-00500
+I0910 21:29:03.150925 139685619324736 run_pretraining.py:503]   /data/part-00075-of-00500
+INFO:tensorflow:  /data/part-00194-of-00500
+I0910 21:29:03.150997 139685619324736 run_pretraining.py:503]   /data/part-00194-of-00500
+INFO:tensorflow:  /data/part-00438-of-00500
+I0910 21:29:03.151068 139685619324736 run_pretraining.py:503]   /data/part-00438-of-00500
+INFO:tensorflow:  /data/part-00434-of-00500
+I0910 21:29:03.151140 139685619324736 run_pretraining.py:503]   /data/part-00434-of-00500
+INFO:tensorflow:  /data/part-00363-of-00500
+I0910 21:29:03.151211 139685619324736 run_pretraining.py:503]   /data/part-00363-of-00500
+INFO:tensorflow:  /data/part-00527-of-01000
+I0910 21:29:03.151283 139685619324736 run_pretraining.py:503]   /data/part-00527-of-01000
+INFO:tensorflow:  /data/part-00139-of-00500
+I0910 21:29:03.151354 139685619324736 run_pretraining.py:503]   /data/part-00139-of-00500
+INFO:tensorflow:  /data/part-00520-of-01000
+I0910 21:29:03.151426 139685619324736 run_pretraining.py:503]   /data/part-00520-of-01000
+INFO:tensorflow:  /data/part-00401-of-00500
+I0910 21:29:03.151497 139685619324736 run_pretraining.py:503]   /data/part-00401-of-00500
+INFO:tensorflow:  /data/part-00691-of-01000
+I0910 21:29:03.151568 139685619324736 run_pretraining.py:503]   /data/part-00691-of-01000
+INFO:tensorflow:  /data/part-00515-of-01000
+I0910 21:29:03.151640 139685619324736 run_pretraining.py:503]   /data/part-00515-of-01000
+INFO:tensorflow:  /data/part-00258-of-00500
+I0910 21:29:03.151711 139685619324736 run_pretraining.py:503]   /data/part-00258-of-00500
+INFO:tensorflow:  /data/part-00142-of-00500
+I0910 21:29:03.151783 139685619324736 run_pretraining.py:503]   /data/part-00142-of-00500
+INFO:tensorflow:  /data/part-00250-of-00500
+I0910 21:29:03.151854 139685619324736 run_pretraining.py:503]   /data/part-00250-of-00500
+INFO:tensorflow:  /data/part-00054-of-00500
+I0910 21:29:03.151926 139685619324736 run_pretraining.py:503]   /data/part-00054-of-00500
+INFO:tensorflow:  /data/part-00359-of-00500
+I0910 21:29:03.151997 139685619324736 run_pretraining.py:503]   /data/part-00359-of-00500
+INFO:tensorflow:  /data/part-00446-of-00500
+I0910 21:29:03.152069 139685619324736 run_pretraining.py:503]   /data/part-00446-of-00500
+INFO:tensorflow:  /data/part-00409-of-00500
+I0910 21:29:03.152140 139685619324736 run_pretraining.py:503]   /data/part-00409-of-00500
+INFO:tensorflow:  /data/part-00110-of-00500
+I0910 21:29:03.152235 139685619324736 run_pretraining.py:503]   /data/part-00110-of-00500
+INFO:tensorflow:  /data/part-00157-of-00500
+I0910 21:29:03.152314 139685619324736 run_pretraining.py:503]   /data/part-00157-of-00500
+INFO:tensorflow:  /data/part-00066-of-00500
+I0910 21:29:03.152391 139685619324736 run_pretraining.py:503]   /data/part-00066-of-00500
+INFO:tensorflow:  /data/part-00676-of-01000
+I0910 21:29:03.152469 139685619324736 run_pretraining.py:503]   /data/part-00676-of-01000
+INFO:tensorflow:  /data/part-00340-of-00500
+I0910 21:29:03.152559 139685619324736 run_pretraining.py:503]   /data/part-00340-of-00500
+INFO:tensorflow:  /data/part-00034-of-00500
+I0910 21:29:03.152631 139685619324736 run_pretraining.py:503]   /data/part-00034-of-00500
+INFO:tensorflow:  /data/part-00524-of-01000
+I0910 21:29:03.152703 139685619324736 run_pretraining.py:503]   /data/part-00524-of-01000
+INFO:tensorflow:  /data/part-00240-of-00500
+I0910 21:29:03.152774 139685619324736 run_pretraining.py:503]   /data/part-00240-of-00500
+INFO:tensorflow:  /data/part-00365-of-00500
+I0910 21:29:03.152846 139685619324736 run_pretraining.py:503]   /data/part-00365-of-00500
+INFO:tensorflow:  /data/part-00581-of-01000
+I0910 21:29:03.152917 139685619324736 run_pretraining.py:503]   /data/part-00581-of-01000
+INFO:tensorflow:  /data/part-00017-of-00500
+I0910 21:29:03.152988 139685619324736 run_pretraining.py:503]   /data/part-00017-of-00500
+INFO:tensorflow:  /data/part-00167-of-00500
+I0910 21:29:03.153060 139685619324736 run_pretraining.py:503]   /data/part-00167-of-00500
+INFO:tensorflow:  /data/part-00366-of-00500
+I0910 21:29:03.153131 139685619324736 run_pretraining.py:503]   /data/part-00366-of-00500
+INFO:tensorflow:  /data/part-00579-of-01000
+I0910 21:29:03.153202 139685619324736 run_pretraining.py:503]   /data/part-00579-of-01000
+INFO:tensorflow:  /data/part-00128-of-00500
+I0910 21:29:03.153274 139685619324736 run_pretraining.py:503]   /data/part-00128-of-00500
+INFO:tensorflow:  /data/part-00292-of-00500
+I0910 21:29:03.153345 139685619324736 run_pretraining.py:503]   /data/part-00292-of-00500
+INFO:tensorflow:  /data/part-00364-of-00500
+I0910 21:29:03.153417 139685619324736 run_pretraining.py:503]   /data/part-00364-of-00500
+INFO:tensorflow:  /data/part-00277-of-00500
+I0910 21:29:03.153488 139685619324736 run_pretraining.py:503]   /data/part-00277-of-00500
+INFO:tensorflow:  /data/part-00419-of-00500
+I0910 21:29:03.153560 139685619324736 run_pretraining.py:503]   /data/part-00419-of-00500
+INFO:tensorflow:  /data/part-00439-of-00500
+I0910 21:29:03.153631 139685619324736 run_pretraining.py:503]   /data/part-00439-of-00500
+INFO:tensorflow:  /data/part-00245-of-00500
+I0910 21:29:03.153702 139685619324736 run_pretraining.py:503]   /data/part-00245-of-00500
+INFO:tensorflow:  /data/part-00031-of-00500
+I0910 21:29:03.153774 139685619324736 run_pretraining.py:503]   /data/part-00031-of-00500
+INFO:tensorflow:  /data/part-00282-of-00500
+I0910 21:29:03.153846 139685619324736 run_pretraining.py:503]   /data/part-00282-of-00500
+INFO:tensorflow:  /data/part-00257-of-00500
+I0910 21:29:03.153917 139685619324736 run_pretraining.py:503]   /data/part-00257-of-00500
+INFO:tensorflow:  /data/part-00353-of-00500
+I0910 21:29:03.153988 139685619324736 run_pretraining.py:503]   /data/part-00353-of-00500
+INFO:tensorflow:  /data/part-00272-of-00500
+I0910 21:29:03.154059 139685619324736 run_pretraining.py:503]   /data/part-00272-of-00500
+INFO:tensorflow:  /data/part-00208-of-00500
+I0910 21:29:03.154131 139685619324736 run_pretraining.py:503]   /data/part-00208-of-00500
+INFO:tensorflow:  /data/part-00423-of-00500
+I0910 21:29:03.154202 139685619324736 run_pretraining.py:503]   /data/part-00423-of-00500
+INFO:tensorflow:  /data/part-00377-of-00500
+I0910 21:29:03.154273 139685619324736 run_pretraining.py:503]   /data/part-00377-of-00500
+INFO:tensorflow:  /data/part-00597-of-01000
+I0910 21:29:03.154345 139685619324736 run_pretraining.py:503]   /data/part-00597-of-01000
+INFO:tensorflow:  /data/part-00662-of-01000
+I0910 21:29:03.154417 139685619324736 run_pretraining.py:503]   /data/part-00662-of-01000
+INFO:tensorflow:  /data/part-00134-of-00500
+I0910 21:29:03.154488 139685619324736 run_pretraining.py:503]   /data/part-00134-of-00500
+INFO:tensorflow:  /data/part-00471-of-00500
+I0910 21:29:03.154560 139685619324736 run_pretraining.py:503]   /data/part-00471-of-00500
+INFO:tensorflow:  /data/part-00489-of-00500
+I0910 21:29:03.154631 139685619324736 run_pretraining.py:503]   /data/part-00489-of-00500
+INFO:tensorflow:  /data/part-00626-of-01000
+I0910 21:29:03.154702 139685619324736 run_pretraining.py:503]   /data/part-00626-of-01000
+INFO:tensorflow:  /data/part-00160-of-00500
+I0910 21:29:03.154773 139685619324736 run_pretraining.py:503]   /data/part-00160-of-00500
+INFO:tensorflow:  /data/part-00165-of-00500
+I0910 21:29:03.154845 139685619324736 run_pretraining.py:503]   /data/part-00165-of-00500
+INFO:tensorflow:  /data/part-00651-of-01000
+I0910 21:29:03.154916 139685619324736 run_pretraining.py:503]   /data/part-00651-of-01000
+INFO:tensorflow:  /data/part-00585-of-01000
+I0910 21:29:03.154988 139685619324736 run_pretraining.py:503]   /data/part-00585-of-01000
+INFO:tensorflow:  /data/part-00216-of-00500
+I0910 21:29:03.155059 139685619324736 run_pretraining.py:503]   /data/part-00216-of-00500
+INFO:tensorflow:  /data/part-00117-of-00500
+I0910 21:29:03.155131 139685619324736 run_pretraining.py:503]   /data/part-00117-of-00500
+INFO:tensorflow:  /data/part-00550-of-01000
+I0910 21:29:03.155221 139685619324736 run_pretraining.py:503]   /data/part-00550-of-01000
+INFO:tensorflow:  /data/part-00534-of-01000
+I0910 21:29:03.155295 139685619324736 run_pretraining.py:503]   /data/part-00534-of-01000
+INFO:tensorflow:  /data/part-00590-of-01000
+I0910 21:29:03.155368 139685619324736 run_pretraining.py:503]   /data/part-00590-of-01000
+INFO:tensorflow:  /data/part-00511-of-01000
+I0910 21:29:03.155457 139685619324736 run_pretraining.py:503]   /data/part-00511-of-01000
+INFO:tensorflow:  /data/part-00076-of-00500
+I0910 21:29:03.155529 139685619324736 run_pretraining.py:503]   /data/part-00076-of-00500
+INFO:tensorflow:  /data/part-00000-of-00500
+I0910 21:29:03.155600 139685619324736 run_pretraining.py:503]   /data/part-00000-of-00500
+INFO:tensorflow:  /data/part-00058-of-00500
+I0910 21:29:03.155672 139685619324736 run_pretraining.py:503]   /data/part-00058-of-00500
+INFO:tensorflow:  /data/part-00685-of-01000
+I0910 21:29:03.155744 139685619324736 run_pretraining.py:503]   /data/part-00685-of-01000
+INFO:tensorflow:  /data/part-00121-of-00500
+I0910 21:29:03.155816 139685619324736 run_pretraining.py:503]   /data/part-00121-of-00500
+INFO:tensorflow:  /data/part-00057-of-00500
+I0910 21:29:03.155887 139685619324736 run_pretraining.py:503]   /data/part-00057-of-00500
+INFO:tensorflow:  /data/part-00048-of-00500
+I0910 21:29:03.155959 139685619324736 run_pretraining.py:503]   /data/part-00048-of-00500
+INFO:tensorflow:  /data/part-00478-of-00500
+I0910 21:29:03.156031 139685619324736 run_pretraining.py:503]   /data/part-00478-of-00500
+INFO:tensorflow:  /data/part-00636-of-01000
+I0910 21:29:03.156102 139685619324736 run_pretraining.py:503]   /data/part-00636-of-01000
+INFO:tensorflow:  /data/part-00358-of-00500
+I0910 21:29:03.156174 139685619324736 run_pretraining.py:503]   /data/part-00358-of-00500
+INFO:tensorflow:  /data/part-00269-of-00500
+I0910 21:29:03.156296 139685619324736 run_pretraining.py:503]   /data/part-00269-of-00500
+INFO:tensorflow:  /data/part-00649-of-01000
+I0910 21:29:03.156377 139685619324736 run_pretraining.py:503]   /data/part-00649-of-01000
+INFO:tensorflow:  /data/part-00153-of-00500
+I0910 21:29:03.156455 139685619324736 run_pretraining.py:503]   /data/part-00153-of-00500
+INFO:tensorflow:  /data/part-00344-of-00500
+I0910 21:29:03.156547 139685619324736 run_pretraining.py:503]   /data/part-00344-of-00500
+INFO:tensorflow:  /data/part-00595-of-01000
+I0910 21:29:03.156619 139685619324736 run_pretraining.py:503]   /data/part-00595-of-01000
+INFO:tensorflow:  /data/part-00657-of-01000
+I0910 21:29:03.156691 139685619324736 run_pretraining.py:503]   /data/part-00657-of-01000
+INFO:tensorflow:  /data/part-00152-of-00500
+I0910 21:29:03.156763 139685619324736 run_pretraining.py:503]   /data/part-00152-of-00500
+INFO:tensorflow:  /data/part-00320-of-00500
+I0910 21:29:03.156834 139685619324736 run_pretraining.py:503]   /data/part-00320-of-00500
+INFO:tensorflow:  /data/part-00188-of-00500
+I0910 21:29:03.156905 139685619324736 run_pretraining.py:503]   /data/part-00188-of-00500
+INFO:tensorflow:  /data/part-00528-of-01000
+I0910 21:29:03.156978 139685619324736 run_pretraining.py:503]   /data/part-00528-of-01000
+INFO:tensorflow:  /data/part-00428-of-00500
+I0910 21:29:03.157049 139685619324736 run_pretraining.py:503]   /data/part-00428-of-00500
+INFO:tensorflow:  /data/part-00646-of-01000
+I0910 21:29:03.157121 139685619324736 run_pretraining.py:503]   /data/part-00646-of-01000
+INFO:tensorflow:  /data/part-00680-of-01000
+I0910 21:29:03.157192 139685619324736 run_pretraining.py:503]   /data/part-00680-of-01000
+INFO:tensorflow:  /data/part-00611-of-01000
+I0910 21:29:03.157264 139685619324736 run_pretraining.py:503]   /data/part-00611-of-01000
+INFO:tensorflow:  /data/part-00480-of-00500
+I0910 21:29:03.157336 139685619324736 run_pretraining.py:503]   /data/part-00480-of-00500
+INFO:tensorflow:  /data/part-00548-of-01000
+I0910 21:29:03.157407 139685619324736 run_pretraining.py:503]   /data/part-00548-of-01000
+INFO:tensorflow:  /data/part-00350-of-00500
+I0910 21:29:03.157479 139685619324736 run_pretraining.py:503]   /data/part-00350-of-00500
+INFO:tensorflow:  /data/part-00645-of-01000
+I0910 21:29:03.157551 139685619324736 run_pretraining.py:503]   /data/part-00645-of-01000
+INFO:tensorflow:  /data/part-00206-of-00500
+I0910 21:29:03.157623 139685619324736 run_pretraining.py:503]   /data/part-00206-of-00500
+INFO:tensorflow:  /data/part-00561-of-01000
+I0910 21:29:03.157694 139685619324736 run_pretraining.py:503]   /data/part-00561-of-01000
+INFO:tensorflow:  /data/part-00271-of-00500
+I0910 21:29:03.157765 139685619324736 run_pretraining.py:503]   /data/part-00271-of-00500
+INFO:tensorflow:  /data/part-00464-of-00500
+I0910 21:29:03.157837 139685619324736 run_pretraining.py:503]   /data/part-00464-of-00500
+INFO:tensorflow:  /data/part-00558-of-01000
+I0910 21:29:03.157908 139685619324736 run_pretraining.py:503]   /data/part-00558-of-01000
+INFO:tensorflow:  /data/part-00298-of-00500
+I0910 21:29:03.157980 139685619324736 run_pretraining.py:503]   /data/part-00298-of-00500
+INFO:tensorflow:  /data/part-00237-of-00500
+I0910 21:29:03.158052 139685619324736 run_pretraining.py:503]   /data/part-00237-of-00500
+INFO:tensorflow:  /data/part-00593-of-01000
+I0910 21:29:03.158124 139685619324736 run_pretraining.py:503]   /data/part-00593-of-01000
+INFO:tensorflow:  /data/part-00413-of-00500
+I0910 21:29:03.158195 139685619324736 run_pretraining.py:503]   /data/part-00413-of-00500
+INFO:tensorflow:  /data/part-00505-of-01000
+I0910 21:29:03.158267 139685619324736 run_pretraining.py:503]   /data/part-00505-of-01000
+INFO:tensorflow:  /data/part-00036-of-00500
+I0910 21:29:03.158339 139685619324736 run_pretraining.py:503]   /data/part-00036-of-00500
+INFO:tensorflow:  /data/part-00380-of-00500
+I0910 21:29:03.158410 139685619324736 run_pretraining.py:503]   /data/part-00380-of-00500
+INFO:tensorflow:  /data/part-00540-of-01000
+I0910 21:29:03.158482 139685619324736 run_pretraining.py:503]   /data/part-00540-of-01000
+INFO:tensorflow:  /data/part-00549-of-01000
+I0910 21:29:03.158554 139685619324736 run_pretraining.py:503]   /data/part-00549-of-01000
+INFO:tensorflow:  /data/part-00047-of-00500
+I0910 21:29:03.158625 139685619324736 run_pretraining.py:503]   /data/part-00047-of-00500
+INFO:tensorflow:  /data/part-00643-of-01000
+I0910 21:29:03.158697 139685619324736 run_pretraining.py:503]   /data/part-00643-of-01000
+INFO:tensorflow:  /data/part-00089-of-00500
+I0910 21:29:03.158768 139685619324736 run_pretraining.py:503]   /data/part-00089-of-00500
+INFO:tensorflow:  /data/part-00338-of-00500
+I0910 21:29:03.158840 139685619324736 run_pretraining.py:503]   /data/part-00338-of-00500
+INFO:tensorflow:  /data/part-00612-of-01000
+I0910 21:29:03.158911 139685619324736 run_pretraining.py:503]   /data/part-00612-of-01000
+INFO:tensorflow:  /data/part-00461-of-00500
+I0910 21:29:03.158982 139685619324736 run_pretraining.py:503]   /data/part-00461-of-00500
+INFO:tensorflow:  /data/part-00169-of-00500
+I0910 21:29:03.159054 139685619324736 run_pretraining.py:503]   /data/part-00169-of-00500
+INFO:tensorflow:  /data/part-00638-of-01000
+I0910 21:29:03.159126 139685619324736 run_pretraining.py:503]   /data/part-00638-of-01000
+INFO:tensorflow:  /data/part-00533-of-01000
+I0910 21:29:03.159197 139685619324736 run_pretraining.py:503]   /data/part-00533-of-01000
+INFO:tensorflow:  /data/part-00262-of-00500
+I0910 21:29:03.159268 139685619324736 run_pretraining.py:503]   /data/part-00262-of-00500
+INFO:tensorflow:  /data/part-00063-of-00500
+I0910 21:29:03.159340 139685619324736 run_pretraining.py:503]   /data/part-00063-of-00500
+INFO:tensorflow:  /data/part-00633-of-01000
+I0910 21:29:03.159411 139685619324736 run_pretraining.py:503]   /data/part-00633-of-01000
+INFO:tensorflow:  /data/part-00053-of-00500
+I0910 21:29:03.159483 139685619324736 run_pretraining.py:503]   /data/part-00053-of-00500
+INFO:tensorflow:  /data/part-00024-of-00500
+I0910 21:29:03.159554 139685619324736 run_pretraining.py:503]   /data/part-00024-of-00500
+INFO:tensorflow:  /data/part-00375-of-00500
+I0910 21:29:03.159626 139685619324736 run_pretraining.py:503]   /data/part-00375-of-00500
+INFO:tensorflow:  /data/part-00435-of-00500
+I0910 21:29:03.159697 139685619324736 run_pretraining.py:503]   /data/part-00435-of-00500
+INFO:tensorflow:  /data/part-00096-of-00500
+I0910 21:29:03.159768 139685619324736 run_pretraining.py:503]   /data/part-00096-of-00500
+INFO:tensorflow:  /data/part-00653-of-01000
+I0910 21:29:03.159840 139685619324736 run_pretraining.py:503]   /data/part-00653-of-01000
+INFO:tensorflow:  /data/part-00221-of-00500
+I0910 21:29:03.159911 139685619324736 run_pretraining.py:503]   /data/part-00221-of-00500
+INFO:tensorflow:  /data/part-00555-of-01000
+I0910 21:29:03.159983 139685619324736 run_pretraining.py:503]   /data/part-00555-of-01000
+INFO:tensorflow:  /data/part-00097-of-00500
+I0910 21:29:03.160053 139685619324736 run_pretraining.py:503]   /data/part-00097-of-00500
+INFO:tensorflow:  /data/part-00619-of-01000
+I0910 21:29:03.160125 139685619324736 run_pretraining.py:503]   /data/part-00619-of-01000
+INFO:tensorflow:  /data/part-00060-of-00500
+I0910 21:29:03.160223 139685619324736 run_pretraining.py:503]   /data/part-00060-of-00500
+INFO:tensorflow:  /data/part-00341-of-00500
+I0910 21:29:03.160316 139685619324736 run_pretraining.py:503]   /data/part-00341-of-00500
+INFO:tensorflow:  /data/part-00683-of-01000
+I0910 21:29:03.160392 139685619324736 run_pretraining.py:503]   /data/part-00683-of-01000
+INFO:tensorflow:  /data/part-00030-of-00500
+I0910 21:29:03.160468 139685619324736 run_pretraining.py:503]   /data/part-00030-of-00500
+INFO:tensorflow:  /data/part-00174-of-00500
+I0910 21:29:03.160573 139685619324736 run_pretraining.py:503]   /data/part-00174-of-00500
+INFO:tensorflow:  /data/part-00372-of-00500
+I0910 21:29:03.160645 139685619324736 run_pretraining.py:503]   /data/part-00372-of-00500
+INFO:tensorflow:  /data/part-00043-of-00500
+I0910 21:29:03.160716 139685619324736 run_pretraining.py:503]   /data/part-00043-of-00500
+INFO:tensorflow:  /data/part-00537-of-01000
+I0910 21:29:03.160788 139685619324736 run_pretraining.py:503]   /data/part-00537-of-01000
+INFO:tensorflow:  /data/part-00414-of-00500
+I0910 21:29:03.160860 139685619324736 run_pretraining.py:503]   /data/part-00414-of-00500
+INFO:tensorflow:  /data/part-00432-of-00500
+I0910 21:29:03.160932 139685619324736 run_pretraining.py:503]   /data/part-00432-of-00500
+INFO:tensorflow:  /data/part-00675-of-01000
+I0910 21:29:03.161004 139685619324736 run_pretraining.py:503]   /data/part-00675-of-01000
+INFO:tensorflow:  /data/part-00223-of-00500
+I0910 21:29:03.161075 139685619324736 run_pretraining.py:503]   /data/part-00223-of-00500
+INFO:tensorflow:  /data/part-00323-of-00500
+I0910 21:29:03.161147 139685619324736 run_pretraining.py:503]   /data/part-00323-of-00500
+INFO:tensorflow:  /data/part-00241-of-00500
+I0910 21:29:03.161218 139685619324736 run_pretraining.py:503]   /data/part-00241-of-00500
+INFO:tensorflow:  /data/part-00295-of-00500
+I0910 21:29:03.161290 139685619324736 run_pretraining.py:503]   /data/part-00295-of-00500
+INFO:tensorflow:  /data/part-00407-of-00500
+I0910 21:29:03.161361 139685619324736 run_pretraining.py:503]   /data/part-00407-of-00500
+INFO:tensorflow:  /data/part-00008-of-00500
+I0910 21:29:03.161433 139685619324736 run_pretraining.py:503]   /data/part-00008-of-00500
+INFO:tensorflow:  /data/part-00562-of-01000
+I0910 21:29:03.161505 139685619324736 run_pretraining.py:503]   /data/part-00562-of-01000
+INFO:tensorflow:  /data/part-00330-of-00500
+I0910 21:29:03.161577 139685619324736 run_pretraining.py:503]   /data/part-00330-of-00500
+INFO:tensorflow:  /data/part-00023-of-00500
+I0910 21:29:03.161649 139685619324736 run_pretraining.py:503]   /data/part-00023-of-00500
+INFO:tensorflow:  /data/part-00020-of-00500
+I0910 21:29:03.161720 139685619324736 run_pretraining.py:503]   /data/part-00020-of-00500
+INFO:tensorflow:  /data/part-00205-of-00500
+I0910 21:29:03.161792 139685619324736 run_pretraining.py:503]   /data/part-00205-of-00500
+INFO:tensorflow:  /data/part-00252-of-00500
+I0910 21:29:03.161864 139685619324736 run_pretraining.py:503]   /data/part-00252-of-00500
+INFO:tensorflow:  /data/part-00019-of-00500
+I0910 21:29:03.161935 139685619324736 run_pretraining.py:503]   /data/part-00019-of-00500
+INFO:tensorflow:  /data/part-00068-of-00500
+I0910 21:29:03.162007 139685619324736 run_pretraining.py:503]   /data/part-00068-of-00500
+INFO:tensorflow:  /data/part-00490-of-00500
+I0910 21:29:03.162078 139685619324736 run_pretraining.py:503]   /data/part-00490-of-00500
+INFO:tensorflow:  /data/part-00460-of-00500
+I0910 21:29:03.162150 139685619324736 run_pretraining.py:503]   /data/part-00460-of-00500
+INFO:tensorflow:  /data/part-00538-of-01000
+I0910 21:29:03.162221 139685619324736 run_pretraining.py:503]   /data/part-00538-of-01000
+INFO:tensorflow:  /data/part-00553-of-01000
+I0910 21:29:03.162293 139685619324736 run_pretraining.py:503]   /data/part-00553-of-01000
+INFO:tensorflow:  /data/part-00001-of-00500
+I0910 21:29:03.162364 139685619324736 run_pretraining.py:503]   /data/part-00001-of-00500
+INFO:tensorflow:  /data/part-00436-of-00500
+I0910 21:29:03.162436 139685619324736 run_pretraining.py:503]   /data/part-00436-of-00500
+INFO:tensorflow:  /data/part-00373-of-00500
+I0910 21:29:03.162508 139685619324736 run_pretraining.py:503]   /data/part-00373-of-00500
+INFO:tensorflow:  /data/part-00124-of-00500
+I0910 21:29:03.162579 139685619324736 run_pretraining.py:503]   /data/part-00124-of-00500
+INFO:tensorflow:  /data/part-00326-of-00500
+I0910 21:29:03.162651 139685619324736 run_pretraining.py:503]   /data/part-00326-of-00500
+INFO:tensorflow:  /data/part-00246-of-00500
+I0910 21:29:03.162723 139685619324736 run_pretraining.py:503]   /data/part-00246-of-00500
+INFO:tensorflow:  /data/part-00207-of-00500
+I0910 21:29:03.162794 139685619324736 run_pretraining.py:503]   /data/part-00207-of-00500
+INFO:tensorflow:  /data/part-00402-of-00500
+I0910 21:29:03.162866 139685619324736 run_pretraining.py:503]   /data/part-00402-of-00500
+INFO:tensorflow:  /data/part-00674-of-01000
+I0910 21:29:03.162938 139685619324736 run_pretraining.py:503]   /data/part-00674-of-01000
+INFO:tensorflow:  /data/part-00238-of-00500
+I0910 21:29:03.163010 139685619324736 run_pretraining.py:503]   /data/part-00238-of-00500
+INFO:tensorflow:  /data/part-00300-of-00500
+I0910 21:29:03.163082 139685619324736 run_pretraining.py:503]   /data/part-00300-of-00500
+INFO:tensorflow:  /data/part-00254-of-00500
+I0910 21:29:03.163154 139685619324736 run_pretraining.py:503]   /data/part-00254-of-00500
+INFO:tensorflow:  /data/part-00080-of-00500
+I0910 21:29:03.163226 139685619324736 run_pretraining.py:503]   /data/part-00080-of-00500
+INFO:tensorflow:  /data/part-00086-of-00500
+I0910 21:29:03.163298 139685619324736 run_pretraining.py:503]   /data/part-00086-of-00500
+INFO:tensorflow:  /data/part-00339-of-00500
+I0910 21:29:03.163369 139685619324736 run_pretraining.py:503]   /data/part-00339-of-00500
+INFO:tensorflow:  /data/part-00664-of-01000
+I0910 21:29:03.163441 139685619324736 run_pretraining.py:503]   /data/part-00664-of-01000
+INFO:tensorflow:  /data/part-00244-of-00500
+I0910 21:29:03.163513 139685619324736 run_pretraining.py:503]   /data/part-00244-of-00500
+INFO:tensorflow:  /data/part-00345-of-00500
+I0910 21:29:03.163585 139685619324736 run_pretraining.py:503]   /data/part-00345-of-00500
+INFO:tensorflow:  /data/part-00578-of-01000
+I0910 21:29:03.163657 139685619324736 run_pretraining.py:503]   /data/part-00578-of-01000
+INFO:tensorflow:  /data/part-00476-of-00500
+I0910 21:29:03.163729 139685619324736 run_pretraining.py:503]   /data/part-00476-of-00500
+INFO:tensorflow:  /data/part-00270-of-00500
+I0910 21:29:03.163800 139685619324736 run_pretraining.py:503]   /data/part-00270-of-00500
+INFO:tensorflow:  /data/part-00220-of-00500
+I0910 21:29:03.163872 139685619324736 run_pretraining.py:503]   /data/part-00220-of-00500
+INFO:tensorflow:  /data/part-00677-of-01000
+I0910 21:29:03.163944 139685619324736 run_pretraining.py:503]   /data/part-00677-of-01000
+INFO:tensorflow:  /data/part-00290-of-00500
+I0910 21:29:03.164015 139685619324736 run_pretraining.py:503]   /data/part-00290-of-00500
+INFO:tensorflow:  /data/part-00213-of-00500
+I0910 21:29:03.164087 139685619324736 run_pretraining.py:503]   /data/part-00213-of-00500
+INFO:tensorflow:  /data/part-00230-of-00500
+I0910 21:29:03.164159 139685619324736 run_pretraining.py:503]   /data/part-00230-of-00500
+INFO:tensorflow:  /data/part-00516-of-01000
+I0910 21:29:03.164287 139685619324736 run_pretraining.py:503]   /data/part-00516-of-01000
+INFO:tensorflow:  /data/part-00078-of-00500
+I0910 21:29:03.164374 139685619324736 run_pretraining.py:503]   /data/part-00078-of-00500
+INFO:tensorflow:  /data/part-00650-of-01000
+I0910 21:29:03.164452 139685619324736 run_pretraining.py:503]   /data/part-00650-of-01000
+INFO:tensorflow:  /data/part-00614-of-01000
+I0910 21:29:03.164568 139685619324736 run_pretraining.py:503]   /data/part-00614-of-01000
+INFO:tensorflow:  /data/part-00284-of-00500
+I0910 21:29:03.164640 139685619324736 run_pretraining.py:503]   /data/part-00284-of-00500
+INFO:tensorflow:  /data/part-00514-of-01000
+I0910 21:29:03.164712 139685619324736 run_pretraining.py:503]   /data/part-00514-of-01000
+INFO:tensorflow:  /data/part-00390-of-00500
+I0910 21:29:03.164784 139685619324736 run_pretraining.py:503]   /data/part-00390-of-00500
+INFO:tensorflow:  /data/part-00575-of-01000
+I0910 21:29:03.164855 139685619324736 run_pretraining.py:503]   /data/part-00575-of-01000
+INFO:tensorflow:  /data/part-00091-of-00500
+I0910 21:29:03.164927 139685619324736 run_pretraining.py:503]   /data/part-00091-of-00500
+INFO:tensorflow:  /data/part-00374-of-00500
+I0910 21:29:03.164999 139685619324736 run_pretraining.py:503]   /data/part-00374-of-00500
+INFO:tensorflow:  /data/part-00403-of-00500
+I0910 21:29:03.165071 139685619324736 run_pretraining.py:503]   /data/part-00403-of-00500
+INFO:tensorflow:  /data/part-00059-of-00500
+I0910 21:29:03.165143 139685619324736 run_pretraining.py:503]   /data/part-00059-of-00500
+INFO:tensorflow:  /data/part-00011-of-00500
+I0910 21:29:03.165214 139685619324736 run_pretraining.py:503]   /data/part-00011-of-00500
+INFO:tensorflow:  /data/part-00088-of-00500
+I0910 21:29:03.165304 139685619324736 run_pretraining.py:503]   /data/part-00088-of-00500
+INFO:tensorflow:  /data/part-00077-of-00500
+I0910 21:29:03.165378 139685619324736 run_pretraining.py:503]   /data/part-00077-of-00500
+INFO:tensorflow:  /data/part-00466-of-00500
+I0910 21:29:03.165451 139685619324736 run_pretraining.py:503]   /data/part-00466-of-00500
+INFO:tensorflow:  /data/part-00347-of-00500
+I0910 21:29:03.165524 139685619324736 run_pretraining.py:503]   /data/part-00347-of-00500
+INFO:tensorflow:  /data/part-00628-of-01000
+I0910 21:29:03.165598 139685619324736 run_pretraining.py:503]   /data/part-00628-of-01000
+INFO:tensorflow:  /data/part-00199-of-00500
+I0910 21:29:03.165671 139685619324736 run_pretraining.py:503]   /data/part-00199-of-00500
+INFO:tensorflow:  /data/part-00418-of-00500
+I0910 21:29:03.165744 139685619324736 run_pretraining.py:503]   /data/part-00418-of-00500
+INFO:tensorflow:  /data/part-00449-of-00500
+I0910 21:29:03.165818 139685619324736 run_pretraining.py:503]   /data/part-00449-of-00500
+INFO:tensorflow:  /data/part-00094-of-00500
+I0910 21:29:03.165891 139685619324736 run_pretraining.py:503]   /data/part-00094-of-00500
+INFO:tensorflow:  /data/part-00211-of-00500
+I0910 21:29:03.165965 139685619324736 run_pretraining.py:503]   /data/part-00211-of-00500
+INFO:tensorflow:  /data/part-00009-of-00500
+I0910 21:29:03.166038 139685619324736 run_pretraining.py:503]   /data/part-00009-of-00500
+INFO:tensorflow:  /data/part-00079-of-00500
+I0910 21:29:03.166112 139685619324736 run_pretraining.py:503]   /data/part-00079-of-00500
+INFO:tensorflow:  /data/part-00488-of-00500
+I0910 21:29:03.166186 139685619324736 run_pretraining.py:503]   /data/part-00488-of-00500
+INFO:tensorflow:  /data/part-00010-of-00500
+I0910 21:29:03.166259 139685619324736 run_pretraining.py:503]   /data/part-00010-of-00500
+INFO:tensorflow:  /data/part-00468-of-00500
+I0910 21:29:03.166333 139685619324736 run_pretraining.py:503]   /data/part-00468-of-00500
+INFO:tensorflow:  /data/part-00219-of-00500
+I0910 21:29:03.166406 139685619324736 run_pretraining.py:503]   /data/part-00219-of-00500
+INFO:tensorflow:  /data/part-00658-of-01000
+I0910 21:29:03.166480 139685619324736 run_pretraining.py:503]   /data/part-00658-of-01000
+INFO:tensorflow:  /data/part-00624-of-01000
+I0910 21:29:03.166553 139685619324736 run_pretraining.py:503]   /data/part-00624-of-01000
+INFO:tensorflow:  /data/part-00485-of-00500
+I0910 21:29:03.166627 139685619324736 run_pretraining.py:503]   /data/part-00485-of-00500
+INFO:tensorflow:  /data/part-00170-of-00500
+I0910 21:29:03.166700 139685619324736 run_pretraining.py:503]   /data/part-00170-of-00500
+INFO:tensorflow:  /data/part-00081-of-00500
+I0910 21:29:03.166774 139685619324736 run_pretraining.py:503]   /data/part-00081-of-00500
+INFO:tensorflow:  /data/part-00074-of-00500
+I0910 21:29:03.166847 139685619324736 run_pretraining.py:503]   /data/part-00074-of-00500
+INFO:tensorflow:  /data/part-00433-of-00500
+I0910 21:29:03.166928 139685619324736 run_pretraining.py:503]   /data/part-00433-of-00500
+INFO:tensorflow:  /data/part-00568-of-01000
+I0910 21:29:03.167001 139685619324736 run_pretraining.py:503]   /data/part-00568-of-01000
+INFO:tensorflow:  /data/part-00392-of-00500
+I0910 21:29:03.167074 139685619324736 run_pretraining.py:503]   /data/part-00392-of-00500
+INFO:tensorflow:  /data/part-00378-of-00500
+I0910 21:29:03.167148 139685619324736 run_pretraining.py:503]   /data/part-00378-of-00500
+INFO:tensorflow:  /data/part-00026-of-00500
+I0910 21:29:03.167222 139685619324736 run_pretraining.py:503]   /data/part-00026-of-00500
+INFO:tensorflow:  /data/part-00467-of-00500
+I0910 21:29:03.167295 139685619324736 run_pretraining.py:503]   /data/part-00467-of-00500
+INFO:tensorflow:  /data/part-00367-of-00500
+I0910 21:29:03.167368 139685619324736 run_pretraining.py:503]   /data/part-00367-of-00500
+INFO:tensorflow:  /data/part-00518-of-01000
+I0910 21:29:03.167442 139685619324736 run_pretraining.py:503]   /data/part-00518-of-01000
+INFO:tensorflow:  /data/part-00671-of-01000
+I0910 21:29:03.167515 139685619324736 run_pretraining.py:503]   /data/part-00671-of-01000
+INFO:tensorflow:  /data/part-00283-of-00500
+I0910 21:29:03.167589 139685619324736 run_pretraining.py:503]   /data/part-00283-of-00500
+INFO:tensorflow:  /data/part-00335-of-00500
+I0910 21:29:03.167663 139685619324736 run_pretraining.py:503]   /data/part-00335-of-00500
+INFO:tensorflow:  /data/part-00114-of-00500
+I0910 21:29:03.167754 139685619324736 run_pretraining.py:503]   /data/part-00114-of-00500
+INFO:tensorflow:  /data/part-00195-of-00500
+I0910 21:29:03.167849 139685619324736 run_pretraining.py:503]   /data/part-00195-of-00500
+INFO:tensorflow:  /data/part-00065-of-00500
+I0910 21:29:03.167926 139685619324736 run_pretraining.py:503]   /data/part-00065-of-00500
+INFO:tensorflow:  /data/part-00640-of-01000
+I0910 21:29:03.168004 139685619324736 run_pretraining.py:503]   /data/part-00640-of-01000
+INFO:tensorflow:  /data/part-00061-of-00500
+I0910 21:29:03.168081 139685619324736 run_pretraining.py:503]   /data/part-00061-of-00500
+INFO:tensorflow:  /data/part-00603-of-01000
+I0910 21:29:03.168158 139685619324736 run_pretraining.py:503]   /data/part-00603-of-01000
+INFO:tensorflow:  /data/part-00584-of-01000
+I0910 21:29:03.168272 139685619324736 run_pretraining.py:503]   /data/part-00584-of-01000
+INFO:tensorflow:  /data/part-00342-of-00500
+I0910 21:29:03.168353 139685619324736 run_pretraining.py:503]   /data/part-00342-of-00500
+INFO:tensorflow:  /data/part-00098-of-00500
+I0910 21:29:03.168431 139685619324736 run_pretraining.py:503]   /data/part-00098-of-00500
+INFO:tensorflow:  /data/part-00084-of-00500
+I0910 21:29:03.168509 139685619324736 run_pretraining.py:503]   /data/part-00084-of-00500
+INFO:tensorflow:  /data/part-00095-of-00500
+I0910 21:29:03.168587 139685619324736 run_pretraining.py:503]   /data/part-00095-of-00500
+INFO:tensorflow:  /data/part-00039-of-00500
+I0910 21:29:03.168664 139685619324736 run_pretraining.py:503]   /data/part-00039-of-00500
+INFO:tensorflow:  /data/part-00399-of-00500
+I0910 21:29:03.168742 139685619324736 run_pretraining.py:503]   /data/part-00399-of-00500
+INFO:tensorflow:  /data/part-00273-of-00500
+I0910 21:29:03.168819 139685619324736 run_pretraining.py:503]   /data/part-00273-of-00500
+INFO:tensorflow:  /data/part-00506-of-01000
+I0910 21:29:03.168897 139685619324736 run_pretraining.py:503]   /data/part-00506-of-01000
+INFO:tensorflow:  /data/part-00305-of-00500
+I0910 21:29:03.168975 139685619324736 run_pretraining.py:503]   /data/part-00305-of-00500
+INFO:tensorflow:  /data/part-00525-of-01000
+I0910 21:29:03.169053 139685619324736 run_pretraining.py:503]   /data/part-00525-of-01000
+INFO:tensorflow:  /data/part-00127-of-00500
+I0910 21:29:03.169146 139685619324736 run_pretraining.py:503]   /data/part-00127-of-00500
+INFO:tensorflow:  /data/part-00486-of-00500
+I0910 21:29:03.169235 139685619324736 run_pretraining.py:503]   /data/part-00486-of-00500
+INFO:tensorflow:  /data/part-00325-of-00500
+I0910 21:29:03.169309 139685619324736 run_pretraining.py:503]   /data/part-00325-of-00500
+INFO:tensorflow:  /data/part-00293-of-00500
+I0910 21:29:03.169382 139685619324736 run_pretraining.py:503]   /data/part-00293-of-00500
+INFO:tensorflow:  /data/part-00296-of-00500
+I0910 21:29:03.169456 139685619324736 run_pretraining.py:503]   /data/part-00296-of-00500
+INFO:tensorflow:  /data/part-00239-of-00500
+I0910 21:29:03.169529 139685619324736 run_pretraining.py:503]   /data/part-00239-of-00500
+INFO:tensorflow:  /data/part-00281-of-00500
+I0910 21:29:03.169602 139685619324736 run_pretraining.py:503]   /data/part-00281-of-00500
+INFO:tensorflow:  /data/part-00591-of-01000
+I0910 21:29:03.169676 139685619324736 run_pretraining.py:503]   /data/part-00591-of-01000
+INFO:tensorflow:  /data/part-00357-of-00500
+I0910 21:29:03.169764 139685619324736 run_pretraining.py:503]   /data/part-00357-of-00500
+INFO:tensorflow:  /data/part-00227-of-00500
+I0910 21:29:03.169836 139685619324736 run_pretraining.py:503]   /data/part-00227-of-00500
+INFO:tensorflow:  /data/part-00256-of-00500
+I0910 21:29:03.169926 139685619324736 run_pretraining.py:503]   /data/part-00256-of-00500
+INFO:tensorflow:  /data/part-00535-of-01000
+I0910 21:29:03.169999 139685619324736 run_pretraining.py:503]   /data/part-00535-of-01000
+INFO:tensorflow:  /data/part-00171-of-00500
+I0910 21:29:03.170072 139685619324736 run_pretraining.py:503]   /data/part-00171-of-00500
+INFO:tensorflow:  /data/part-00394-of-00500
+I0910 21:29:03.170146 139685619324736 run_pretraining.py:503]   /data/part-00394-of-00500
+INFO:tensorflow:  /data/part-00588-of-01000
+I0910 21:29:03.170234 139685619324736 run_pretraining.py:503]   /data/part-00588-of-01000
+INFO:tensorflow:  /data/part-00218-of-00500
+I0910 21:29:03.170305 139685619324736 run_pretraining.py:503]   /data/part-00218-of-00500
+INFO:tensorflow:  /data/part-00038-of-00500
+I0910 21:29:03.170377 139685619324736 run_pretraining.py:503]   /data/part-00038-of-00500
+INFO:tensorflow:  /data/part-00313-of-00500
+I0910 21:29:03.170448 139685619324736 run_pretraining.py:503]   /data/part-00313-of-00500
+INFO:tensorflow:  /data/part-00267-of-00500
+I0910 21:29:03.170520 139685619324736 run_pretraining.py:503]   /data/part-00267-of-00500
+INFO:tensorflow:  /data/part-00408-of-00500
+I0910 21:29:03.170591 139685619324736 run_pretraining.py:503]   /data/part-00408-of-00500
+INFO:tensorflow:  /data/part-00462-of-00500
+I0910 21:29:03.170682 139685619324736 run_pretraining.py:503]   /data/part-00462-of-00500
+INFO:tensorflow:  /data/part-00453-of-00500
+I0910 21:29:03.170755 139685619324736 run_pretraining.py:503]   /data/part-00453-of-00500
+INFO:tensorflow:  /data/part-00209-of-00500
+I0910 21:29:03.170828 139685619324736 run_pretraining.py:503]   /data/part-00209-of-00500
+INFO:tensorflow:  /data/part-00201-of-00500
+I0910 21:29:03.170917 139685619324736 run_pretraining.py:503]   /data/part-00201-of-00500
+INFO:tensorflow:  /data/part-00509-of-01000
+I0910 21:29:03.170989 139685619324736 run_pretraining.py:503]   /data/part-00509-of-01000
+INFO:tensorflow:  /data/part-00545-of-01000
+I0910 21:29:03.171060 139685619324736 run_pretraining.py:503]   /data/part-00545-of-01000
+INFO:tensorflow:  /data/part-00144-of-00500
+I0910 21:29:03.171132 139685619324736 run_pretraining.py:503]   /data/part-00144-of-00500
+INFO:tensorflow:  /data/part-00625-of-01000
+I0910 21:29:03.171203 139685619324736 run_pretraining.py:503]   /data/part-00625-of-01000
+INFO:tensorflow:  /data/part-00203-of-00500
+I0910 21:29:03.171275 139685619324736 run_pretraining.py:503]   /data/part-00203-of-00500
+INFO:tensorflow:  /data/part-00569-of-01000
+I0910 21:29:03.171346 139685619324736 run_pretraining.py:503]   /data/part-00569-of-01000
+INFO:tensorflow:  /data/part-00448-of-00500
+I0910 21:29:03.171418 139685619324736 run_pretraining.py:503]   /data/part-00448-of-00500
+INFO:tensorflow:  /data/part-00104-of-00500
+I0910 21:29:03.171489 139685619324736 run_pretraining.py:503]   /data/part-00104-of-00500
+INFO:tensorflow:  /data/part-00116-of-00500
+I0910 21:29:03.171561 139685619324736 run_pretraining.py:503]   /data/part-00116-of-00500
+INFO:tensorflow:  /data/part-00362-of-00500
+I0910 21:29:03.171633 139685619324736 run_pretraining.py:503]   /data/part-00362-of-00500
+INFO:tensorflow:  /data/part-00192-of-00500
+I0910 21:29:03.171704 139685619324736 run_pretraining.py:503]   /data/part-00192-of-00500
+INFO:tensorflow:  /data/part-00051-of-00500
+I0910 21:29:03.171776 139685619324736 run_pretraining.py:503]   /data/part-00051-of-00500
+INFO:tensorflow:  /data/part-00668-of-01000
+I0910 21:29:03.171847 139685619324736 run_pretraining.py:503]   /data/part-00668-of-01000
+INFO:tensorflow:  /data/part-00100-of-00500
+I0910 21:29:03.171919 139685619324736 run_pretraining.py:503]   /data/part-00100-of-00500
+INFO:tensorflow:  /data/part-00472-of-00500
+I0910 21:29:03.172008 139685619324736 run_pretraining.py:503]   /data/part-00472-of-00500
+INFO:tensorflow:  /data/part-00557-of-01000
+I0910 21:29:03.172082 139685619324736 run_pretraining.py:503]   /data/part-00557-of-01000
+INFO:tensorflow:  /data/part-00447-of-00500
+I0910 21:29:03.172155 139685619324736 run_pretraining.py:503]   /data/part-00447-of-00500
+INFO:tensorflow:  /data/part-00690-of-01000
+I0910 21:29:03.172281 139685619324736 run_pretraining.py:503]   /data/part-00690-of-01000
+INFO:tensorflow:  /data/part-00180-of-00500
+I0910 21:29:03.172364 139685619324736 run_pretraining.py:503]   /data/part-00180-of-00500
+INFO:tensorflow:  /data/part-00404-of-00500
+I0910 21:29:03.172442 139685619324736 run_pretraining.py:503]   /data/part-00404-of-00500
+INFO:tensorflow:  /data/part-00457-of-00500
+I0910 21:29:03.172536 139685619324736 run_pretraining.py:503]   /data/part-00457-of-00500
+INFO:tensorflow:  /data/part-00382-of-00500
+I0910 21:29:03.172629 139685619324736 run_pretraining.py:503]   /data/part-00382-of-00500
+INFO:tensorflow:  /data/part-00576-of-01000
+I0910 21:29:03.172701 139685619324736 run_pretraining.py:503]   /data/part-00576-of-01000
+INFO:tensorflow:  /data/part-00309-of-00500
+I0910 21:29:03.172773 139685619324736 run_pretraining.py:503]   /data/part-00309-of-00500
+INFO:tensorflow:  /data/part-00332-of-00500
+I0910 21:29:03.172844 139685619324736 run_pretraining.py:503]   /data/part-00332-of-00500
+INFO:tensorflow:  /data/part-00354-of-00500
+I0910 21:29:03.172915 139685619324736 run_pretraining.py:503]   /data/part-00354-of-00500
+INFO:tensorflow:  /data/part-00673-of-01000
+I0910 21:29:03.172987 139685619324736 run_pretraining.py:503]   /data/part-00673-of-01000
+INFO:tensorflow:  /data/part-00331-of-00500
+I0910 21:29:03.173059 139685619324736 run_pretraining.py:503]   /data/part-00331-of-00500
+INFO:tensorflow:  /data/part-00411-of-00500
+I0910 21:29:03.173130 139685619324736 run_pretraining.py:503]   /data/part-00411-of-00500
+INFO:tensorflow:  /data/part-00554-of-01000
+I0910 21:29:03.173202 139685619324736 run_pretraining.py:503]   /data/part-00554-of-01000
+INFO:tensorflow:  /data/part-00396-of-00500
+I0910 21:29:03.173274 139685619324736 run_pretraining.py:503]   /data/part-00396-of-00500
+INFO:tensorflow:  /data/part-00071-of-00500
+I0910 21:29:03.173346 139685619324736 run_pretraining.py:503]   /data/part-00071-of-00500
+INFO:tensorflow:  /data/part-00204-of-00500
+I0910 21:29:03.173417 139685619324736 run_pretraining.py:503]   /data/part-00204-of-00500
+INFO:tensorflow:  /data/part-00508-of-01000
+I0910 21:29:03.173489 139685619324736 run_pretraining.py:503]   /data/part-00508-of-01000
+INFO:tensorflow:  /data/part-00055-of-00500
+I0910 21:29:03.173560 139685619324736 run_pretraining.py:503]   /data/part-00055-of-00500
+INFO:tensorflow:  /data/part-00166-of-00500
+I0910 21:29:03.173631 139685619324736 run_pretraining.py:503]   /data/part-00166-of-00500
+INFO:tensorflow:  /data/part-00536-of-01000
+I0910 21:29:03.173703 139685619324736 run_pretraining.py:503]   /data/part-00536-of-01000
+INFO:tensorflow:  /data/part-00303-of-00500
+I0910 21:29:03.173775 139685619324736 run_pretraining.py:503]   /data/part-00303-of-00500
+INFO:tensorflow:  /data/part-00437-of-00500
+I0910 21:29:03.173846 139685619324736 run_pretraining.py:503]   /data/part-00437-of-00500
+INFO:tensorflow:  /data/part-00629-of-01000
+I0910 21:29:03.173918 139685619324736 run_pretraining.py:503]   /data/part-00629-of-01000
+INFO:tensorflow:  /data/part-00622-of-01000
+I0910 21:29:03.173989 139685619324736 run_pretraining.py:503]   /data/part-00622-of-01000
+INFO:tensorflow:  /data/part-00147-of-00500
+I0910 21:29:03.174060 139685619324736 run_pretraining.py:503]   /data/part-00147-of-00500
+INFO:tensorflow:  /data/part-00620-of-01000
+I0910 21:29:03.174132 139685619324736 run_pretraining.py:503]   /data/part-00620-of-01000
+INFO:tensorflow:  /data/part-00648-of-01000
+I0910 21:29:03.174203 139685619324736 run_pretraining.py:503]   /data/part-00648-of-01000
+INFO:tensorflow:  /data/part-00666-of-01000
+I0910 21:29:03.174274 139685619324736 run_pretraining.py:503]   /data/part-00666-of-01000
+INFO:tensorflow:  /data/part-00563-of-01000
+I0910 21:29:03.174346 139685619324736 run_pretraining.py:503]   /data/part-00563-of-01000
+INFO:tensorflow:  /data/part-00444-of-00500
+I0910 21:29:03.174417 139685619324736 run_pretraining.py:503]   /data/part-00444-of-00500
+INFO:tensorflow:  /data/part-00667-of-01000
+I0910 21:29:03.174489 139685619324736 run_pretraining.py:503]   /data/part-00667-of-01000
+INFO:tensorflow:  /data/part-00602-of-01000
+I0910 21:29:03.174560 139685619324736 run_pretraining.py:503]   /data/part-00602-of-01000
+INFO:tensorflow:  /data/part-00274-of-00500
+I0910 21:29:03.174648 139685619324736 run_pretraining.py:503]   /data/part-00274-of-00500
+INFO:tensorflow:  /data/part-00327-of-00500
+I0910 21:29:03.174722 139685619324736 run_pretraining.py:503]   /data/part-00327-of-00500
+INFO:tensorflow:  /data/part-00049-of-00500
+I0910 21:29:03.174796 139685619324736 run_pretraining.py:503]   /data/part-00049-of-00500
+INFO:tensorflow:  /data/part-00312-of-00500
+I0910 21:29:03.174869 139685619324736 run_pretraining.py:503]   /data/part-00312-of-00500
+INFO:tensorflow:  /data/part-00316-of-00500
+I0910 21:29:03.174958 139685619324736 run_pretraining.py:503]   /data/part-00316-of-00500
+INFO:tensorflow:  /data/part-00184-of-00500
+I0910 21:29:03.175030 139685619324736 run_pretraining.py:503]   /data/part-00184-of-00500
+INFO:tensorflow:  /data/part-00530-of-01000
+I0910 21:29:03.175102 139685619324736 run_pretraining.py:503]   /data/part-00530-of-01000
+INFO:tensorflow:  /data/part-00182-of-00500
+I0910 21:29:03.175173 139685619324736 run_pretraining.py:503]   /data/part-00182-of-00500
+INFO:tensorflow:  /data/part-00319-of-00500
+I0910 21:29:03.175245 139685619324736 run_pretraining.py:503]   /data/part-00319-of-00500
+INFO:tensorflow:  /data/part-00567-of-01000
+I0910 21:29:03.175317 139685619324736 run_pretraining.py:503]   /data/part-00567-of-01000
+INFO:tensorflow:  /data/part-00028-of-00500
+I0910 21:29:03.175389 139685619324736 run_pretraining.py:503]   /data/part-00028-of-00500
+INFO:tensorflow:  /data/part-00102-of-00500
+I0910 21:29:03.175460 139685619324736 run_pretraining.py:503]   /data/part-00102-of-00500
+INFO:tensorflow:  /data/part-00544-of-01000
+I0910 21:29:03.175532 139685619324736 run_pretraining.py:503]   /data/part-00544-of-01000
+INFO:tensorflow:  /data/part-00158-of-00500
+I0910 21:29:03.175603 139685619324736 run_pretraining.py:503]   /data/part-00158-of-00500
+INFO:tensorflow:  /data/part-00287-of-00500
+I0910 21:29:03.175674 139685619324736 run_pretraining.py:503]   /data/part-00287-of-00500
+2022-09-10 21:29:03.177231: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2022-09-10 21:29:03.556656: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 0 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:06:00.0
+2022-09-10 21:29:03.558716: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 1 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:07:00.0
+2022-09-10 21:29:03.560818: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 2 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:0a:00.0
+2022-09-10 21:29:03.562902: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 3 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:0b:00.0
+2022-09-10 21:29:03.565082: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 4 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:85:00.0
+2022-09-10 21:29:03.567143: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 5 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:86:00.0
+2022-09-10 21:29:03.569242: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 6 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:89:00.0
+2022-09-10 21:29:03.571271: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 7 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:8a:00.0
+2022-09-10 21:29:03.571653: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2022-09-10 21:29:03.573343: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2022-09-10 21:29:03.574692: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10.0
+2022-09-10 21:29:03.575088: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10.0
+2022-09-10 21:29:03.576936: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10.0
+2022-09-10 21:29:03.578344: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10.0
+2022-09-10 21:29:03.582509: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2022-09-10 21:29:03.613746: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1767] Adding visible gpu devices: 0, 1, 2, 3, 4, 5, 6, 7
+2022-09-10 21:29:03.614297: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2022-09-10 21:29:03.628375: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2195240000 Hz
+2022-09-10 21:29:03.632394: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x577ff60 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2022-09-10 21:29:03.632415: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2022-09-10 21:29:05.552798: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x50d0860 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2022-09-10 21:29:05.552831: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Tesla V100-SXM2-32GB, Compute Capability 7.0
+2022-09-10 21:29:05.552855: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (1): Tesla V100-SXM2-32GB, Compute Capability 7.0
+2022-09-10 21:29:05.552863: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (2): Tesla V100-SXM2-32GB, Compute Capability 7.0
+2022-09-10 21:29:05.552869: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (3): Tesla V100-SXM2-32GB, Compute Capability 7.0
+2022-09-10 21:29:05.552894: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (4): Tesla V100-SXM2-32GB, Compute Capability 7.0
+2022-09-10 21:29:05.552920: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (5): Tesla V100-SXM2-32GB, Compute Capability 7.0
+2022-09-10 21:29:05.552942: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (6): Tesla V100-SXM2-32GB, Compute Capability 7.0
+2022-09-10 21:29:05.552949: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (7): Tesla V100-SXM2-32GB, Compute Capability 7.0
+2022-09-10 21:29:05.566989: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 0 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:06:00.0
+2022-09-10 21:29:05.569237: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 1 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:07:00.0
+2022-09-10 21:29:05.571289: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 2 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:0a:00.0
+2022-09-10 21:29:05.573487: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 3 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:0b:00.0
+2022-09-10 21:29:05.575469: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 4 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:85:00.0
+2022-09-10 21:29:05.577605: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 5 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:86:00.0
+2022-09-10 21:29:05.579590: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 6 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:89:00.0
+2022-09-10 21:29:05.581773: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Found device 7 with properties: 
+name: Tesla V100-SXM2-32GB major: 7 minor: 0 memoryClockRate(GHz): 1.53
+pciBusID: 0000:8a:00.0
+2022-09-10 21:29:05.581882: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2022-09-10 21:29:05.581923: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2022-09-10 21:29:05.581961: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10.0
+2022-09-10 21:29:05.581998: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10.0
+2022-09-10 21:29:05.582018: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10.0
+2022-09-10 21:29:05.582038: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10.0
+2022-09-10 21:29:05.582058: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2022-09-10 21:29:05.613292: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1767] Adding visible gpu devices: 0, 1, 2, 3, 4, 5, 6, 7
+2022-09-10 21:29:05.613375: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2022-09-10 21:29:05.628612: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1180] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-09-10 21:29:05.628632: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1186]      0 1 2 3 4 5 6 7 
+2022-09-10 21:29:05.628656: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1199] 0:   N Y Y Y Y N N N 
+2022-09-10 21:29:05.628663: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1199] 1:   Y N Y Y N Y N N 
+2022-09-10 21:29:05.628687: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1199] 2:   Y Y N Y N N Y N 
+2022-09-10 21:29:05.628694: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1199] 3:   Y Y Y N N N N Y 
+2022-09-10 21:29:05.628718: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1199] 4:   Y N N N N Y Y Y 
+2022-09-10 21:29:05.628725: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1199] 5:   N Y N N Y N Y Y 
+2022-09-10 21:29:05.628732: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1199] 6:   N N Y N Y Y N Y 
+2022-09-10 21:29:05.628739: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1199] 7:   N N N Y Y Y Y N 
+2022-09-10 21:29:05.645844: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1325] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 30591 MB memory) -> physical GPU (device: 0, name: Tesla V100-SXM2-32GB, pci bus id: 0000:06:00.0, compute capability: 7.0)
+2022-09-10 21:29:05.648278: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1325] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:1 with 30591 MB memory) -> physical GPU (device: 1, name: Tesla V100-SXM2-32GB, pci bus id: 0000:07:00.0, compute capability: 7.0)
+2022-09-10 21:29:05.650674: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1325] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:2 with 30591 MB memory) -> physical GPU (device: 2, name: Tesla V100-SXM2-32GB, pci bus id: 0000:0a:00.0, compute capability: 7.0)
+2022-09-10 21:29:05.653043: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1325] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:3 with 30591 MB memory) -> physical GPU (device: 3, name: Tesla V100-SXM2-32GB, pci bus id: 0000:0b:00.0, compute capability: 7.0)
+2022-09-10 21:29:05.655362: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1325] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:4 with 30591 MB memory) -> physical GPU (device: 4, name: Tesla V100-SXM2-32GB, pci bus id: 0000:85:00.0, compute capability: 7.0)
+2022-09-10 21:29:05.657750: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1325] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:5 with 30591 MB memory) -> physical GPU (device: 5, name: Tesla V100-SXM2-32GB, pci bus id: 0000:86:00.0, compute capability: 7.0)
+2022-09-10 21:29:05.660037: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1325] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:6 with 30591 MB memory) -> physical GPU (device: 6, name: Tesla V100-SXM2-32GB, pci bus id: 0000:89:00.0, compute capability: 7.0)
+2022-09-10 21:29:05.662334: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1325] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:7 with 30591 MB memory) -> physical GPU (device: 7, name: Tesla V100-SXM2-32GB, pci bus id: 0000:8a:00.0, compute capability: 7.0)
+INFO:tensorflow:Single-worker CollectiveAllReduceStrategy with local_devices = ('/device:GPU:0', '/device:GPU:1', '/device:GPU:2', '/device:GPU:3', '/device:GPU:4', '/device:GPU:5', '/device:GPU:6', '/device:GPU:7'), communication = CollectiveCommunication.NCCL
+I0910 21:29:05.668902 139685619324736 collective_all_reduce_strategy.py:211] Single-worker CollectiveAllReduceStrategy with local_devices = ('/device:GPU:0', '/device:GPU:1', '/device:GPU:2', '/device:GPU:3', '/device:GPU:4', '/device:GPU:5', '/device:GPU:6', '/device:GPU:7'), communication = CollectiveCommunication.NCCL
+INFO:tensorflow:Initializing RunConfig with distribution strategies.
+I0910 21:29:05.669412 139685619324736 run_config.py:566] Initializing RunConfig with distribution strategies.
+INFO:tensorflow:Not using Distribute Coordinator.
+I0910 21:29:05.669730 139685619324736 estimator_training.py:167] Not using Distribute Coordinator.
+INFO:tensorflow:Using config: {'_model_dir': '/output', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': 6250, '_save_checkpoints_secs': None, '_session_config': inter_op_parallelism_threads: 8
+allow_soft_placement: true
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': <tensorflow.python.distribute.collective_all_reduce_strategy.CollectiveAllReduceStrategyV1 object at 0x7f099ab41ba8>, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_experimental_max_worker_delay_secs': None, '_session_creation_timeout_secs': 7200, '_service': None, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x7f099ab4c0f0>, '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1, '_distribute_coordinator_mode': None}
+I0910 21:29:05.670574 139685619324736 estimator.py:212] Using config: {'_model_dir': '/output', '_tf_random_seed': None, '_save_summary_steps': 100, '_save_checkpoints_steps': 6250, '_save_checkpoints_secs': None, '_session_config': inter_op_parallelism_threads: 8
+allow_soft_placement: true
+, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': <tensorflow.python.distribute.collective_all_reduce_strategy.CollectiveAllReduceStrategyV1 object at 0x7f099ab41ba8>, '_device_fn': None, '_protocol': None, '_eval_distribute': None, '_experimental_distribute': None, '_experimental_max_worker_delay_secs': None, '_session_creation_timeout_secs': 7200, '_service': None, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x7f099ab4c0f0>, '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1, '_distribute_coordinator_mode': None}
+INFO:tensorflow:***** Running training *****
+I0910 21:29:05.671573 139685619324736 run_pretraining.py:575] ***** Running training *****
+INFO:tensorflow:  Batch size = 18
+I0910 21:29:05.671773 139685619324736 run_pretraining.py:576]   Batch size = 18
+INFO:tensorflow:Create CheckpointSaverHook.
+I0910 21:29:05.671947 139685619324736 basic_session_run_hooks.py:541] Create CheckpointSaverHook.
+:::MLLOG {"namespace": "", "time_ms": 1662845345672, "event_type": "POINT_IN_TIME", "key": "submission_benchmark", "value": "bert", "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 46}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345672, "event_type": "POINT_IN_TIME", "key": "submission_org", "value": "reference_implementation", "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 51}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345672, "event_type": "POINT_IN_TIME", "key": "submission_division", "value": "closed", "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 55}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345673, "event_type": "POINT_IN_TIME", "key": "submission_status", "value": "reference_implementation", "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 59}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345673, "event_type": "POINT_IN_TIME", "key": "submission_platform", "value": "reference_implementation", "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 63}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345673, "event_type": "POINT_IN_TIME", "key": "global_batch_size", "value": 18, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 67}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345673, "event_type": "POINT_IN_TIME", "key": "max_sequence_length", "value": 512, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 68}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345673, "event_type": "POINT_IN_TIME", "key": "max_prediction_per_seq", "value": 76, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 69}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345673, "event_type": "POINT_IN_TIME", "key": "opt_name", "value": "lamb", "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 71}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345673, "event_type": "POINT_IN_TIME", "key": "opt_base_learning_rate", "value": 0.0001, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 72}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345674, "event_type": "POINT_IN_TIME", "key": "opt_weight_decay", "value": 0.01, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 73}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345674, "event_type": "POINT_IN_TIME", "key": "opt_lamb_beta_1", "value": 0.9, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 74}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345674, "event_type": "POINT_IN_TIME", "key": "opt_lamb_beta_2", "value": 0.999, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 75}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345674, "event_type": "POINT_IN_TIME", "key": "opt_lamb_learning_rate_decay_poly_power", "value": 1.0, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 76}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345674, "event_type": "POINT_IN_TIME", "key": "opt_lamb_epsilon", "value": 1e-06, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 77}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345674, "event_type": "POINT_IN_TIME", "key": "opt_learning_rate_warmup_steps", "value": 0, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 79}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345675, "event_type": "POINT_IN_TIME", "key": "start_warmup_step", "value": 0, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 80}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345675, "event_type": "POINT_IN_TIME", "key": "opt_learning_rate_trainnig_steps", "value": 15000000, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 81}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345675, "event_type": "POINT_IN_TIME", "key": "gradient_accumulation_steps", "value": 1, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 82}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345675, "event_type": "POINT_IN_TIME", "key": "eval_samples", "value": 10000, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 83}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345675, "event_type": "POINT_IN_TIME", "key": "train_samples", "value": 270000000, "metadata": {"file": "/workspace/bert/mlp_logging.py", "lineno": 84}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345675, "event_type": "INTERVAL_END", "key": "init_stop", "value": null, "metadata": {"file": "run_pretraining.py", "lineno": 597}}
+:::MLLOG {"namespace": "", "time_ms": 1662845345675, "event_type": "INTERVAL_START", "key": "run_start", "value": null, "metadata": {"file": "run_pretraining.py", "lineno": 598}}
+INFO:tensorflow:The `input_fn` accepts an `input_context` which will be given by DistributionStrategy
+I0910 21:29:05.677807 139685619324736 estimator.py:1112] The `input_fn` accepts an `input_context` which will be given by DistributionStrategy
+WARNING:tensorflow:From run_pretraining.py:376: The name tf.FixedLenFeature is deprecated. Please use tf.io.FixedLenFeature instead.
+
+W0910 21:29:05.678154 139685619324736 module_wrapper.py:139] From run_pretraining.py:376: The name tf.FixedLenFeature is deprecated. Please use tf.io.FixedLenFeature instead.
+
+REEEEEEEEEEEE
+Traceback (most recent call last):
+  File "run_pretraining.py", line 658, in <module>
+    absl.app.run(main)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 299, in run
+    _run_main(main, args)
+  File "/usr/local/lib/python3.6/dist-packages/absl/app.py", line 250, in _run_main
+    sys.exit(main(argv))
+  File "run_pretraining.py", line 605, in main
+    hooks=[checkpoint_hook])
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_estimator/python/estimator/estimator.py", line 370, in train
+    loss = self._train_model(input_fn, hooks, saving_listeners)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_estimator/python/estimator/estimator.py", line 1159, in _train_model
+    return self._train_model_distributed(input_fn, hooks, saving_listeners)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_estimator/python/estimator/estimator.py", line 1222, in _train_model_distributed
+    self._config._train_distribute, input_fn, hooks, saving_listeners)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_estimator/python/estimator/estimator.py", line 1258, in _actual_train_model_distributed
+    input_fn, ModeKeys.TRAIN, strategy)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_estimator/python/estimator/estimator.py", line 1012, in _get_iterator_from_input_fn
+    lambda input_context: self._call_input_fn(input_fn, mode,
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_core/python/distribute/distribute_lib.py", line 1050, in make_input_fn_iterator
+    input_fn, replication_mode)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_core/python/distribute/distribute_lib.py", line 577, in make_input_fn_iterator
+    input_fn, replication_mode=replication_mode)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_core/python/distribute/collective_all_reduce_strategy.py", line 398, in _make_input_fn_iterator
+    self._container_strategy())
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_core/python/distribute/input_lib.py", line 719, in __init__
+    result = input_fn(ctx)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_estimator/python/estimator/estimator.py", line 1013, in <lambda>
+    input_context))
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_estimator/python/estimator/estimator.py", line 1116, in _call_input_fn
+    return input_fn(**kwargs)
+  File "run_pretraining.py", line 604, in <lambda>
+    params=hparams, input_context=input_context), max_steps=FLAGS.num_train_steps,
+  File "run_pretraining.py", line 398, in input_fn
+    for elem in d:
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_core/python/data/ops/dataset_ops.py", line 2034, in __iter__
+    return iter(self._dataset)
+  File "/usr/local/lib/python3.6/dist-packages/tensorflow_core/python/data/ops/dataset_ops.py", line 343, in __iter__
+    raise RuntimeError("__iter__() is only supported inside of tf.function "
+RuntimeError: __iter__() is only supported inside of tf.function or when eager execution is enabled.
+ENDING TIMING RUN AT 2022-09-10 09:29:06 PM
+RESULT,BERT,,6,,2022-09-10 09:29:00 PM

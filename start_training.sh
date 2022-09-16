@@ -12,18 +12,16 @@ DATA_DIR='/raid/data/bert/preproc_data'
 NUM_GPUS=8
 AMT_MEMORY=-1
 DELETE_PREVIOUS_RUNS=0
-WARMUP_AMOUNT=10000
 
 # Getting each named parameter
-while getopts g:o:d:m:r:w:h flag
+while getopts g:o:d:m:r:h flag
 do
 	case "${flag}" in
 		g) NUM_GPUS=${OPTARG};;
 		o) OUTPUT_DIR=${OPTARG};;
-		d) DATA_DIR=${OPTARG};;
+		d) if [ -d ${OPTARG} ]; then DATA_DIR=${OPTARG}; echo "VALID INPUT GIVEN"; fi;;
 		m) AMT_MEMORY=${OPTARG};;
 		r) DELETE_PREVIOUS_RUNS=1;;
-		w) WARMUP_AMOUNT=${OPTARG};;
 		h) echo "-g: number of gpus"; echo "-o: checkpoint output dir"; echo "-d: TFRecord directory"; echo "-m: memory limit in GB"; echo "-h: this page"; exit 1;
 	esac
 done
@@ -62,6 +60,6 @@ then
 		COMMAND="${COMMAND} -m ${AMT_MEMORY}g"
 fi
 
-COMMAND="${COMMAND} tf-bert:latest /bin/bash train_model.sh ${NUM_GPUS} ${WARMUP_AMOUNT}"
+COMMAND="${COMMAND} tf-bert:latest /bin/bash train_model.sh ${NUM_GPUS}"
 
 exec $COMMAND

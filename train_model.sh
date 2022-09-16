@@ -9,6 +9,7 @@ BATCH_SIZE=24
 if [ $# -eq 1 ] 
 then
 	NUM_GPUS=$1
+	# For graphics cards of 32GB memory 
 	BATCH_SIZE=$(expr 6 \* $NUM_GPUS)
 
 fi
@@ -32,7 +33,7 @@ python run_pretraining.py \
   --output_dir=${OUTPUT_DIR} \
   --log_dir=${OUTPUT_DIR} \
   --input_file="${DATA_DIR}/part*" \
-  --nodo_eval \
+  --do_eval \
   --do_train \
   --eval_batch_size=8 \
   --learning_rate=0.0001 \
@@ -40,7 +41,7 @@ python run_pretraining.py \
   --iterations_per_loop=1000 \
   --max_predictions_per_seq=76 \
   --max_seq_length=512 \
-  --num_train_steps=107538 \
+  --num_train_steps=107538\
   --num_warmup_steps=0 \
   --optimizer=lamb \
   --save_checkpoints_steps=6250 \

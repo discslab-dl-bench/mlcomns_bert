@@ -391,27 +391,25 @@ def input_fn_builder(input_files,
     # For training, we want a lot of parallel reading and shuffling.
     # For eval, we want no shuffling and parallel reading doesn't matter.
     if is_training:
-      d = tf.data.Dataset.from_tensor_slices(tf.constant(input_files))
+      # `cycle_length` is the number of parallel files that get read.
+      cycle_length = min(num_cpu_threads, len(input_files))
+      
+      filenames = tf.data.Dataset.list_files(FLAGS.input_file)
+      # Note sloppy might be an issue, as it loads the files non-deterministically
+      d = filenames.apply(
+              tf.data.experimental.parralel_interleave(
+                  lambda filename: tf.data.TFRecordDataset(filename),
+                  sloppy=true,
+                  cycle_length=cycle_length))
+      d = d.shuffle(buffer_size=len(input_files))
+
+      # TODO What is the point of input_context if every call to input_fn sets it to None, and has default set to None
       if input_context:
         tf.logging.info(
             'Sharding the dataset: input_pipeline_id=%d num_input_pipelines=%d' % (
             input_context.input_pipeline_id, input_context.num_input_pipelines))
         d = d.shard(input_context.num_input_pipelines,
                     input_context.input_pipeline_id)
-      d = d.shuffle(buffer_size=len(input_files))
-
-      # `cycle_length` is the number of parallel files that get read.
-      cycle_length = min(num_cpu_threads, len(input_files))
-
-      # `sloppy` mode means that the interleaving is not exact. This adds
-      # even more randomness to the training pipeline.
-      d = d.apply(
-          tf.data.experimental.parallel_interleave(
-              tf.data.TFRecordDataset,
-              sloppy=is_training,
-              cycle_length=cycle_length))
-      d = d.shuffle(buffer_size=1000)
-      d = d.repeat()
     else:
       d = tf.data.TFRecordDataset(input_files)
       d = d.take(batch_size * num_eval_steps)
@@ -432,6 +430,7 @@ def input_fn_builder(input_files,
     return d
 
   return input_fn
+
 
 
 def _decode_record(record, name_to_features):
@@ -578,7 +577,7 @@ def main(_):
         max_predictions_per_seq=FLAGS.max_predictions_per_seq,
         is_training=True,
         input_context=None,
-        num_cpu_threads=8)
+        num_cpu_threads=40)
 
     checkpoint_hook = CheckpointHook(
         num_train_steps=FLAGS.num_train_steps,
