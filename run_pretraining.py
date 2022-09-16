@@ -395,13 +395,15 @@ def input_fn_builder(input_files,
       cycle_length = min(num_cpu_threads, len(input_files))
       
       filenames = tf.data.Dataset.list_files(FLAGS.input_file)
-      # Note sloppy might be an issue, as it loads the files non-deterministically
+      # TODO Note sloppy might be an issue, as it loads the files non-deterministically
       d = filenames.apply(
               tf.data.experimental.parralel_interleave(
                   lambda filename: tf.data.TFRecordDataset(filename),
                   sloppy=true,
                   cycle_length=cycle_length))
       d = d.shuffle(buffer_size=len(input_files))
+      # Cache the dataset into memory if room otherwise into its file
+      d = d.cache()
 
       # TODO What is the point of input_context if every call to input_fn sets it to None, and has default set to None
       if input_context:
