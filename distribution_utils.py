@@ -48,7 +48,7 @@ def _collective_communication(all_reduce_alg):
         "all_reduce_alg are ['ring', 'nccl'].  Supplied value: {}".format(
             all_reduce_alg))
   return collective_communication_options[all_reduce_alg]
-
+# test
 
 def _mirrored_cross_device_ops(all_reduce_alg, num_packs):
   """Return a CrossDeviceOps based on all_reduce_alg and num_packs.
@@ -74,7 +74,11 @@ def _mirrored_cross_device_ops(all_reduce_alg, num_packs):
   cross_device_ops_class = mirrored_all_reduce_options[all_reduce_alg]
   return cross_device_ops_class(num_packs=num_packs)
 
-
+# Mirrored strategy is a "Synchronous training across multiple replicas on one machine."
+# It uses a single worker, "To use MirroredStrategy with multiple workers, please refer 
+# to tf.distribute.experimental.MultiWorkerMirroredStrategy."
+#
+# Note: PyTorch DDP seems to use multiple workers by default - assigning one to each GPU
 def get_distribution_strategy(distribution_strategy="mirrored",
                               num_gpus=0,
                               all_reduce_alg=None,

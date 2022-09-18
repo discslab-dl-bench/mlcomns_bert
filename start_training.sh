@@ -62,6 +62,6 @@ then
 		COMMAND="${COMMAND} -m ${AMT_MEMORY}g"
 fi
 
-COMMAND="${COMMAND} tf-bert:latest /bin/bash train_model.sh ${NUM_GPUS} ${WARMUP_AMOUNT}"
+COMMAND="${COMMAND} --name train_bert tf-bert:test-loic /bin/bash train_model.sh ${NUM_GPUS} ${WARMUP_AMOUNT}"
 
 exec $COMMAND

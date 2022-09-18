@@ -369,6 +369,7 @@ def input_fn_builder(input_files,
 
   def input_fn(params, input_context = None):
     """The actual input function."""
+    # This is the per GPU batch size
     batch_size = params["batch_size"]
 
     name_to_features = {
@@ -398,19 +399,31 @@ def input_fn_builder(input_files,
             input_context.input_pipeline_id, input_context.num_input_pipelines))
         d = d.shard(input_context.num_input_pipelines,
                     input_context.input_pipeline_id)
+      
       d = d.shuffle(buffer_size=len(input_files))
 
       # `cycle_length` is the number of parallel files that get read.
+      # Minimum btw number of cpu threads we want to use or number of files
       cycle_length = min(num_cpu_threads, len(input_files))
+
+      # Here we actually create the dataset using the filenames stored in d
+      # "it gets elements from cycle_length nested datasets in parallel, which increases the throughput, especially in the presence of stragglers."
 
       # `sloppy` mode means that the interleaving is not exact. This adds
       # even more randomness to the training pipeline.
+      # Block length is 1 by default = The number of consecutive elements to pull from an input Dataset before advancing to the next input Dataset.
+      # So it will produce a dataset of TFRecords,  pick 1 file from each file in sequence
+      # https://www.tensorflow.org/api_docs/python/tf/data/experimental/parallel_interleave
       d = d.apply(
           tf.data.experimental.parallel_interleave(
               tf.data.TFRecordDataset,
               sloppy=is_training,
               cycle_length=cycle_length))
+
+      # Shuffles the 1000 first TFRecords 
       d = d.shuffle(buffer_size=1000)
+      # TODO: Calculate the number of steps per epoch since we won't know when it does a full run-through
+      # Dataset is set to repeat
       d = d.repeat()
     else:
       d = tf.data.TFRecordDataset(input_files)
@@ -423,7 +436,9 @@ def input_fn_builder(input_files,
     # size dimensions. For eval, we assume we are evaluating on the CPU or GPU
     # and we *don't* want to drop the remainder, otherwise we wont cover
     # every sample.
+    # https://www.tensorflow.org/api_docs/python/tf/data/experimental/map_and_batch
     d = d.apply(
+        # batch_size * num_parallel_batches elements will be processed in parallel.
         tf.data.experimental.map_and_batch(
             lambda record: _decode_record(record, name_to_features),
             batch_size=batch_size,
@@ -478,15 +493,18 @@ def main(_):
   if not FLAGS.do_train and not FLAGS.do_eval:
     raise ValueError("At least one of `do_train` or `do_eval` must be True.")
 
-  mlperf_logger = mllog.get_mlperf_logger(FLAGS.output_dir, 'bert.log')
   if FLAGS.do_train:
     mllog.mllog_start(key=mllog_constants.INIT_START)
 
+  # bert_config.json parametrized the BERT large model in the paper
   bert_config = modeling.BertConfig.from_json_file(FLAGS.bert_config_file)
 
   tf.gfile.MakeDirs(FLAGS.output_dir)
 
   input_files = []
+
+  # This returns the file names matching the given glob pattern
+  # Aka. will fetch th enames of all input tfrecords
   for input_pattern in FLAGS.input_file.split(","):
     input_files.extend(tf.gfile.Glob(input_pattern))
 
@@ -499,17 +517,19 @@ def main(_):
     tpu_cluster_resolver = tf.distribute.cluster_resolver.TPUClusterResolver(
         FLAGS.tpu_name, zone=FLAGS.tpu_zone, project=FLAGS.gcp_project)
 
+  # Init
   model_fn = model_fn_builder(
       bert_config=bert_config,
-      init_checkpoint=FLAGS.init_checkpoint,
-      learning_rate=FLAGS.learning_rate,
-      num_train_steps=FLAGS.num_train_steps,
-      num_warmup_steps=FLAGS.num_warmup_steps,
+      init_checkpoint=FLAGS.init_checkpoint,    # /wiki/ckpt/model.ckpt-28252
+      learning_rate=FLAGS.learning_rate,        # 0.0001
+      num_train_steps=FLAGS.num_train_steps,    # 107538
+      num_warmup_steps=FLAGS.num_warmup_steps,  # 0
       use_tpu=FLAGS.use_tpu,
-      use_one_hot_embeddings=FLAGS.use_tpu,
-      optimizer=FLAGS.optimizer,
+      use_one_hot_embeddings=FLAGS.use_tpu, 
+      optimizer=FLAGS.optimizer,                # lamb
       poly_power=FLAGS.poly_power,
-      start_warmup_step=FLAGS.start_warmup_step)
+      start_warmup_step=FLAGS.start_warmup_step 
+    )
 
   if FLAGS.use_tpu:
     is_per_host = tf.estimator.tpu.InputPipelineConfig.PER_HOST_V2
@@ -537,16 +557,20 @@ def main(_):
 
     # Creates session config. allow_soft_placement = True, is required for
     # multi-GPU and is not harmful for other modes.
+    # See https://github.com/tensorflow/tensorflow/blob/v1.15.0/tensorflow/core/protobuf/config.proto#L360
     session_config = tf.compat.v1.ConfigProto(
         inter_op_parallelism_threads=8,
         allow_soft_placement=True)
 
+    # TODO: What is num_packs?
+    # We could use a DGX-1 optimized version of all_reduce_alg here: 
     distribution_strategy = distribution_utils.get_distribution_strategy(
         distribution_strategy="mirrored",
         num_gpus=FLAGS.num_gpus,
         all_reduce_alg="nccl",
         num_packs=0)
 
+    # Make an estimator run configuration using the distribution strategy and session config
     dist_gpu_config = tf.estimator.RunConfig(
         train_distribute=distribution_strategy,
         model_dir=FLAGS.output_dir,
@@ -555,6 +579,8 @@ def main(_):
         save_checkpoints_steps=FLAGS.save_checkpoints_steps,
     )
 
+    # Estimator is configured with the dsitributed GPU config that 
+    # implements the distribution strategy, and the global batch size
     hparams = {"batch_size": FLAGS.train_batch_size}
     estimator = tf.estimator.Estimator(
         model_fn=model_fn,
@@ -565,15 +591,20 @@ def main(_):
 
   if FLAGS.do_train:
     tf.logging.info("***** Running training *****")
-    tf.logging.info("  Batch size = %d", FLAGS.train_batch_size)
+    tf.logging.info("  Overall batch size = %d", FLAGS.train_batch_size)
     batch_size = FLAGS.train_batch_size
     if FLAGS.num_gpus > 1:
+      tf.logging.info("  Using %d GPUs", FLAGS.num_gpus)
       batch_size = distribution_utils.per_replica_batch_size(
             batch_size, FLAGS.num_gpus)
     hparams = {"batch_size": batch_size}
+    tf.logging.info("  Per GPU batch size = %d", batch_size)
+
+    # The train input function is given the per gpu batch size
+    # and has a configurable number of CPU threads, presumably to load data from disk
     train_input_fn = input_fn_builder(
         input_files=input_files,
-        batch_size=batch_size,
+        batch_size=batch_size,    # not actually used, input_fn will use the batch size in hparams when it's called, which is equal
         max_seq_length=FLAGS.max_seq_length,
         max_predictions_per_seq=FLAGS.max_predictions_per_seq,
         is_training=True,
@@ -584,6 +615,7 @@ def main(_):
         num_train_steps=FLAGS.num_train_steps,
         checkpoint_dir=FLAGS.output_dir,
         save_steps=FLAGS.save_checkpoints_steps)
+
     mllog.mlperf_submission_log()
     mllog.mlperf_run_param_log()
     mllog.mllog_end(key=mllog_constants.INIT_STOP)

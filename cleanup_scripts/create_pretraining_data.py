@@ -119,9 +119,10 @@ def write_instance_to_example_files(instances, tokenizer, max_seq_length,
     features["masked_lm_ids"] = create_int_feature(masked_lm_ids)
     features["masked_lm_weights"] = create_float_feature(masked_lm_weights)
     features["next_sentence_labels"] = create_int_feature([next_sentence_label])
-
+    # Make an example (case) out of the above feature dictionary
+    # https://www.tensorflow.org/tutorials/load_data/tfrecord#creating_a_tftrainexample_message
     tf_example = tf.train.Example(features=tf.train.Features(feature=features))
-
+    
     writers[writer_index].write(tf_example.SerializeToString())
     writer_index = (writer_index + 1) % len(writers)
 

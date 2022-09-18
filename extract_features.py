@@ -9,8 +9,8 @@ import collections
 import json
 import re
 
-from language.bert import modeling
-from language.bert import tokenization
+import modeling
+import cleanup_scripts.tokenization
 import tensorflow as tf
 from tensorflow.contrib import tpu as contrib_tpu
 

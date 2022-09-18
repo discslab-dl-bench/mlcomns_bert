@@ -10,7 +10,6 @@ if [ $# -eq 1 ]
 then
 	NUM_GPUS=$1
 	BATCH_SIZE=$(expr 6 \* $NUM_GPUS)
-
 fi
 
 DATA_DIR="/data"
@@ -46,7 +45,7 @@ python run_pretraining.py \
   --save_checkpoints_steps=6250 \
   --start_warmup_step=0 \
   --num_gpus=$NUM_GPUS \
-  --train_batch_size=$BATCH_SIZE 
+  --train_batch_size=$BATCH_SIZE 2>&1 | tee ${OUTPUT_DIR}/app.log
   
   # end timing
 end=$(date +%s)
