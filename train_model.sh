@@ -9,9 +9,7 @@ BATCH_SIZE=24
 if [ $# -eq 1 ] 
 then
 	NUM_GPUS=$1
-	# For graphics cards of 32GB memory 
-	BATCH_SIZE=$(expr 6 \* $NUM_GPUS)
-
+	BATCH_SIZE=$(expr 6  \* $NUM_GPUS)
 fi
 
 DATA_DIR="/data"

@@ -391,27 +391,10 @@ def input_fn_builder(input_files,
     # For training, we want a lot of parallel reading and shuffling.
     # For eval, we want no shuffling and parallel reading doesn't matter.
     if is_training:
-      # `cycle_length` is the number of parallel files that get read.
-      cycle_length = min(num_cpu_threads, len(input_files))
-      
-      filenames = tf.data.Dataset.list_files(FLAGS.input_file)
-      # TODO Note sloppy might be an issue, as it loads the files non-deterministically
-      d = filenames.apply(
-              tf.data.experimental.parralel_interleave(
-                  lambda filename: tf.data.TFRecordDataset(filename),
-                  sloppy=true,
-                  cycle_length=cycle_length))
+      # Load all the file names into dataset
+      d = tf.data.Dataset.list_files(FLAGS.input_file)
+      d = d.interleave(lambda f: tf.data.TFRecordDataset(f), num_parallel_calls=tf.data.experimental.AUTOTUNE)
       d = d.shuffle(buffer_size=len(input_files))
-      # Cache the dataset into memory if room otherwise into its file
-      d = d.cache()
-
-      # TODO What is the point of input_context if every call to input_fn sets it to None, and has default set to None
-      if input_context:
-        tf.logging.info(
-            'Sharding the dataset: input_pipeline_id=%d num_input_pipelines=%d' % (
-            input_context.input_pipeline_id, input_context.num_input_pipelines))
-        d = d.shard(input_context.num_input_pipelines,
-                    input_context.input_pipeline_id)
     else:
       d = tf.data.TFRecordDataset(input_files)
       d = d.take(batch_size * num_eval_steps)
@@ -423,16 +406,11 @@ def input_fn_builder(input_files,
     # size dimensions. For eval, we assume we are evaluating on the CPU or GPU
     # and we *don't* want to drop the remainder, otherwise we wont cover
     # every sample.
-    d = d.apply(
-        tf.data.experimental.map_and_batch(
-            lambda record: _decode_record(record, name_to_features),
-            batch_size=batch_size,
-            num_parallel_batches=num_cpu_threads,
-            drop_remainder=True))
+    d = d.map(lambda record: _decode_record(record, name_to_features), num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    d = d.batch(batch_size, drop_remainder=True)
     return d
 
   return input_fn
-
 
 
 def _decode_record(record, name_to_features):
@@ -579,7 +557,7 @@ def main(_):
         max_predictions_per_seq=FLAGS.max_predictions_per_seq,
         is_training=True,
         input_context=None,
-        num_cpu_threads=40)
+        num_cpu_threads=8)
 
     checkpoint_hook = CheckpointHook(
         num_train_steps=FLAGS.num_train_steps,
