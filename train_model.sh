@@ -3,14 +3,14 @@
 # To be run in the docker container
 # Needs /data (containing tfrecords of data), /wiki and /output mounted
 
-NUM_GPUS=8
-BATCH_SIZE=24
+NUM_GPUS=${1:-8}
+BATCH_SIZE=${2:-24}
 
-if [ $# -eq 1 ] 
-then
-	NUM_GPUS=$1
-	BATCH_SIZE=$(expr 6 \* $NUM_GPUS)
-fi
+# if [ $# -eq 1 ] 
+# then
+# 	NUM_GPUS=$1
+# 	BATCH_SIZE=$(expr 6 \* $NUM_GPUS)
+# fi
 
 DATA_DIR="/data"
 WIKI_DIR="/wiki"
@@ -42,7 +42,7 @@ python run_pretraining.py \
   --num_train_steps=107538 \
   --num_warmup_steps=0 \
   --optimizer=lamb \
-  --save_checkpoints_steps=6250 \
+  --save_checkpoints_steps=300 \
   --start_warmup_step=0 \
   --num_gpus=$NUM_GPUS \
   --train_batch_size=$BATCH_SIZE 2>&1 | tee ${OUTPUT_DIR}/app.log

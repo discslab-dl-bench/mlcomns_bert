@@ -116,6 +116,7 @@ def create_optimizer(loss,
     # This is how the model was pre-trained.
     (grads, _) = tf.clip_by_global_norm(grads, clip_norm=1.0)
 
+  tf.logging.info(f"************** Calling optimizer.apply_gradients(), global step: {global_step}")
   train_op = optimizer.apply_gradients(
       zip(grads, tvars), global_step=global_step)
 

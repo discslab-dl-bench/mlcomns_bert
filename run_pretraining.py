@@ -124,8 +124,12 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
   """Returns `model_fn` closure for TPUEstimator."""
 
   def model_fn(features, labels, mode, params):  # pylint: disable=unused-argument
-    """The `model_fn` for TPUEstimator."""
+    """
+    The `model_fn` for TPUEstimator.
+    Returns an OutputSpec
+    """
 
+    tf.logging.info("IN MODEL_FN!!!")
     tf.logging.info("*** Features ***")
     for name in sorted(features.keys()):
       tf.logging.info("  name = %s, shape = %s" % (name, features[name].shape))
@@ -148,6 +152,8 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
         token_type_ids=segment_ids,
         use_one_hot_embeddings=use_one_hot_embeddings)
 
+    # Is model function describing a single step here?
+    # DOes that mean we recrate the model each time??? Implausible
     (masked_lm_loss,
      masked_lm_example_loss, masked_lm_log_probs) = get_masked_lm_output(
          bert_config, model.get_sequence_output(), model.get_embedding_table(),
@@ -183,15 +189,17 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
       else:
         tf.train.init_from_checkpoint(init_checkpoint, assignment_map)
 
-    tf.logging.info("**** Trainable Variables ****")
-    for var in tvars:
-      init_string = ""
-      if var.name in initialized_variable_names:
-        init_string = ", *INIT_FROM_CKPT*"
-      tf.logging.info("  name = %s, shape = %s%s", var.name, var.shape,
-                      init_string)
+    # tf.logging.info("**** Trainable Variables ****")
+    # for var in tvars:
+    #   init_string = ""
+    #   if var.name in initialized_variable_names:
+    #     init_string = ", *INIT_FROM_CKPT*"
+    #   tf.logging.info("  name = %s, shape = %s%s", var.name, var.shape,
+    #                   init_string)
 
     output_spec = None
+    # It may be that we calculate the first loss (on the initial model) to create the graph flow
+    # necessary for optimization
     if mode == tf.estimator.ModeKeys.TRAIN:
       train_op = optimization.create_optimizer(
           total_loss, learning_rate, num_train_steps, num_warmup_steps,
@@ -268,6 +276,7 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
     else:
       raise ValueError("Only TRAIN and EVAL modes are supported: %s" % (mode))
 
+    tf.logging.info("**** Returning OUTPUT SPEC ****")
     return output_spec
 
   return model_fn
@@ -299,12 +308,14 @@ def get_masked_lm_output(bert_config, input_tensor, output_weights, positions,
     logits = tf.matmul(input_tensor, output_weights, transpose_b=True)
     logits = tf.nn.bias_add(logits, output_bias)
     log_probs = tf.nn.log_softmax(logits, axis=-1)
+    tf.logging.info(f'log_probs shape: {log_probs.get_shape()}')
 
     label_ids = tf.reshape(label_ids, [-1])
     label_weights = tf.reshape(label_weights, [-1])
 
     one_hot_labels = tf.one_hot(
         label_ids, depth=bert_config.vocab_size, dtype=tf.float32)
+    tf.logging.info(f'one_hot_labels shape: {one_hot_labels.get_shape()}')
 
     # The `positions` tensor might be zero-padded (if the sequence is too
     # short to have the maximum number of predictions). The `label_weights`
@@ -391,12 +402,13 @@ def input_fn_builder(input_files,
 
     # For training, we want a lot of parallel reading and shuffling.
     # For eval, we want no shuffling and parallel reading doesn't matter.
-    if is_training:
+    if is_training: 
       d = tf.data.Dataset.from_tensor_slices(tf.constant(input_files))
       if input_context:
         tf.logging.info(
             'Sharding the dataset: input_pipeline_id=%d num_input_pipelines=%d' % (
             input_context.input_pipeline_id, input_context.num_input_pipelines))
+        tf.logging.info(f"Input context: {str(input_context)}")
         d = d.shard(input_context.num_input_pipelines,
                     input_context.input_pipeline_id)
       
@@ -406,6 +418,7 @@ def input_fn_builder(input_files,
       # Minimum btw number of cpu threads we want to use or number of files
       cycle_length = min(num_cpu_threads, len(input_files))
 
+      tf.logging.info('parallel interleave cycle_length=%d' % (cycle_length))
       # Here we actually create the dataset using the filenames stored in d
       # "it gets elements from cycle_length nested datasets in parallel, which increases the throughput, especially in the presence of stragglers."
 
@@ -414,16 +427,28 @@ def input_fn_builder(input_files,
       # Block length is 1 by default = The number of consecutive elements to pull from an input Dataset before advancing to the next input Dataset.
       # So it will produce a dataset of TFRecords,  pick 1 file from each file in sequence
       # https://www.tensorflow.org/api_docs/python/tf/data/experimental/parallel_interleave
+
+      def print_map_func(filename):
+        tf.logging.info(f"Opening file: {filename}") # I think this doesn't get compiled into the graph
+        return filename
+      # Wrap my debug function with py_function so it can run python code (else python code gets removed)
+      d.map(lambda x: tf.py_function(func=print_map_func, inp=[x], Tout=tf.string))
+
+      # buffer_output_elements	The number of elements each iterator being interleaved should buffer (similar to the .prefetch() transformation for each interleaved iterator).
+      # is None by default!
       d = d.apply(
           tf.data.experimental.parallel_interleave(
               tf.data.TFRecordDataset,
               sloppy=is_training,
               cycle_length=cycle_length))
 
-      # Shuffles the 1000 first TFRecords 
+      # Create a buffer that will randomly pick from 1000 TFRecords 
+      # The 1001'th element can never be returned first
       d = d.shuffle(buffer_size=1000)
-      # TODO: Calculate the number of steps per epoch since we won't know when it does a full run-through
       # Dataset is set to repeat
+
+      # Makes the dataset become effectvely infinite
+      # When do we load new files then?
       d = d.repeat()
     else:
       d = tf.data.TFRecordDataset(input_files)
@@ -451,6 +476,7 @@ def input_fn_builder(input_files,
 
 def _decode_record(record, name_to_features):
   """Decodes a record to a TensorFlow example."""
+  tf.logging.info("Decoding record")
   example = tf.parse_single_example(record, name_to_features)
 
   # tf.Example only supports tf.int64, but the TPU only supports tf.int32.
@@ -470,7 +496,7 @@ class CheckpointHook(tf.train.CheckpointSaverHook):
   def __init__(self, num_train_steps, *args, **kwargs):
     super(CheckpointHook, self).__init__(*args, **kwargs)
     self.num_train_steps = num_train_steps
-    self.previous_step = None
+    self.previous_step = -1
 
   def _save(self, session, step):
     if self.previous_step:
@@ -508,9 +534,9 @@ def main(_):
   for input_pattern in FLAGS.input_file.split(","):
     input_files.extend(tf.gfile.Glob(input_pattern))
 
-  tf.logging.info("*** Input Files ***")
-  for input_file in input_files:
-    tf.logging.info("  %s" % input_file)
+  # tf.logging.info("*** Input Files ***")
+  # for input_file in input_files:
+  #   tf.logging.info("  %s" % input_file)
 
   tpu_cluster_resolver = None
   if FLAGS.use_tpu and FLAGS.tpu_name:
@@ -624,6 +650,7 @@ def main(_):
       estimator.train(input_fn=train_input_fn, max_steps=FLAGS.num_train_steps,
           hooks=[checkpoint_hook])
     else:
+      tf.logging.info("********** CALLING ESTIMATOR.TRAIN() **************")
       estimator.train(input_fn=lambda input_context=None: train_input_fn(
           params=hparams, input_context=input_context), max_steps=FLAGS.num_train_steps,
           hooks=[checkpoint_hook])
