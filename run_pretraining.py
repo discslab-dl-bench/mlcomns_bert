@@ -416,7 +416,8 @@ def input_fn_builder(input_files,
 
       # `cycle_length` is the number of parallel files that get read.
       # Minimum btw number of cpu threads we want to use or number of files
-      cycle_length = min(num_cpu_threads, len(input_files))
+      # cycle_length = min(num_cpu_threads, len(input_files))
+      cycle_length = 2
 
       tf.logging.info('parallel interleave cycle_length=%d' % (cycle_length))
       # Here we actually create the dataset using the filenames stored in d
@@ -434,8 +435,8 @@ def input_fn_builder(input_files,
       # Wrap my debug function with py_function so it can run python code (else python code gets removed)
       d.map(lambda x: tf.py_function(func=print_map_func, inp=[x], Tout=tf.string))
 
-      # buffer_output_elements	The number of elements each iterator being interleaved should buffer (similar to the .prefetch() transformation for each interleaved iterator).
-      # is None by default!
+      # buffer_output_elements	The number of elements each iterator being interleaved should buffer 
+      # (similar to the .prefetch() transformation for each interleaved iterator). is None by default!
       d = d.apply(
           tf.data.experimental.parallel_interleave(
               tf.data.TFRecordDataset,
@@ -496,20 +497,22 @@ class CheckpointHook(tf.train.CheckpointSaverHook):
   def __init__(self, num_train_steps, *args, **kwargs):
     super(CheckpointHook, self).__init__(*args, **kwargs)
     self.num_train_steps = num_train_steps
-    self.previous_step = -1
+    self.previous_step = None
 
   def _save(self, session, step):
-    if self.previous_step:
+    if self.previous_step is not None:
       mllog.mllog_end(key=mllog_constants.BLOCK_STOP,
                       metadata={"first_step_num": self.previous_step + 1,
                           "step_count": step - self.previous_step})
+    else:
+      # First time this gets called
+      mllog.mllog_end(key=mllog_constants.INIT_STOP)
     self.previous_step = step
     mllog.mllog_start(key="checkpoint_start", metadata={"step_num" : step}) 
     return_value = super(CheckpointHook, self)._save(session, step)
     mllog.mllog_end(key="checkpoint_stop", metadata={"step_num" : step})
     if step < self.num_train_steps:
-        mllog.mllog_start(key=mllog_constants.BLOCK_START,
-                          metadata={"first_step_num": step + 1})
+        mllog.mllog_start(key=mllog_constants.BLOCK_START, metadata={"first_step_num": step + 1})
     return return_value
 
 
@@ -526,6 +529,14 @@ def main(_):
   bert_config = modeling.BertConfig.from_json_file(FLAGS.bert_config_file)
 
   tf.gfile.MakeDirs(FLAGS.output_dir)
+
+  # # Turn on Darshan
+  # os.environ["DARSHAN_LOGPATH"] = FLAGS.output_dir
+  # os.environ["DARSHAN_ENABLE_NONMPI"] = "1"
+  # os.environ["LD_PRELOAD"] = "/usr/local/lib/libdarshan.so"
+  # os.environ["DXT_ENABLE_IO_TRACE"] = "1"
+  # os.environ["DARSHAN_DISABLE"] = "0"
+
 
   input_files = []
 
@@ -644,7 +655,7 @@ def main(_):
 
     mllog.mlperf_submission_log()
     mllog.mlperf_run_param_log()
-    mllog.mllog_end(key=mllog_constants.INIT_STOP)
+    
     mllog.mllog_start(key=mllog_constants.RUN_START)
     if FLAGS.use_tpu:
       estimator.train(input_fn=train_input_fn, max_steps=FLAGS.num_train_steps,
@@ -706,4 +717,5 @@ if __name__ == "__main__":
   flags.mark_flag_as_required("input_file")
   flags.mark_flag_as_required("bert_config_file")
   flags.mark_flag_as_required("output_dir")
+
   absl.app.run(main)
