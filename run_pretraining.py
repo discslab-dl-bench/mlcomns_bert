@@ -404,6 +404,7 @@ def input_fn_builder(input_files,
     # For eval, we want no shuffling and parallel reading doesn't matter.
     if is_training: 
       d = tf.data.Dataset.from_tensor_slices(tf.constant(input_files))
+      # An input context will be passed when input_fn is called during training.
       if input_context:
         tf.logging.info(
             'Sharding the dataset: input_pipeline_id=%d num_input_pipelines=%d' % (
@@ -437,6 +438,11 @@ def input_fn_builder(input_files,
 
       # buffer_output_elements	The number of elements each iterator being interleaved should buffer 
       # (similar to the .prefetch() transformation for each interleaved iterator). is None by default!
+      # parallel_interleave() maps map_func across its input to produce nested datasets, and outputs their elements interleaved. 
+      # Unlike tf.data.Dataset.interleave, it gets elements from cycle_length nested datasets in parallel, 
+      # which increases the throughput, especially in the presence of stragglers. 
+      # Furthermore, the sloppy argument can be used to improve performance, by relaxing the requirement that the outputs 
+      # are produced in a deterministic order, and allowing the implementation to skip over nested datasets whose elements are not readily available when requested.
       d = d.apply(
           tf.data.experimental.parallel_interleave(
               tf.data.TFRecordDataset,
@@ -645,7 +651,7 @@ def main(_):
         max_seq_length=FLAGS.max_seq_length,
         max_predictions_per_seq=FLAGS.max_predictions_per_seq,
         is_training=True,
-        input_context=None,
+        input_context=None, # Always None so the dataset is not sharded? No, the distribution strategy passes the input context to the input_fn
         num_cpu_threads=8)
 
     checkpoint_hook = CheckpointHook(

@@ -66,7 +66,7 @@ then
 		COMMAND="${COMMAND} -m ${AMT_MEMORY}g"
 fi
 
-COMMAND="${COMMAND} --name $CONTAINER_NAME tf-bert:dev-loic /bin/bash ./train_model.sh $NUM_GPUS $BATCH_SIZE"
+COMMAND="${COMMAND} --name $CONTAINER_NAME bert:latest /bin/bash ./train_model.sh $NUM_GPUS $BATCH_SIZE"
 # COMMAND="${COMMAND} --name $CONTAINER_NAME tf-bert:dev-loic"
 
 exec $COMMAND
