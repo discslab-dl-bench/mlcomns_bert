@@ -114,7 +114,7 @@ flags.DEFINE_integer(
 flags.DEFINE_integer("steps_per_update", 1,
                      "The number of steps for accumulating gradients.")
 
-flags.DEFINE_integer("keep_checkpoint_max", 5,
+flags.DEFINE_integer("keep_checkpoint_max", 1,
                      "The maximum number of checkpoints to keep.")
 
 def model_fn_builder(bert_config, init_checkpoint, learning_rate,
@@ -518,7 +518,7 @@ class CheckpointHook(tf.train.CheckpointSaverHook):
     return_value = super(CheckpointHook, self)._save(session, step)
     mllog.mllog_end(key="checkpoint_stop", metadata={"step_num" : step})
     if step < self.num_train_steps:
-        mllog.mllog_start(key=mllog_constants.BLOCK_START, metadata={"first_step_num": step + 1})
+        mllog.mllog_start(key=mllog_constants.BLOCK_START, metadata={"first_step_num": step})
     return return_value
 
 
@@ -535,13 +535,6 @@ def main(_):
   bert_config = modeling.BertConfig.from_json_file(FLAGS.bert_config_file)
 
   tf.gfile.MakeDirs(FLAGS.output_dir)
-
-  # # Turn on Darshan
-  # os.environ["DARSHAN_LOGPATH"] = FLAGS.output_dir
-  # os.environ["DARSHAN_ENABLE_NONMPI"] = "1"
-  # os.environ["LD_PRELOAD"] = "/usr/local/lib/libdarshan.so"
-  # os.environ["DXT_ENABLE_IO_TRACE"] = "1"
-  # os.environ["DARSHAN_DISABLE"] = "0"
 
 
   input_files = []
@@ -608,7 +601,7 @@ def main(_):
     # TODO: What is num_packs?
     # We could use a DGX-1 optimized version of all_reduce_alg here: 
     distribution_strategy = distribution_utils.get_distribution_strategy(
-        distribution_strategy="mirrored",
+        distribution_strategy="multi_worker_mirrored",
         num_gpus=FLAGS.num_gpus,
         all_reduce_alg="nccl",
         num_packs=0)
@@ -622,7 +615,7 @@ def main(_):
         save_checkpoints_steps=FLAGS.save_checkpoints_steps,
     )
 
-    # Estimator is configured with the dsitributed GPU config that 
+    # Estimator is configured with the run config from above that 
     # implements the distribution strategy, and the global batch size
     hparams = {"batch_size": FLAGS.train_batch_size}
     estimator = tf.estimator.Estimator(
@@ -657,7 +650,29 @@ def main(_):
     checkpoint_hook = CheckpointHook(
         num_train_steps=FLAGS.num_train_steps,
         checkpoint_dir=FLAGS.output_dir,
-        save_steps=FLAGS.save_checkpoints_steps)
+        save_steps=FLAGS.save_checkpoints_steps
+    )
+
+    train_spec = tf.estimator.TrainSpec(
+      input_fn=train_input_fn,
+      max_steps=FLAGS.num_train_steps,
+      hooks=[checkpoint_hook]
+    )
+
+    eval_input_fn = input_fn_builder(
+      input_files=input_files,
+      batch_size=batch_size,
+      max_seq_length=FLAGS.max_seq_length,
+      max_predictions_per_seq=FLAGS.max_predictions_per_seq,
+      is_training=False,
+      input_context=None,
+      num_cpu_threads=8,
+      num_eval_steps=FLAGS.max_eval_steps)
+
+    eval_spec = tf.estimator.EvalSpec(
+      input_fn=eval_input_fn,
+      steps=FLAGS.max_eval_steps
+    )
 
     mllog.mlperf_submission_log()
     mllog.mlperf_run_param_log()
@@ -668,9 +683,10 @@ def main(_):
           hooks=[checkpoint_hook])
     else:
       tf.logging.info("********** CALLING ESTIMATOR.TRAIN() **************")
-      estimator.train(input_fn=lambda input_context=None: train_input_fn(
-          params=hparams, input_context=input_context), max_steps=FLAGS.num_train_steps,
-          hooks=[checkpoint_hook])
+      # estimator.train(input_fn=lambda input_context=None: train_input_fn(
+      #     params=hparams, input_context=input_context), max_steps=FLAGS.num_train_steps,
+      #     hooks=[checkpoint_hook])
+      tf.estimator.train_and_evaluate(estimator, train_spec, eval_spec)
     mllog.mllog_end(key=mllog_constants.RUN_STOP)
 
   if FLAGS.do_eval:

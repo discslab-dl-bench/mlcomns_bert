@@ -4,17 +4,18 @@
 MAX_NUM_GPUS=8
 SCRIPT_DIR=$( dirname -- "$( readlink -f -- "$0"; )" )
 
-NUM_GPUS=${1:-8}
-CONTAINER_NAME=${2:-train_bert}
-shift 2
+# NUM_GPUS=${1:-8}
+# CONTAINER_NAME=${2:-train_bert}
+# shift 2
 
 echo $SCRIPT_DIR
 
 # Defaults 
+NUM_GPUS=8
+BATCH_SIZE=$(expr 6 \* $NUM_GPUS)
 OUTPUT_DIR="${SCRIPT_DIR}/output"
 DATA_DIR='/raid/data/bert/preproc_data'
-NUM_GPUS=8
-BATCH_SIZE=48
+CONTAINER_NAME='train_bert'
 AMT_MEMORY=-1
 DELETE_PREVIOUS_RUNS=0
 
@@ -66,7 +67,7 @@ then
 		COMMAND="${COMMAND} -m ${AMT_MEMORY}g"
 fi
 
-COMMAND="${COMMAND} --name $CONTAINER_NAME bert:latest /bin/bash ./train_model.sh $NUM_GPUS $BATCH_SIZE"
+COMMAND="${COMMAND} --name $CONTAINER_NAME bert:loic /bin/bash ./train_model.sh $NUM_GPUS $BATCH_SIZE"
 # COMMAND="${COMMAND} --name $CONTAINER_NAME tf-bert:dev-loic"
-
+echo $COMMAND
 exec $COMMAND
