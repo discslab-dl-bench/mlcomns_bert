@@ -9,14 +9,13 @@ import os
 import absl
 import modeling
 import optimization
+import distribution_utils
 import mlp_logging as mllog
+
 from mlperf_logging.mllog import constants as mllog_constants
 
 import tensorflow as tf
-# from tensorflow.contrib import cluster_resolver as contrib_cluster_resolver
-# from tensorflow.contrib import data as contrib_data
-# from tensorflow.contrib import tpu as contrib_tpu
-import distribution_utils
+import horovod.tensorflow as hvd
 
 flags = absl.flags
 
@@ -404,15 +403,17 @@ def input_fn_builder(input_files,
     # For eval, we want no shuffling and parallel reading doesn't matter.
     if is_training: 
       d = tf.data.Dataset.from_tensor_slices(tf.constant(input_files))
-      # An input context will be passed when input_fn is called during training.
-      if input_context:
-        tf.logging.info(
-            'Sharding the dataset: input_pipeline_id=%d num_input_pipelines=%d' % (
-            input_context.input_pipeline_id, input_context.num_input_pipelines))
-        tf.logging.info(f"Input context: {str(input_context)}")
-        d = d.shard(input_context.num_input_pipelines,
-                    input_context.input_pipeline_id)
-      
+      # # An input context will be passed when input_fn is called during training.
+      # if input_context:
+      #   tf.logging.info(
+      #       'Sharding the dataset: input_pipeline_id=%d num_input_pipelines=%d' % (
+      #       input_context.input_pipeline_id, input_context.num_input_pipelines))
+      #   tf.logging.info(f"Input context: {str(input_context)}")
+      #   d = d.shard(input_context.num_input_pipelines,
+      #               input_context.input_pipeline_id)
+
+      # Horovod, shard the dataset between workers
+      d = d.shard(hvd.size(), hvd.rank())
       d = d.shuffle(buffer_size=len(input_files))
 
       # `cycle_length` is the number of parallel files that get read.
@@ -523,7 +524,11 @@ class CheckpointHook(tf.train.CheckpointSaverHook):
 
 
 def main(_):
+
   tf.logging.set_verbosity(tf.logging.INFO)
+  
+  # Initialize Horovod
+  hvd.init()
 
   if not FLAGS.do_train and not FLAGS.do_eval:
     raise ValueError("At least one of `do_train` or `do_eval` must be True.")
@@ -535,14 +540,6 @@ def main(_):
   bert_config = modeling.BertConfig.from_json_file(FLAGS.bert_config_file)
 
   tf.gfile.MakeDirs(FLAGS.output_dir)
-
-  # # Turn on Darshan
-  # os.environ["DARSHAN_LOGPATH"] = FLAGS.output_dir
-  # os.environ["DARSHAN_ENABLE_NONMPI"] = "1"
-  # os.environ["LD_PRELOAD"] = "/usr/local/lib/libdarshan.so"
-  # os.environ["DXT_ENABLE_IO_TRACE"] = "1"
-  # os.environ["DARSHAN_DISABLE"] = "0"
-
 
   input_files = []
 
@@ -605,18 +602,24 @@ def main(_):
         inter_op_parallelism_threads=8,
         allow_soft_placement=True)
 
-    # TODO: What is num_packs?
-    # We could use a DGX-1 optimized version of all_reduce_alg here: 
-    distribution_strategy = distribution_utils.get_distribution_strategy(
-        distribution_strategy="mirrored",
-        num_gpus=FLAGS.num_gpus,
-        all_reduce_alg="nccl",
-        num_packs=0)
+    # Pin GPU to be used to process local rank (one GPU per process)
+    session_config.gpu_options.visible_device_list = str(hvd.local_rank())
+
+    # # TODO: What is num_packs?
+    # # We could use a DGX-1 optimized version of all_reduce_alg here: 
+    # distribution_strategy = distribution_utils.get_distribution_strategy(
+    #     distribution_strategy="mirrored",
+    #     num_gpus=FLAGS.num_gpus,
+    #     all_reduce_alg="nccl",
+    #     num_packs=0)
+
+    # Horovod: save checkpoints only on worker 0 to prevent other workers from corrupting them.
+    model_dir = FLAGS.output_dir
 
     # Make an estimator run configuration using the distribution strategy and session config
     dist_gpu_config = tf.estimator.RunConfig(
-        train_distribute=distribution_strategy,
-        model_dir=FLAGS.output_dir,
+        # train_distribute=distribution_strategy,
+        model_dir=model_dir,
         session_config=session_config,
         keep_checkpoint_max=FLAGS.keep_checkpoint_max,
         save_checkpoints_steps=FLAGS.save_checkpoints_steps,
@@ -628,7 +631,7 @@ def main(_):
     estimator = tf.estimator.Estimator(
         model_fn=model_fn,
         config=dist_gpu_config,
-        model_dir=FLAGS.output_dir,
+        model_dir=model_dir,
         params=hparams,
     )
 
@@ -656,8 +659,16 @@ def main(_):
 
     checkpoint_hook = CheckpointHook(
         num_train_steps=FLAGS.num_train_steps,
-        checkpoint_dir=FLAGS.output_dir,
+        checkpoint_dir=model_dir,
         save_steps=FLAGS.save_checkpoints_steps)
+
+    # Horovod: BroadcastGlobalVariablesHook broadcasts initial variable states from
+    # rank 0 to all other processes. This is necessary to ensure consistent
+    # initialization of all workers when training is started with random weights or
+    # restored from a checkpoint.
+    bcast_hook = hvd.BroadcastGlobalVariablesHook(0)
+
+    hooks = [checkpoint_hook, bcast_hook] if hvd.rank() == 0 else [bcast_hook]
 
     mllog.mlperf_submission_log()
     mllog.mlperf_run_param_log()
@@ -665,12 +676,12 @@ def main(_):
     mllog.mllog_start(key=mllog_constants.RUN_START)
     if FLAGS.use_tpu:
       estimator.train(input_fn=train_input_fn, max_steps=FLAGS.num_train_steps,
-          hooks=[checkpoint_hook])
+          hooks=hooks)
     else:
       tf.logging.info("********** CALLING ESTIMATOR.TRAIN() **************")
       estimator.train(input_fn=lambda input_context=None: train_input_fn(
           params=hparams, input_context=input_context), max_steps=FLAGS.num_train_steps,
-          hooks=[checkpoint_hook])
+          hooks=hooks)
     mllog.mllog_end(key=mllog_constants.RUN_STOP)
 
   if FLAGS.do_eval:

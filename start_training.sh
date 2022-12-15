@@ -11,9 +11,9 @@ shift 2
 echo $SCRIPT_DIR
 
 # Defaults 
+# NUM_GPUS=8
 OUTPUT_DIR="${SCRIPT_DIR}/output"
 DATA_DIR='/raid/data/bert/preproc_data'
-NUM_GPUS=8
 BATCH_SIZE=48
 AMT_MEMORY=-1
 DELETE_PREVIOUS_RUNS=0
@@ -66,7 +66,7 @@ then
 		COMMAND="${COMMAND} -m ${AMT_MEMORY}g"
 fi
 
-COMMAND="${COMMAND} --name $CONTAINER_NAME bert:latest /bin/bash ./train_model.sh $NUM_GPUS $BATCH_SIZE"
+COMMAND="${COMMAND} --name $CONTAINER_NAME bert:horovod /bin/bash ./train_model.sh $NUM_GPUS $BATCH_SIZE"
 # COMMAND="${COMMAND} --name $CONTAINER_NAME tf-bert:dev-loic"
 
 exec $COMMAND

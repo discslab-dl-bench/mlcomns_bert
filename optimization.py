@@ -7,6 +7,7 @@ from __future__ import print_function
 import re
 import absl
 import tensorflow.compat.v1 as tf
+import horovod.tensorflow as hvd
 
 # from tensorflow.contrib import tpu as contrib_tpu
 
@@ -108,6 +109,8 @@ def create_optimizer(loss,
 
   if use_tpu:
     optimizer = tf.tpu.CrossShardOptimizer(optimizer)
+
+  optimizer = hvd.DistributedOptimizer(optimizer)
 
   tvars = tf.trainable_variables()
   grads = tf.gradients(loss, tvars)
