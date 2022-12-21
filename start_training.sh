@@ -12,14 +12,17 @@ echo $SCRIPT_DIR
 
 # Defaults 
 # NUM_GPUS=8
+# CONTAINER_NAME='train_bert'
+IMAGE_NAME=
+NUM_STEPS=300
+BATCH_SIZE=$(expr 6 \* $NUM_GPUS)
 OUTPUT_DIR="${SCRIPT_DIR}/output"
 DATA_DIR='/raid/data/bert/preproc_data'
-BATCH_SIZE=48
 AMT_MEMORY=-1
 DELETE_PREVIOUS_RUNS=0
 
 # Getting each named parameter
-while getopts g:b:o:d:m:r:w:h flag
+while getopts g:b:o:d:m:r:w:h:i:s: flag
 do
 	case "${flag}" in
 		g) NUM_GPUS=${OPTARG};;
@@ -28,7 +31,9 @@ do
 		d) DATA_DIR=${OPTARG};;
 		m) AMT_MEMORY=${OPTARG};;
 		r) DELETE_PREVIOUS_RUNS=1;;
-		h) echo "-g: number of gpus"; echo "-b: global batch size"; echo "-o: checkpoint output dir"; echo "-d: TFRecord directory"; echo "-m: memory limit in GB"; echo "-h: this page"; exit 1;
+		i) IMAGE_NAME=${OPTARG};;
+		s) NUM_STEPS=${OPTARG};;
+		h) echo "-g: number of gpus"; echo "-s: num training steps"; echo "-i: image name"; echo "-b: global batch size"; echo "-o: checkpoint output dir"; echo "-d: TFRecord directory"; echo "-m: memory limit in GB"; echo "-h: this page"; exit 1;
 	esac
 done
 
@@ -66,7 +71,7 @@ then
 		COMMAND="${COMMAND} -m ${AMT_MEMORY}g"
 fi
 
-COMMAND="${COMMAND} --name $CONTAINER_NAME bert:horovod /bin/bash ./train_model.sh $NUM_GPUS $BATCH_SIZE"
+COMMAND="${COMMAND} --name $CONTAINER_NAME $IMAGE_NAME /bin/bash ./train_model.sh $NUM_GPUS $BATCH_SIZE $NUM_STEPS"
 # COMMAND="${COMMAND} --name $CONTAINER_NAME tf-bert:dev-loic"
-
+echo $COMMAND
 exec $COMMAND
