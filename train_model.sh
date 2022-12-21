@@ -5,8 +5,9 @@
 
 NUM_GPUS=${1:-8}
 BATCH_SIZE=${2:-48}
+NUM_STEPS_TRAIN=${3:-1200}
+SAVE_CKPT_STEPS=600
 
-TRAIN_STEPS=300
 
 DATA_DIR="/data"
 WIKI_DIR="/wiki"
@@ -34,10 +35,10 @@ horovodrun -np $NUM_GPUS python run_pretraining.py \
   --iterations_per_loop=1000 \
   --max_predictions_per_seq=76 \
   --max_seq_length=512 \
-  --num_train_steps=$TRAIN_STEPS \
+  --num_train_steps=$NUM_STEPS_TRAIN \
   --num_warmup_steps=0 \
   --optimizer=lamb \
-  --save_checkpoints_steps=$TRAIN_STEPS \
+  --save_checkpoints_steps=$SAVE_CKPT_STEPS \
   --start_warmup_step=0 \
   --num_gpus=$NUM_GPUS \
   --train_batch_size=$BATCH_SIZE 2>&1 | tee ${OUTPUT_DIR}/app.log
