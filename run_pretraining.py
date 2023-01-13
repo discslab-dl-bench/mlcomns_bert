@@ -584,6 +584,14 @@ def main(_):
         num_train_steps=FLAGS.num_train_steps,
         checkpoint_dir=FLAGS.output_dir,
         save_steps=FLAGS.save_checkpoints_steps)
+
+    profiler_hook = tf.estimator.ProfilerHook(
+      save_steps=300,
+      output_dir=FLAGS.output_dir,
+      show_dataflow=False,
+      show_memory=False
+    )
+
     mllog.mlperf_submission_log()
     mllog.mlperf_run_param_log()
     mllog.mllog_end(key=mllog_constants.INIT_STOP)
@@ -594,7 +602,7 @@ def main(_):
     else:
       estimator.train(input_fn=lambda input_context=None: train_input_fn(
           params=hparams, input_context=input_context), max_steps=FLAGS.num_train_steps,
-          hooks=[checkpoint_hook])
+          hooks=[checkpoint_hook, profiler_hook])
     mllog.mllog_end(key=mllog_constants.RUN_STOP)
 
   if FLAGS.do_eval:
