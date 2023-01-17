@@ -11,8 +11,8 @@ shift 2
 echo $SCRIPT_DIR
 
 # Defaults 
-# NUM_GPUS=8
-# CONTAINER_NAME='train_bert'
+NUM_GPUS=8
+CONTAINER_NAME='train_bert'
 IMAGE_NAME=
 NUM_STEPS=1200
 BATCH_SIZE=$(expr 6 \* $NUM_GPUS)
