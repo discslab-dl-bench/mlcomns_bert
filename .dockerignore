@@ -1,2 +1,5 @@
 output/
+notes/
 random/
+cleanup_scripts/
+__pycache__/

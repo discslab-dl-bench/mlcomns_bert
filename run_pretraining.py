@@ -172,16 +172,9 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
           (name, tvar_index.get(name, value))
           for name, value in assignment_map.items()
       ])
-
-      if use_tpu:
-
-        def tpu_scaffold():
-          tf.train.init_from_checkpoint(init_checkpoint, assignment_map)
-          return tf.train.Scaffold()
-
-        scaffold_fn = tpu_scaffold
-      else:
-        tf.train.init_from_checkpoint(init_checkpoint, assignment_map)
+      tf.logging.info(f"Starting from initial checkpoint {init_checkpoint}")
+      tf.train.init_from_checkpoint(init_checkpoint, assignment_map)
+      tf.logging.info(f"Done starting from checkpoint")
 
     tf.logging.info("**** Trainable Variables ****")
     for var in tvars:
@@ -197,17 +190,11 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
           total_loss, learning_rate, num_train_steps, num_warmup_steps,
           use_tpu, optimizer, poly_power, start_warmup_step, FLAGS.steps_per_update)
 
-      if use_tpu:
-        output_spec = tf.estimator.tpu.TPUEstimatorSpec(
-            mode=mode,
-            loss=total_loss,
-            train_op=train_op,
-            scaffold_fn=scaffold_fn)
-      else:
-        output_spec = tf.estimator.EstimatorSpec(
-            mode=mode,
-            loss=total_loss,
-            train_op=train_op)
+      output_spec = tf.estimator.EstimatorSpec(
+          mode=mode,
+          loss=total_loss,
+          train_op=train_op)
+
     elif mode == tf.estimator.ModeKeys.EVAL:
 
       def metric_fn(masked_lm_example_loss, masked_lm_log_probs, masked_lm_ids,
@@ -250,20 +237,14 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
           masked_lm_weights, next_sentence_example_loss,
           next_sentence_log_probs, next_sentence_labels
       ])
-      if use_tpu:
-        output_spec = tf.estimator.tpu.TPUEstimatorSpec(
-            mode=mode,
-            loss=total_loss,
-            eval_metrics=eval_metrics,
-            scaffold_fn=scaffold_fn)
-      else:
-        output_spec = tf.estimator.EstimatorSpec(
-            mode=mode,
-            loss=total_loss,
-            eval_metric_ops=metric_fn(
-              masked_lm_example_loss, masked_lm_log_probs, masked_lm_ids,
-              masked_lm_weights, next_sentence_example_loss,
-              next_sentence_log_probs, next_sentence_labels))
+
+      output_spec = tf.estimator.EstimatorSpec(
+          mode=mode,
+          loss=total_loss,
+          eval_metric_ops=metric_fn(
+            masked_lm_example_loss, masked_lm_log_probs, masked_lm_ids,
+            masked_lm_weights, next_sentence_example_loss,
+            next_sentence_log_probs, next_sentence_labels))
 
     else:
       raise ValueError("Only TRAIN and EVAL modes are supported: %s" % (mode))
@@ -455,11 +436,11 @@ class CheckpointHook(tf.train.CheckpointSaverHook):
   def __init__(self, num_train_steps, *args, **kwargs):
     super(CheckpointHook, self).__init__(*args, **kwargs)
     self.num_train_steps = num_train_steps
-    self.previous_step = None
+    self.previous_step = 0
 
   def _save(self, session, step):
-    if self.previous_step:
-      mllog.mllog_end(key=mllog_constants.BLOCK_STOP,
+    if step != 0:
+      mllog.mllog_end(key="block_stop",
                       metadata={"first_step_num": self.previous_step + 1,
                           "step_count": step - self.previous_step})
     self.previous_step = step
@@ -494,10 +475,6 @@ def main(_):
   for input_file in input_files:
     tf.logging.info("  %s" % input_file)
 
-  tpu_cluster_resolver = None
-  if FLAGS.use_tpu and FLAGS.tpu_name:
-    tpu_cluster_resolver = tf.distribute.cluster_resolver.TPUClusterResolver(
-        FLAGS.tpu_name, zone=FLAGS.tpu_zone, project=FLAGS.gcp_project)
 
   model_fn = model_fn_builder(
       bert_config=bert_config,
@@ -511,57 +488,34 @@ def main(_):
       poly_power=FLAGS.poly_power,
       start_warmup_step=FLAGS.start_warmup_step)
 
-  if FLAGS.use_tpu:
-    is_per_host = tf.estimator.tpu.InputPipelineConfig.PER_HOST_V2
-    run_config = tf.estimator.tpu.RunConfig(
-        cluster=tpu_cluster_resolver,
-        master=FLAGS.master,
-        model_dir=FLAGS.output_dir,
-        keep_checkpoint_max=FLAGS.keep_checkpoint_max,
-        save_checkpoints_steps=FLAGS.save_checkpoints_steps,
-        tpu_config=tf.estimator.tpu.TPUConfig(
-            iterations_per_loop=FLAGS.iterations_per_loop,
-            num_shards=FLAGS.num_tpu_cores,
-            per_host_input_for_training=is_per_host))
+  # GPU path uses MirroredStrategy.
+  # Creates session config. allow_soft_placement = True, is required for
+  # multi-GPU and is not harmful for other modes.
+  session_config = tf.compat.v1.ConfigProto(
+      inter_op_parallelism_threads=8,
+      allow_soft_placement=True)
 
-    # If TPU is not available, this will fall back to normal Estimator on CPU
-    # or GPU.
-    estimator = tf.estimator.tpu.TPUEstimator(
-        use_tpu=FLAGS.use_tpu,
-        model_fn=model_fn,
-        config=run_config,
-        train_batch_size=FLAGS.train_batch_size,
-        eval_batch_size=FLAGS.eval_batch_size)
-  else:
-    # GPU path uses MirroredStrategy.
+  distribution_strategy = distribution_utils.get_distribution_strategy(
+      distribution_strategy="mirrored",
+      num_gpus=FLAGS.num_gpus,
+      all_reduce_alg="nccl",
+      num_packs=0)
 
-    # Creates session config. allow_soft_placement = True, is required for
-    # multi-GPU and is not harmful for other modes.
-    session_config = tf.compat.v1.ConfigProto(
-        inter_op_parallelism_threads=8,
-        allow_soft_placement=True)
+  dist_gpu_config = tf.estimator.RunConfig(
+      train_distribute=distribution_strategy,
+      model_dir=FLAGS.output_dir,
+      session_config=session_config,
+      keep_checkpoint_max=FLAGS.keep_checkpoint_max,
+      save_checkpoints_steps=FLAGS.save_checkpoints_steps,
+  )
 
-    distribution_strategy = distribution_utils.get_distribution_strategy(
-        distribution_strategy="mirrored",
-        num_gpus=FLAGS.num_gpus,
-        all_reduce_alg="nccl",
-        num_packs=0)
-
-    dist_gpu_config = tf.estimator.RunConfig(
-        train_distribute=distribution_strategy,
-        model_dir=FLAGS.output_dir,
-        session_config=session_config,
-        keep_checkpoint_max=FLAGS.keep_checkpoint_max,
-        save_checkpoints_steps=FLAGS.save_checkpoints_steps,
-    )
-
-    hparams = {"batch_size": FLAGS.train_batch_size}
-    estimator = tf.estimator.Estimator(
-        model_fn=model_fn,
-        config=dist_gpu_config,
-        model_dir=FLAGS.output_dir,
-        params=hparams,
-    )
+  hparams = {"batch_size": FLAGS.train_batch_size}
+  estimator = tf.estimator.Estimator(
+      model_fn=model_fn,
+      config=dist_gpu_config,
+      model_dir=FLAGS.output_dir,
+      params=hparams,
+  )
 
   if FLAGS.do_train:
     tf.logging.info("***** Running training *****")
@@ -571,6 +525,7 @@ def main(_):
       batch_size = distribution_utils.per_replica_batch_size(
             batch_size, FLAGS.num_gpus)
     hparams = {"batch_size": batch_size}
+    
     train_input_fn = input_fn_builder(
         input_files=input_files,
         batch_size=batch_size,
@@ -596,10 +551,6 @@ def main(_):
     mllog.mlperf_run_param_log()
     mllog.mllog_end(key=mllog_constants.INIT_STOP)
     mllog.mllog_start(key=mllog_constants.RUN_START)
-    # if FLAGS.use_tpu:
-    #   estimator.train(input_fn=train_input_fn, max_steps=FLAGS.num_train_steps,
-    #       hooks=[checkpoint_hook])
-    # else:
 
     estimator.train(input_fn=lambda input_context=None: train_input_fn(
         params=hparams, input_context=input_context), max_steps=FLAGS.num_train_steps,
@@ -627,14 +578,12 @@ def main(_):
 
     while True:
       mllog.mllog_start(key=mllog_constants.EVAL_START)
-      if FLAGS.use_tpu:
-        result = estimator.evaluate(
-          input_fn=eval_input_fn, steps=FLAGS.max_eval_steps)
-      else:
-        result = estimator.evaluate(
-            input_fn=lambda input_context=None: eval_input_fn(
-                params=hparams, input_context=input_context),
-            steps=FLAGS.max_eval_steps)
+
+      result = estimator.evaluate(
+          input_fn=lambda input_context=None: eval_input_fn(
+              params=hparams, input_context=input_context),
+          steps=FLAGS.max_eval_steps)
+
       global_step = result["global_step"]
       mllog.mllog_end(key=mllog_constants.EVAL_STOP, value=global_step,
                        metadata={"step_num": global_step})
