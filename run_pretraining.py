@@ -403,14 +403,14 @@ def input_fn_builder(input_files,
     # For eval, we want no shuffling and parallel reading doesn't matter.
     if is_training: 
       d = tf.data.Dataset.from_tensor_slices(tf.constant(input_files))
-      # # An input context will be passed when input_fn is called during training.
-      # if input_context:
-      #   tf.logging.info(
-      #       'Sharding the dataset: input_pipeline_id=%d num_input_pipelines=%d' % (
-      #       input_context.input_pipeline_id, input_context.num_input_pipelines))
-      #   tf.logging.info(f"Input context: {str(input_context)}")
-      #   d = d.shard(input_context.num_input_pipelines,
-      #               input_context.input_pipeline_id)
+      # An input context will be passed when input_fn is called during training.
+      if input_context:
+        tf.logging.info(
+            'Sharding the dataset: input_pipeline_id=%d num_input_pipelines=%d' % (
+            input_context.input_pipeline_id, input_context.num_input_pipelines))
+        tf.logging.info(f"Input context: {str(input_context)}")
+        # d = d.shard(input_context.num_input_pipelines,
+        #             input_context.input_pipeline_id)
 
       # Horovod, shard the dataset between workers
       d = d.shard(hvd.size(), hvd.rank())
@@ -419,7 +419,7 @@ def input_fn_builder(input_files,
       # `cycle_length` is the number of parallel files that get read.
       # Minimum btw number of cpu threads we want to use or number of files
       # cycle_length = min(num_cpu_threads, len(input_files))
-      cycle_length = 2
+      cycle_length = 8
 
       tf.logging.info('parallel interleave cycle_length=%d' % (cycle_length))
       # Here we actually create the dataset using the filenames stored in d
@@ -430,12 +430,6 @@ def input_fn_builder(input_files,
       # Block length is 1 by default = The number of consecutive elements to pull from an input Dataset before advancing to the next input Dataset.
       # So it will produce a dataset of TFRecords,  pick 1 file from each file in sequence
       # https://www.tensorflow.org/api_docs/python/tf/data/experimental/parallel_interleave
-
-      def print_map_func(filename):
-        tf.logging.info(f"Opening file: {filename}") # I think this doesn't get compiled into the graph
-        return filename
-      # Wrap my debug function with py_function so it can run python code (else python code gets removed)
-      d.map(lambda x: tf.py_function(func=print_map_func, inp=[x], Tout=tf.string))
 
       # buffer_output_elements	The number of elements each iterator being interleaved should buffer 
       # (similar to the .prefetch() transformation for each interleaved iterator). is None by default!
@@ -514,12 +508,16 @@ class CheckpointHook(tf.train.CheckpointSaverHook):
     else:
       # First time this gets called
       mllog.mllog_end(key=mllog_constants.INIT_STOP)
+
     self.previous_step = step
+    # Don't checkpoint right at the start
     mllog.mllog_start(key="checkpoint_start", metadata={"step_num" : step}) 
     return_value = super(CheckpointHook, self)._save(session, step)
     mllog.mllog_end(key="checkpoint_stop", metadata={"step_num" : step})
+
     if step < self.num_train_steps:
         mllog.mllog_start(key=mllog_constants.BLOCK_START, metadata={"first_step_num": step + 1})
+
     return return_value
 
 
@@ -533,13 +531,15 @@ def main(_):
   if not FLAGS.do_train and not FLAGS.do_eval:
     raise ValueError("At least one of `do_train` or `do_eval` must be True.")
 
+  tf.gfile.MakeDirs(FLAGS.output_dir)
+
+  # mlperf_logger = mllog.get_mlperf_logger(FLAGS.output_dir, 'bert.log')
   if FLAGS.do_train:
     mllog.mllog_start(key=mllog_constants.INIT_START)
 
   # bert_config.json parametrized the BERT large model in the paper
   bert_config = modeling.BertConfig.from_json_file(FLAGS.bert_config_file)
 
-  tf.gfile.MakeDirs(FLAGS.output_dir)
 
   input_files = []
 
@@ -702,32 +702,26 @@ def main(_):
         num_cpu_threads=8,
         num_eval_steps=FLAGS.max_eval_steps)
 
-    while True:
-      mllog.mllog_start(key=mllog_constants.EVAL_START)
-      if FLAGS.use_tpu:
-        result = estimator.evaluate(
-          input_fn=eval_input_fn, steps=FLAGS.max_eval_steps)
-      else:
-        result = estimator.evaluate(
-            input_fn=lambda input_context=None: eval_input_fn(
-                params=hparams, input_context=input_context),
-            steps=FLAGS.max_eval_steps)
-      global_step = result["global_step"]
-      mllog.mllog_end(key=mllog_constants.EVAL_STOP, value=global_step,
-                       metadata={"step_num": global_step})
-      mllog.mllog_event(key=mllog_constants.EVAL_ACCURACY,
-                        value=result["masked_lm_accuracy"],
-                        metadata={"step_num": global_step})
+    mllog.mllog_start(key=mllog_constants.EVAL_START)
+    result = estimator.evaluate(
+        input_fn=lambda input_context=None: eval_input_fn(
+            params=hparams, input_context=input_context),
+        steps=FLAGS.max_eval_steps)
+        
+    global_step = result["global_step"]
+    mllog.mllog_end(key=mllog_constants.EVAL_STOP, value=global_step,
+                      metadata={"step_num": global_step})
+    mllog.mllog_event(key=mllog_constants.EVAL_ACCURACY,
+                      value=result["masked_lm_accuracy"],
+                      metadata={"step_num": global_step})
 
-      output_eval_file = os.path.join(FLAGS.output_dir, "eval_results.txt")
-      with tf.gfile.GFile(output_eval_file, "w") as writer:
-        tf.logging.info("***** Eval results *****")
-        for key in sorted(result.keys()):
-          tf.logging.info("  %s = %s", key, str(result[key]))
-          writer.write("%s = %s\n" % (key, str(result[key])))
+    output_eval_file = os.path.join(FLAGS.output_dir, "eval_results.txt")
+    with tf.gfile.GFile(output_eval_file, "w") as writer:
+      tf.logging.info("***** Eval results *****")
+      for key in sorted(result.keys()):
+        tf.logging.info("  %s = %s", key, str(result[key]))
+        writer.write("%s = %s\n" % (key, str(result[key])))
 
-      if global_step >= FLAGS.num_train_steps:
-        break
 
 
 if __name__ == "__main__":

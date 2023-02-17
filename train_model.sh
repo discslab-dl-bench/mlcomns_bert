@@ -4,10 +4,12 @@
 # Needs /data (containing tfrecords of data), /wiki and /output mounted
 
 NUM_GPUS=${1:-8}
-BATCH_SIZE=${2:-48}
-NUM_STEPS_TRAIN=${3:-1200}
-SAVE_CKPT_STEPS=600
+BATCH_SIZE=${2:-6}
+NUM_STEPS_TRAIN=${3:-2400}
+# ALways checkpoints once at the start as well
+SAVE_CKPT_STEPS=${4:-2400}
 
+GLOBAL_BATCH_SIZE=$(expr $BATCH_SIZE \* $NUM_GPUS)
 
 DATA_DIR="/data"
 WIKI_DIR="/wiki"
@@ -30,7 +32,6 @@ horovodrun -np $NUM_GPUS python run_pretraining.py \
   --input_file="${DATA_DIR}/part*" \
   --nodo_eval \
   --do_train \
-  --eval_batch_size=8 \
   --learning_rate=0.0001 \
   --iterations_per_loop=1000 \
   --max_predictions_per_seq=76 \
@@ -41,7 +42,27 @@ horovodrun -np $NUM_GPUS python run_pretraining.py \
   --save_checkpoints_steps=$SAVE_CKPT_STEPS \
   --start_warmup_step=0 \
   --num_gpus=$NUM_GPUS \
-  --train_batch_size=$BATCH_SIZE 2>&1 | tee ${OUTPUT_DIR}/app.log
+  --train_batch_size=$GLOBAL_BATCH_SIZE 2>&1 | tee ${OUTPUT_DIR}/app.log
+
+# Perform an evaluation
+horovodrun -np $NUM_GPUS python run_pretraining.py \
+  --bert_config_file=${WIKI_DIR}/bert_config.json \
+  --output_dir=${OUTPUT_DIR} \
+  --log_dir=${OUTPUT_DIR} \
+  --input_file="${DATA_DIR}/eval_10k" \
+  --nodo_train \
+  --do_eval \
+  --eval_batch_size=8 \
+  --learning_rate=0.0001 \
+  --iterations_per_loop=1000 \
+  --max_predictions_per_seq=76 \
+  --max_seq_length=512 \
+  --num_warmup_steps=0 \
+  --optimizer=lamb \
+  --save_checkpoints_steps=$SAVE_CKPT_STEPS \
+  --start_warmup_step=0 \
+  --max_eval_steps=100 \
+  --num_gpus=$NUM_GPUS | tee -a ${OUTPUT_DIR}/app.log
   
   # --init_checkpoint=${WIKI_DIR}/ckpt/model.ckpt-28252 \
   # end timing

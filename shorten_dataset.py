@@ -89,7 +89,7 @@ def main(_):
   input_files = []
 
   # This returns the file names matching the given glob pattern
-  # Aka. will fetch th enames of all input tfrecords
+  # Aka. will fetch the names of all input tfrecords
   for input_pattern in FLAGS.input_file.split(","):
     input_files.extend(tf.gfile.Glob(input_pattern))
   input_files=input_files[0:10]
@@ -126,7 +126,7 @@ def main(_):
   input_files = []
   # Try opening the written files
   # This returns the file names matching the given glob pattern
-  # Aka. will fetch th enames of all input tfrecords
+  # Aka. will fetch the names of all input tfrecords
   tf.logging.info("Testing writen files")
   for input_pattern in os.path.join(FLAGS.output_dir, f"small_*"):
     input_files.extend(tf.gfile.Glob(input_pattern))
