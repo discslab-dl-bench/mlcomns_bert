@@ -1,0 +1,602 @@
+File /data/part-00000-of-00500
+Num records: 191942
+File /data/part-00001-of-00500
+Num records: 194052
+File /data/part-00002-of-00500
+Num records: 194720
+File /data/part-00003-of-00500
+Num records: 191385
+File /data/part-00004-of-00500
+Num records: 191407
+File /data/part-00005-of-00500
+Num records: 194242
+File /data/part-00006-of-00500
+Num records: 193755
+File /data/part-00007-of-00500
+Num records: 194022
+File /data/part-00008-of-00500
+Num records: 190222
+File /data/part-00009-of-00500
+Num records: 189985
+File /data/part-00010-of-00500
+Num records: 205686
+File /data/part-00011-of-00500
+Num records: 202065
+File /data/part-00012-of-00500
+Num records: 198626
+File /data/part-00013-of-00500
+Num records: 201062
+File /data/part-00014-of-00500
+Num records: 198794
+File /data/part-00015-of-00500
+Num records: 200828
+File /data/part-00016-of-00500
+Num records: 204562
+File /data/part-00017-of-00500
+Num records: 205589
+File /data/part-00018-of-00500
+Num records: 202978
+File /data/part-00019-of-00500
+Num records: 213021
+File /data/part-00020-of-00500
+Num records: 223896
+File /data/part-00021-of-00500
+Num records: 228540
+File /data/part-00022-of-00500
+Num records: 227779
+File /data/part-00023-of-00500
+Num records: 256634
+File /data/part-00024-of-00500
+Num records: 259474
+File /data/part-00025-of-00500
+Num records: 262340
+File /data/part-00026-of-00500
+Num records: 262560
+File /data/part-00027-of-00500
+Num records: 251017
+File /data/part-00028-of-00500
+Num records: 234187
+File /data/part-00029-of-00500
+Num records: 213005
+File /data/part-00030-of-00500
+Num records: 212912
+File /data/part-00031-of-00500
+Num records: 210556
+File /data/part-00032-of-00500
+Num records: 212282
+File /data/part-00033-of-00500
+Num records: 215044
+File /data/part-00034-of-00500
+Num records: 211107
+File /data/part-00035-of-00500
+Num records: 212487
+File /data/part-00036-of-00500
+Num records: 215741
+File /data/part-00037-of-00500
+Num records: 217715
+File /data/part-00038-of-00500
+Num records: 214603
+File /data/part-00039-of-00500
+Num records: 216252
+File /data/part-00040-of-00500
+Num records: 215108
+File /data/part-00041-of-00500
+Num records: 214656
+File /data/part-00042-of-00500
+Num records: 224732
+File /data/part-00043-of-00500
+Num records: 207416
+File /data/part-00044-of-00500
+Num records: 211870
+File /data/part-00045-of-00500
+Num records: 215018
+File /data/part-00046-of-00500
+Num records: 216669
+File /data/part-00047-of-00500
+Num records: 216049
+File /data/part-00048-of-00500
+Num records: 224504
+File /data/part-00049-of-00500
+Num records: 222091
+File /data/part-00050-of-00500
+Num records: 216359
+File /data/part-00051-of-00500
+Num records: 220627
+File /data/part-00052-of-00500
+Num records: 217687
+File /data/part-00053-of-00500
+Num records: 221356
+File /data/part-00054-of-00500
+Num records: 220334
+File /data/part-00055-of-00500
+Num records: 222587
+File /data/part-00056-of-00500
+Num records: 227016
+File /data/part-00057-of-00500
+Num records: 225671
+File /data/part-00058-of-00500
+Num records: 228711
+File /data/part-00059-of-00500
+Num records: 234127
+File /data/part-00060-of-00500
+Num records: 227032
+File /data/part-00061-of-00500
+Num records: 237627
+File /data/part-00062-of-00500
+Num records: 231116
+File /data/part-00063-of-00500
+Num records: 232143
+File /data/part-00064-of-00500
+Num records: 228735
+File /data/part-00065-of-00500
+Num records: 228996
+File /data/part-00066-of-00500
+Num records: 232849
+File /data/part-00067-of-00500
+Num records: 233120
+File /data/part-00068-of-00500
+Num records: 232235
+File /data/part-00069-of-00500
+Num records: 229772
+File /data/part-00070-of-00500
+Num records: 237932
+File /data/part-00071-of-00500
+Num records: 234512
+File /data/part-00072-of-00500
+Num records: 235283
+File /data/part-00073-of-00500
+Num records: 232272
+File /data/part-00074-of-00500
+Num records: 234765
+File /data/part-00075-of-00500
+Num records: 238999
+File /data/part-00076-of-00500
+Num records: 232360
+File /data/part-00077-of-00500
+Num records: 238127
+File /data/part-00078-of-00500
+Num records: 241642
+File /data/part-00079-of-00500
+Num records: 236249
+File /data/part-00080-of-00500
+Num records: 235527
+File /data/part-00081-of-00500
+Num records: 244340
+File /data/part-00082-of-00500
+Num records: 237530
+File /data/part-00083-of-00500
+Num records: 236938
+File /data/part-00084-of-00500
+Num records: 238847
+File /data/part-00085-of-00500
+Num records: 246317
+File /data/part-00086-of-00500
+Num records: 241408
+File /data/part-00087-of-00500
+Num records: 247254
+File /data/part-00088-of-00500
+Num records: 240507
+File /data/part-00089-of-00500
+Num records: 247917
+File /data/part-00090-of-00500
+Num records: 244007
+File /data/part-00091-of-00500
+Num records: 244571
+File /data/part-00092-of-00500
+Num records: 247831
+File /data/part-00093-of-00500
+Num records: 246057
+File /data/part-00094-of-00500
+Num records: 241662
+File /data/part-00095-of-00500
+Num records: 249687
+File /data/part-00096-of-00500
+Num records: 250179
+File /data/part-00097-of-00500
+Num records: 250316
+File /data/part-00098-of-00500
+Num records: 250534
+File /data/part-00099-of-00500
+Num records: 249600
+File /data/part-00100-of-00500
+Num records: 249244
+File /data/part-00101-of-00500
+Num records: 245281
+File /data/part-00102-of-00500
+Num records: 250672
+File /data/part-00103-of-00500
+Num records: 247736
+File /data/part-00104-of-00500
+Num records: 248075
+File /data/part-00105-of-00500
+Num records: 248989
+File /data/part-00106-of-00500
+Num records: 249461
+File /data/part-00107-of-00500
+Num records: 248085
+File /data/part-00108-of-00500
+Num records: 249618
+File /data/part-00109-of-00500
+Num records: 246272
+File /data/part-00110-of-00500
+Num records: 257284
+File /data/part-00111-of-00500
+Num records: 253135
+File /data/part-00112-of-00500
+Num records: 256485
+File /data/part-00113-of-00500
+Num records: 255121
+File /data/part-00114-of-00500
+Num records: 252729
+File /data/part-00115-of-00500
+Num records: 252453
+File /data/part-00116-of-00500
+Num records: 252496
+File /data/part-00117-of-00500
+Num records: 252394
+File /data/part-00118-of-00500
+Num records: 253036
+File /data/part-00119-of-00500
+Num records: 256087
+File /data/part-00120-of-00500
+Num records: 258552
+File /data/part-00121-of-00500
+Num records: 259394
+File /data/part-00122-of-00500
+Num records: 259477
+File /data/part-00123-of-00500
+Num records: 263844
+File /data/part-00124-of-00500
+Num records: 261256
+File /data/part-00125-of-00500
+Num records: 257178
+File /data/part-00126-of-00500
+Num records: 263540
+File /data/part-00127-of-00500
+Num records: 263812
+File /data/part-00128-of-00500
+Num records: 262477
+File /data/part-00129-of-00500
+Num records: 263520
+File /data/part-00130-of-00500
+Num records: 263914
+File /data/part-00131-of-00500
+Num records: 264339
+File /data/part-00132-of-00500
+Num records: 265930
+File /data/part-00133-of-00500
+Num records: 265316
+File /data/part-00134-of-00500
+Num records: 265761
+File /data/part-00135-of-00500
+Num records: 267318
+File /data/part-00136-of-00500
+Num records: 269927
+File /data/part-00137-of-00500
+Num records: 267933
+File /data/part-00138-of-00500
+Num records: 262398
+File /data/part-00139-of-00500
+Num records: 268207
+File /data/part-00140-of-00500
+Num records: 267505
+File /data/part-00141-of-00500
+Num records: 275581
+File /data/part-00142-of-00500
+Num records: 270323
+File /data/part-00143-of-00500
+Num records: 267783
+File /data/part-00144-of-00500
+Num records: 274006
+File /data/part-00145-of-00500
+Num records: 271447
+File /data/part-00146-of-00500
+Num records: 272417
+File /data/part-00147-of-00500
+Num records: 268383
+File /data/part-00148-of-00500
+Num records: 271423
+File /data/part-00149-of-00500
+Num records: 267528
+File /data/part-00150-of-00500
+Num records: 276331
+File /data/part-00151-of-00500
+Num records: 277957
+File /data/part-00152-of-00500
+Num records: 275150
+File /data/part-00153-of-00500
+Num records: 277900
+File /data/part-00154-of-00500
+Num records: 280873
+File /data/part-00155-of-00500
+Num records: 273300
+File /data/part-00156-of-00500
+Num records: 274934
+File /data/part-00157-of-00500
+Num records: 278165
+File /data/part-00158-of-00500
+Num records: 277554
+File /data/part-00159-of-00500
+Num records: 285489
+File /data/part-00160-of-00500
+Num records: 281171
+File /data/part-00161-of-00500
+Num records: 284691
+File /data/part-00162-of-00500
+Num records: 276844
+File /data/part-00163-of-00500
+Num records: 283246
+File /data/part-00164-of-00500
+Num records: 283682
+File /data/part-00165-of-00500
+Num records: 282230
+File /data/part-00166-of-00500
+Num records: 275309
+File /data/part-00167-of-00500
+Num records: 282095
+File /data/part-00168-of-00500
+Num records: 278681
+File /data/part-00169-of-00500
+Num records: 283309
+File /data/part-00170-of-00500
+Num records: 283894
+File /data/part-00171-of-00500
+Num records: 284821
+File /data/part-00172-of-00500
+Num records: 275050
+File /data/part-00173-of-00500
+Num records: 286575
+File /data/part-00174-of-00500
+Num records: 285149
+File /data/part-00175-of-00500
+Num records: 291109
+File /data/part-00176-of-00500
+Num records: 288061
+File /data/part-00177-of-00500
+Num records: 286942
+File /data/part-00178-of-00500
+Num records: 288563
+File /data/part-00179-of-00500
+Num records: 289039
+File /data/part-00180-of-00500
+Num records: 296005
+File /data/part-00181-of-00500
+Num records: 308242
+File /data/part-00182-of-00500
+Num records: 287676
+File /data/part-00183-of-00500
+Num records: 299171
+File /data/part-00184-of-00500
+Num records: 296304
+File /data/part-00185-of-00500
+Num records: 293739
+File /data/part-00186-of-00500
+Num records: 297578
+File /data/part-00187-of-00500
+Num records: 289351
+File /data/part-00188-of-00500
+Num records: 288715
+File /data/part-00189-of-00500
+Num records: 304353
+File /data/part-00190-of-00500
+Num records: 315021
+File /data/part-00191-of-00500
+Num records: 321310
+File /data/part-00192-of-00500
+Num records: 312548
+File /data/part-00193-of-00500
+Num records: 301491
+File /data/part-00194-of-00500
+Num records: 292188
+File /data/part-00195-of-00500
+Num records: 288847
+File /data/part-00196-of-00500
+Num records: 298757
+File /data/part-00197-of-00500
+Num records: 304993
+File /data/part-00198-of-00500
+Num records: 305293
+File /data/part-00199-of-00500
+Num records: 296103
+File /data/part-00200-of-00500
+Num records: 301962
+File /data/part-00201-of-00500
+Num records: 305475
+File /data/part-00202-of-00500
+Num records: 313867
+File /data/part-00203-of-00500
+Num records: 293466
+File /data/part-00204-of-00500
+Num records: 304397
+File /data/part-00205-of-00500
+Num records: 300177
+File /data/part-00206-of-00500
+Num records: 289452
+File /data/part-00207-of-00500
+Num records: 300115
+File /data/part-00208-of-00500
+Num records: 299903
+File /data/part-00209-of-00500
+Num records: 304350
+File /data/part-00210-of-00500
+Num records: 294204
+File /data/part-00211-of-00500
+Num records: 297605
+File /data/part-00212-of-00500
+Num records: 305983
+File /data/part-00213-of-00500
+Num records: 309643
+File /data/part-00214-of-00500
+Num records: 297605
+File /data/part-00215-of-00500
+Num records: 292467
+File /data/part-00216-of-00500
+Num records: 307735
+File /data/part-00217-of-00500
+Num records: 308989
+File /data/part-00218-of-00500
+Num records: 311142
+File /data/part-00219-of-00500
+Num records: 304891
+File /data/part-00220-of-00500
+Num records: 310217
+File /data/part-00221-of-00500
+Num records: 316950
+File /data/part-00222-of-00500
+Num records: 311588
+File /data/part-00223-of-00500
+Num records: 307083
+File /data/part-00224-of-00500
+Num records: 299014
+File /data/part-00225-of-00500
+Num records: 303892
+File /data/part-00226-of-00500
+Num records: 303203
+File /data/part-00227-of-00500
+Num records: 308998
+File /data/part-00228-of-00500
+Num records: 316348
+File /data/part-00229-of-00500
+Num records: 322161
+File /data/part-00230-of-00500
+Num records: 318934
+File /data/part-00231-of-00500
+Num records: 324116
+File /data/part-00232-of-00500
+Num records: 306592
+File /data/part-00233-of-00500
+Num records: 320847
+File /data/part-00234-of-00500
+Num records: 334453
+File /data/part-00235-of-00500
+Num records: 342342
+File /data/part-00236-of-00500
+Num records: 370077
+File /data/part-00237-of-00500
+Num records: 366081
+File /data/part-00238-of-00500
+Num records: 357347
+File /data/part-00239-of-00500
+Num records: 342166
+File /data/part-00240-of-00500
+Num records: 400452
+File /data/part-00241-of-00500
+Num records: 328220
+File /data/part-00242-of-00500
+Num records: 373805
+File /data/part-00243-of-00500
+Num records: 323163
+File /data/part-00244-of-00500
+Num records: 329326
+File /data/part-00245-of-00500
+Num records: 329575
+File /data/part-00246-of-00500
+Num records: 329657
+File /data/part-00247-of-00500
+Num records: 327364
+File /data/part-00248-of-00500
+Num records: 327680
+File /data/part-00249-of-00500
+Num records: 321680
+File /data/part-00250-of-00500
+Num records: 319878
+File /data/part-00251-of-00500
+Num records: 321861
+File /data/part-00252-of-00500
+Num records: 346505
+File /data/part-00253-of-00500
+Num records: 355855
+File /data/part-00254-of-00500
+Num records: 350263
+File /data/part-00255-of-00500
+Num records: 350705
+File /data/part-00256-of-00500
+Num records: 343912
+File /data/part-00257-of-00500
+Num records: 348187
+File /data/part-00258-of-00500
+Num records: 355613
+File /data/part-00259-of-00500
+Num records: 385731
+File /data/part-00260-of-00500
+Num records: 364435
+File /data/part-00261-of-00500
+Num records: 330725
+File /data/part-00262-of-00500
+Num records: 329827
+File /data/part-00263-of-00500
+Num records: 331362
+File /data/part-00264-of-00500
+Num records: 339988
+File /data/part-00265-of-00500
+Num records: 331642
+File /data/part-00266-of-00500
+Num records: 316645
+File /data/part-00267-of-00500
+Num records: 335518
+File /data/part-00268-of-00500
+Num records: 322196
+File /data/part-00269-of-00500
+Num records: 330534
+File /data/part-00270-of-00500
+Num records: 331559
+File /data/part-00271-of-00500
+Num records: 343611
+File /data/part-00272-of-00500
+Num records: 360300
+File /data/part-00273-of-00500
+Num records: 364348
+File /data/part-00274-of-00500
+Num records: 358171
+File /data/part-00275-of-00500
+Num records: 376300
+File /data/part-00276-of-00500
+Num records: 367202
+File /data/part-00277-of-00500
+Num records: 342472
+File /data/part-00278-of-00500
+Num records: 415647
+File /data/part-00279-of-00500
+Num records: 308906
+File /data/part-00280-of-00500
+Num records: 317355
+File /data/part-00281-of-00500
+Num records: 336975
+File /data/part-00282-of-00500
+Num records: 335356
+File /data/part-00283-of-00500
+Num records: 408272
+File /data/part-00284-of-00500
+Num records: 334660
+File /data/part-00285-of-00500
+Num records: 329915
+File /data/part-00286-of-00500
+Num records: 328898
+File /data/part-00287-of-00500
+Num records: 332906
+File /data/part-00288-of-00500
+Num records: 336806
+File /data/part-00289-of-00500
+Num records: 332959
+File /data/part-00290-of-00500
+Num records: 356584
+File /data/part-00291-of-00500
+Num records: 360857
+File /data/part-00292-of-00500
+Num records: 332030
+File /data/part-00293-of-00500
+Num records: 346455
+File /data/part-00294-of-00500
+Num records: 352382
+File /data/part-00295-of-00500
+Num records: 374397
+File /data/part-00296-of-00500
+Num records: 373548
+File /data/part-00297-of-00500
+Num records: 384983
+File /data/part-00298-of-00500
+Num records: 326379
+File /data/part-00299-of-00500
+Num records: 369531
+File /data/part-00300-of-00500
+Num records: 354229

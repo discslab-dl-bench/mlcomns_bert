@@ -540,12 +540,12 @@ def main(_):
         checkpoint_dir=FLAGS.output_dir,
         save_steps=FLAGS.save_checkpoints_steps)
 
-    # profiler_hook = tf.estimator.ProfilerHook(
-    #   save_steps=0,
-    #   output_dir=FLAGS.output_dir,
-    #   show_dataflow=False,
-    #   show_memory=False
-    # )
+    profiler_hook = tf.estimator.ProfilerHook(
+      save_steps=1,
+      output_dir=FLAGS.output_dir,
+      show_dataflow=False,
+      show_memory=False
+    )
 
     mllog.mlperf_submission_log()
     mllog.mlperf_run_param_log()
@@ -554,7 +554,7 @@ def main(_):
 
     estimator.train(input_fn=lambda input_context=None: train_input_fn(
         params=hparams, input_context=input_context), max_steps=FLAGS.num_train_steps,
-        hooks=[checkpoint_hook])
+        hooks=[checkpoint_hook, profiler_hook])
 
     mllog.mllog_end(key=mllog_constants.RUN_STOP)
 
@@ -576,30 +576,27 @@ def main(_):
         num_cpu_threads=8,
         num_eval_steps=FLAGS.max_eval_steps)
 
-    while True:
-      mllog.mllog_start(key=mllog_constants.EVAL_START)
+    mllog.mllog_start(key=mllog_constants.EVAL_START)
 
-      result = estimator.evaluate(
-          input_fn=lambda input_context=None: eval_input_fn(
-              params=hparams, input_context=input_context),
-          steps=FLAGS.max_eval_steps)
+    result = estimator.evaluate(
+        input_fn=lambda input_context=None: eval_input_fn(
+            params=hparams, input_context=input_context),
+        steps=FLAGS.max_eval_steps)
 
-      global_step = result["global_step"]
-      mllog.mllog_end(key=mllog_constants.EVAL_STOP, value=global_step,
-                       metadata={"step_num": global_step})
-      mllog.mllog_event(key=mllog_constants.EVAL_ACCURACY,
-                        value=result["masked_lm_accuracy"],
-                        metadata={"step_num": global_step})
+    global_step = result["global_step"]
+    mllog.mllog_end(key=mllog_constants.EVAL_STOP, value=global_step,
+                      metadata={"step_num": global_step})
+    mllog.mllog_event(key=mllog_constants.EVAL_ACCURACY,
+                      value=result["masked_lm_accuracy"],
+                      metadata={"step_num": global_step})
 
-      output_eval_file = os.path.join(FLAGS.output_dir, "eval_results.txt")
-      with tf.gfile.GFile(output_eval_file, "w") as writer:
-        tf.logging.info("***** Eval results *****")
-        for key in sorted(result.keys()):
-          tf.logging.info("  %s = %s", key, str(result[key]))
-          writer.write("%s = %s\n" % (key, str(result[key])))
+    output_eval_file = os.path.join(FLAGS.output_dir, "eval_results.txt")
+    with tf.gfile.GFile(output_eval_file, "w") as writer:
+      tf.logging.info("***** Eval results *****")
+      for key in sorted(result.keys()):
+        tf.logging.info("  %s = %s", key, str(result[key]))
+        writer.write("%s = %s\n" % (key, str(result[key])))
 
-      if global_step >= FLAGS.num_train_steps:
-        break
 
 
 if __name__ == "__main__":
