@@ -532,6 +532,7 @@ def main(_):
     raise ValueError("At least one of `do_train` or `do_eval` must be True.")
 
   tf.gfile.MakeDirs(FLAGS.output_dir)
+  tf.gfile.MakeDirs(FLAGS.log_dir)
 
   # mlperf_logger = mllog.get_mlperf_logger(FLAGS.output_dir, 'bert.log')
   if FLAGS.do_train:
@@ -614,6 +615,7 @@ def main(_):
     #     num_packs=0)
 
     # Horovod: save checkpoints only on worker 0 to prevent other workers from corrupting them.
+    # Need to be the same between confi and estimator
     model_dir = FLAGS.output_dir
 
     # Make an estimator run configuration using the distribution strategy and session config
@@ -661,6 +663,13 @@ def main(_):
         num_train_steps=FLAGS.num_train_steps,
         checkpoint_dir=model_dir,
         save_steps=FLAGS.save_checkpoints_steps)
+    
+    profiler_hook = tf.estimator.ProfilerHook(
+          save_steps=10,
+          output_dir=FLAGS.log_dir,
+          show_dataflow=True,
+          show_memory=False
+        )
 
     # Horovod: BroadcastGlobalVariablesHook broadcasts initial variable states from
     # rank 0 to all other processes. This is necessary to ensure consistent
@@ -668,7 +677,7 @@ def main(_):
     # restored from a checkpoint.
     bcast_hook = hvd.BroadcastGlobalVariablesHook(0)
 
-    hooks = [checkpoint_hook, bcast_hook] if hvd.rank() == 0 else [bcast_hook]
+    hooks = [checkpoint_hook, profiler_hook, bcast_hook] if hvd.rank() == 0 else [bcast_hook]
 
     mllog.mlperf_submission_log()
     mllog.mlperf_run_param_log()
@@ -715,7 +724,7 @@ def main(_):
                       value=result["masked_lm_accuracy"],
                       metadata={"step_num": global_step})
 
-    output_eval_file = os.path.join(FLAGS.output_dir, "eval_results.txt")
+    output_eval_file = os.path.join(FLAGS.log_dir, "eval_results.txt")
     with tf.gfile.GFile(output_eval_file, "w") as writer:
       tf.logging.info("***** Eval results *****")
       for key in sorted(result.keys()):
