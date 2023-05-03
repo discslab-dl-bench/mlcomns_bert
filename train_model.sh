@@ -8,7 +8,7 @@ BATCH_SIZE=${2:-6}
 NUM_STEPS_TRAIN=${3:-2400}
 # ALways checkpoints once at the start as well
 SAVE_CKPT_STEPS=${4:-2400}
-
+# Convert the per-worker batch size to a global batch size for the model
 GLOBAL_BATCH_SIZE=$(expr $BATCH_SIZE \* $NUM_GPUS)
 
 DATA_DIR="/data"
@@ -63,7 +63,7 @@ horovodrun -np $NUM_GPUS python run_pretraining.py \
   --save_checkpoints_steps=$SAVE_CKPT_STEPS \
   --start_warmup_step=0 \
   --max_eval_steps=100 \
-  --num_gpus=$NUM_GPUS | tee -a ${LOGGING_DIR}/bert.log
+  --num_gpus=$NUM_GPUS 2>&1 | tee -a ${LOGGING_DIR}/bert.log
   
   # --init_checkpoint=${WIKI_DIR}/ckpt/model.ckpt-28252 \
   # end timing
