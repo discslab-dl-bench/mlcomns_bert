@@ -82,44 +82,53 @@ def to_tf_example(parsed_record):
   return tf.train.Example(features=tf.train.Features(feature=features))
 
 def main(_):
-  tf.logging.set_verbosity(tf.logging.INFO)
+  # tf.logging.set_verbosity(tf.logging.INFO)
 
-  tf.gfile.MakeDirs(FLAGS.output_dir)
+  # tf.gfile.MakeDirs(FLAGS.output_dir)
 
   input_files = []
 
   # This returns the file names matching the given glob pattern
   # Aka. will fetch the names of all input tfrecords
   for input_pattern in FLAGS.input_file.split(","):
-    input_files.extend(tf.gfile.Glob(input_pattern))
+    input_files.extend(tf.io.gfile.glob(input_pattern))
   input_files=input_files[0:10]
 
-  tf.logging.info("*** Input Files ***")
-  for input_file in input_files:
-    tf.logging.info("  %s" % input_file)
+  # tf.logging.info("*** Input Files ***")
+  # for input_file in input_files:
+    # tf.logging.info("  %s" % input_file)
 
 
   raw_dataset = tf.data.TFRecordDataset(input_files)
 
-  for raw_record in raw_dataset.take(10):
-    print(repr(raw_record))
+  for raw_record in raw_dataset.take(1):
+    print(raw_record)
+    print(tf.size(raw_record))
 
   parsed_dataset = raw_dataset.map(_decode_record).repeat()
 
+  for parsed_record in parsed_dataset.take(1):
+    import code 
+    code.interact(local=locals())
+
+  exit()
   # python shorten_dataset.py --input_file=/data/part* --output_dir=/output
   
   # Create shorter files 
   for i in range(10):
-    tf.logging.info(f"Creating shortened file {i}")
+    # tf.logging.info(f"Creating shortened file {i}")
     outfile = os.path.join(FLAGS.output_dir, f"small_{i}.tfrecord")
 
     with tf.io.TFRecordWriter(outfile) as writer:
       for i, parsed_record in enumerate(parsed_dataset):
-        print(i)
+        print(i.shape)
+        import code 
+        code.interact(local=locals())
         if i == 10_000:
           break
         tf_example = to_tf_example(parsed_record)
         writer.write(tf_example.SerializeToString())
+        exit()
 
   tf.logging.info("Done")
 
@@ -148,5 +157,5 @@ def main(_):
 
 if __name__ == "__main__":
   flags.mark_flag_as_required("input_file")
-  flags.mark_flag_as_required("output_dir")
+  # flags.mark_flag_as_required("output_dir")
   absl.app.run(main)
