@@ -665,12 +665,12 @@ def main(_):
         checkpoint_dir=model_dir,
         save_steps=FLAGS.save_checkpoints_steps)
     
-    profiler_hook = tf.estimator.ProfilerHook(
-          save_steps=10,
-          output_dir=FLAGS.log_dir,
-          show_dataflow=True,
-          show_memory=False
-        )
+    # profiler_hook = tf.estimator.ProfilerHook(
+    #       save_steps=10,
+    #       output_dir=FLAGS.log_dir,
+    #       show_dataflow=True,
+    #       show_memory=False
+    #     )
 
     # Horovod: BroadcastGlobalVariablesHook broadcasts initial variable states from
     # rank 0 to all other processes. This is necessary to ensure consistent
@@ -678,7 +678,7 @@ def main(_):
     # restored from a checkpoint.
     bcast_hook = hvd.BroadcastGlobalVariablesHook(0)
 
-    hooks = [checkpoint_hook, profiler_hook, bcast_hook] if hvd.rank() == 0 else [bcast_hook]
+    hooks = [checkpoint_hook, bcast_hook] if hvd.rank() == 0 else [bcast_hook]
 
     mllog.mlperf_submission_log()
     mllog.mlperf_run_param_log()
