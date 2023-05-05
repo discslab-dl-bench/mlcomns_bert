@@ -4,13 +4,6 @@ This code is taken from the [MLCommons Training BERT workload](https://github.co
 
 I have added a docker image containing everything needed to run the workload, and convenience launch scripts. 
 
--------------------------
-You should not have to modify this code - especially the model code.
--------------------------
--------------------------
-
-You can find the preprocessed data for this workload on the server under `/raid/data/bert/` 
-
 The `start_training.sh` script is used to launch training as the root process in the container and is used in the traces. `train_model.sh` is the actual training entry point. 
 
 
