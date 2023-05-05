@@ -2,7 +2,7 @@
 
 SCRIPT_DIR=$( dirname -- "$( readlink -f -- "$0"; )" )
 
-DOCKER_IMAGE=${1:-"bert:loic"}
+DOCKER_IMAGE=${1:-"bert:original"}
 
 docker run -it --gpus all \
 	-v /raid/data/bert/wiki:/wiki \
