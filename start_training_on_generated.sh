@@ -9,9 +9,9 @@ OUTPUT_DIR=""
 NUM_GPUS=${1:-8}
 CONTAINER_NAME=${2:-train_bert}
 LOGGING_DIR=${3:-"$SCRIPT_DIR/output"}
-DOCKER_IMAGE=${4:-"bert:loic"}
+DOCKER_IMAGE=${4:-"bert:profiler"}
 BATCH_SIZE=${5:-6}
-NUM_STEPS=${6:-2400}
+NUM_STEPS=${6:-300}
 SAVE_CKPT_STEPS=${7:-2400}
 
 docker run -it --rm --name=$CONTAINER_NAME --gpus all \
