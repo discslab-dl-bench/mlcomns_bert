@@ -6,9 +6,6 @@ SCRIPT_DIR=$( dirname -- "$( readlink -f -- "$0"; )" )
 DATA_DIR=""
 OUTPUT_DIR=""
 WIKI_DIR=""
-DATA_DIR='/raid/data/bert/preproc_data'
-OUTPUT_DIR="/raid/data/bert/run_output"
-WIKI_DIR="/raid/data/bert/wiki"
 
 NUM_GPUS=${1:-8}
 CONTAINER_NAME=${2:-train_bert}
