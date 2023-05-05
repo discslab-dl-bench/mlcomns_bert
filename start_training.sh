@@ -5,8 +5,6 @@ SCRIPT_DIR=$( dirname -- "$( readlink -f -- "$0"; )" )
 # Change these directories to your values!
 DATA_DIR=""
 OUTPUT_DIR=""
-DATA_DIR='/raid/data/bert/preproc_data'
-OUTPUT_DIR="/raid/data/bert/run_output"
 
 NUM_GPUS=${1:-8}
 CONTAINER_NAME=${2:-train_bert}
